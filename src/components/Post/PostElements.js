@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { green1, black1 } from '../../constants.js'
 export const PostContainer = styled.div`
   height: 130px;
   width: 660px;
@@ -32,12 +32,12 @@ export const PostMain = styled.div`
 `
 
 export const PostInfo = styled.p`
-  color:#01bf71;
+  color: ${green1};
   font-size: 0.7rem;
 `
 
 export const PostTitle = styled.h2`
-  color:#000;
+  color: ${black1};
   font-weight: bold;
   font-size: 1.2rem;
 `

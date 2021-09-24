@@ -8,7 +8,7 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import NewPost from './pages/NewPost'
 import Music from './pages/Music'
-
+import MusicPlayer from './components/MusicPlayer'
 function App() {
   const [isOpenSignPanel, setIsOpenSignPanel] = useState(false)
   const toggleSignPanel = () => {
@@ -26,6 +26,7 @@ function App() {
         isOpenSignPanel={isOpenSignPanel}
         toggleSignPanel={toggleSignPanel}
       />
+      <MusicPlayer />
       <Switch>
         <Route exact path='/'>
           <Music />

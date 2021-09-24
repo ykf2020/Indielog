@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-
+import { green1, black1 } from '../../constants.js'
 export const Nav = styled.nav`
-  background: #000;
+  background: ${black1};
   height: 80px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
@@ -92,9 +92,9 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled.a`
   border-radius: 50px;
-  background: #01bf71;
+  background: ${green1};
   padding: 10px 22px;
-  color: #010606;
+  color: ${black1};
   font-size: 14px;
   outline:none;
   border: none;
@@ -105,6 +105,6 @@ export const NavBtnLink = styled.a`
   &:hover {
     transition: all 0.2s ease-in-out;
     background: #fff;
-    color: #010606;
+    color: ${black1};
   }
 `

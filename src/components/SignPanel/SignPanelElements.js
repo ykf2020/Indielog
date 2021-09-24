@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-
+import { green1, black1 } from '../../constants.js'
 export const SignPanelContainer = styled.div`
-  background: #01bf71;
+  background: ${green1};
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -22,7 +22,7 @@ export const SignPanelLogo = styled.h1`
 `
 
 export const Panel = styled.div`
-  background: black;
+  background: #000;
   border-radius: 20px;
   margin: 0 auto;
   width: 400px;
@@ -41,7 +41,7 @@ export const CancelButton = styled.button`
   height: 20px;
   font-weight: bold;
   position: absolute;
-  color: #010606;
+  color: ${black1};
   right: 14px;
   top: 14px;
 
@@ -55,7 +55,7 @@ export const CancelButton = styled.button`
 
   &:hover {
     color: #fff;
-    background: #01bf71;
+    background: ${green1};
     cursor: pointer;
   }
 
@@ -98,7 +98,7 @@ export const SignPanelButton = styled.button`
   border: none;
   border-radius: 6px;
   color: white;
-  background: #01bf71;
+  background: ${green1};
   font-size: 1rem;
   width: 100%;
   height: 40px;
