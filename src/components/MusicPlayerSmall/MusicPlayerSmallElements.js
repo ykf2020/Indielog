@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4} from '../../constants.js'
+import { gray1, gray2, gray3, gray4, MEDIA_QUERY_768} from '../../constants.js'
 export const Container = styled.div`
   position: fixed;
   display: flex;
@@ -10,6 +10,13 @@ export const Container = styled.div`
   bottom: 0;
   right: 20px;
   align-items: center;
+
+  ${MEDIA_QUERY_768} {
+    width: 100%;
+    right: 0;
+    height: 50px;
+    justify-content: space-between;
+  }
 `
 
 export const ImgDiv = styled.div`
@@ -18,10 +25,16 @@ export const ImgDiv = styled.div`
   width: 50px;
   border-radius: 50%;
   overflow: hidden;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  ${MEDIA_QUERY_768} {
+    height: 38px;
+    width: 38px;
   }
 `
 
@@ -32,6 +45,10 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 8px;
+
+  ${MEDIA_QUERY_768} {
+    width: 70%;
+  }
 `
 
 export const SongName = styled.h2`
@@ -51,6 +68,9 @@ export const IconContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-right: 10px;
+  ${MEDIA_QUERY_768} {
+    align-self: end;
+  }
 `
 export const FontAwesome = styled(FontAwesomeIcon)`
   color: ${gray3};
@@ -66,11 +86,16 @@ export const FontAwesome = styled(FontAwesomeIcon)`
 export const Track = styled.div`
   background: linear-gradient(to right, lightblue, lightgreen);
   width: 100%;
-  height: 6px;
+  height: 8px;
   position: absolute;
   overflow: hidden;
   top: -8px;
   border-radius: 4px 4px 0 0 ;
+
+  ${MEDIA_QUERY_768} {
+    height: 6px;
+    top: -6px;
+  }
 `
 
 export const AnimateTrack = styled.div`

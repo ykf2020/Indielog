@@ -9,6 +9,7 @@ import BlogPost from './pages/BlogPost'
 import NewPost from './pages/NewPost'
 import Music from './pages/Music'
 import MusicPlayer from './components/MusicPlayer'
+import PaddingBottom from './components/PaddingBottom'
 function App() {
   const [isOpenSignPanel, setIsOpenSignPanel] = useState(false)
   const toggleSignPanel = () => {
@@ -41,6 +42,7 @@ function App() {
           <NewPost path='/new-post' />
         </Route>
       </Switch>
+      <PaddingBottom />
     </Router>
   );
 }

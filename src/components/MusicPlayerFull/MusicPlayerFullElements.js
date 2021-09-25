@@ -1,15 +1,17 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4, black1, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, green1, black1, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
+
 export const Container = styled.div`
+  display: none;
   background-image: url('https://akstatic.streetvoice.com/song_covers/br/in/bringmesomesoup/eLgqpgYWGVawffdNWb8gYC.jpg?x-oss-process=image/resize,m_fill,h_610,w_610,limit_0/interlace,1/quality,q_95/sharpen,80/format,jpg');
   background-size: 180%;
   background-position: center;
   position: fixed;
   width: 100%;
   height: 100vh;
-  z-index: 50;
+  z-index: 99;
   overflow: hidden;
 
   &:before {
@@ -20,10 +22,8 @@ export const Container = styled.div`
     height: 100%;
     backdrop-filter: blur(30px) brightness(40%);
     -webkit-backdrop-filter: blur(30px) brightness(40%);
-
   }
 `
-
 export const BgFilter = styled.div`
   background: ${black1};
   positon: absolute;
@@ -40,7 +40,7 @@ export const Nav = styled.div`
   width: 100%;
   height: 16%;
   padding: 0 10%;
-  positon: relative;
+  positon: fixed;
 `
 
 export const NavLogo = styled(Link)`
@@ -74,10 +74,11 @@ export const BodyContainer = styled.div`
 
 export const Library = styled.div`
   display: flex;
+  flex-direction: column;
   opacity: 0;
   width: 0;
-  height: 100%;
-  border: 1px solid green;
+  height: 84%;
+  padding: 1rem 0;
   transition: 0.5s all ease;
   transform: translateX(-100%);
 
@@ -85,8 +86,16 @@ export const Library = styled.div`
     width: 40%;
     opacity:1;
     transform: translateX(0%);
+    overflow-Y: scroll;
   `}
 
+  ${MEDIA_QUERY_1400} {
+    ${({libraryStatus}) => libraryStatus && `
+      width: 50%;
+      opacity:1;
+      transform: translateX(0%);
+    `}
+  }
   ${MEDIA_QUERY_768} {
     position: absolute;
     z-index: 5;
@@ -95,6 +104,62 @@ export const Library = styled.div`
       opacity:1;
       transform: translateX(0%);
     `}
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${green1};
+    border-radius: 20px;
+    border: transparent;
+  }
+
+`
+
+export const LibrarySongDiv = styled.div`
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem 1rem 3rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: ${green1}
+    }
+
+    ${({ active }) => active && `
+      background: #FADADD;
+    `}
+`
+
+export const LibrarySongDesc = styled.div`
+  padding-left: 1rem;
+`
+
+export const LibrarySongName = styled.h3`
+  font-size: 1rem;
+`
+
+export const LibrarySongAuthorName = styled.h4`
+  font-size: 0.7rem;
+`
+
+export const LibraryImgDiv = styled.div`
+  width:  100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `
 
@@ -107,9 +172,26 @@ export const Song = styled.div`
   height: 100%;
   transition: 0.5s all ease;
 
+  ${({libraryStatus}) => libraryStatus && `
+    width: 70%;
+    opacity:1;
+    transform: translateX(0%);
+  `}
+
+  ${MEDIA_QUERY_1400} {
+    ${({libraryStatus}) => libraryStatus && `
+      width: 50%;
+      opacity:1;
+      transform: translateX(0%);
+    `}
+  }
+
   ${MEDIA_QUERY_768} {
     position: absolute;
     z-index: 3;
+    ${({libraryStatus}) => libraryStatus && `
+      opacity:0;
+    `}
   }
 `
 
@@ -121,27 +203,28 @@ export const SongInfo = styled.div`
   width: 50%;
   text-align: center;
 
-
-
   ${MEDIA_QUERY_1400} {
-    width:80%;
+    width:10%;
     padding: 0 40px;
-  }
-
-  ${MEDIA_QUERY_1024} {
-    width:100%;
-    padding: 0 50px;
   }
 `
 export const ImgDiv = styled.div`
-  width:  500px;
-  height: 500px;
+  width:  480px;
+  height: 480px;
   border-radius: 20px;
   overflow: hidden;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  ${MEDIA_QUERY_1024} {
+    ${({libraryStatus}) => libraryStatus && `
+      width:  380px;
+      height: 380px;
+      border-radius: 16px;
+      margin-bottom:100px
+    `}
   }
 `
 export const SongName = styled.h1`
@@ -163,14 +246,14 @@ export const ControlPanel = styled.div`
   height: 30%;
   position: relative;
 
-  ${MEDIA_QUERY_1024} {
+  ${MEDIA_QUERY_1400} {
     width:70%;
     padding: 0 40px;
   }
 
   ${MEDIA_QUERY_1024} {
     width:80%;
-    padding: 0 40px;
+    padding: 0 20px;
   }
 `
 
@@ -259,4 +342,10 @@ export const ToggleButton = styled(FontAwesomeIcon)`
   &:hover {
     color: white;
   }
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80px;
 `

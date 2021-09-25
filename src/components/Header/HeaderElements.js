@@ -4,7 +4,7 @@ import { green1, black1 } from '../../constants.js'
 export const Nav = styled.nav`
   background: ${black1};
   height: 80px;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;

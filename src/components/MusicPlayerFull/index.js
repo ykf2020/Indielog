@@ -22,6 +22,12 @@ import {
   FontAwesomeControl,
   ToggleButton,
   BgFilter,
+  ButtonGroup,
+  LibrarySongDiv,
+  LibrarySongDesc,
+  LibrarySongName,
+  LibrarySongAuthorName,
+  LibraryImgDiv
 } from './MusicPlayerFullElements.js'
 import {
   faPause,
@@ -32,10 +38,11 @@ import {
   faChevronLeft,
   faUndo,
   faToggleOff,
-  faToggleOn
+  faToggleOn,
+  faCompressAlt
 } from '@fortawesome/free-solid-svg-icons'
 
-const MusicPlayerFull = () => {
+const MusicPlayerFull = ({ data }) => {
   const [libraryStatus, setLibraryStatus] = useState(true)
   const [animationPercentage, setAnimationPercentage] = useState(50)
   return (
@@ -43,15 +50,31 @@ const MusicPlayerFull = () => {
       <Container>
         <Nav>
           <NavLogo to='/'>Indielog</NavLogo>
-          <FontAwesome size='2x' icon={faTimes}/>
+          <ButtonGroup>
+            <FontAwesome size='2x' icon={faCompressAlt}/>
+            <FontAwesome size='2x' icon={faTimes} onClick={() => console.log(data)}/>
+          </ButtonGroup>
           <ToggleButton size='2x' icon={libraryStatus ? faToggleOn : faToggleOff } onClick={() => setLibraryStatus(!libraryStatus)}/>
         </Nav>
         <BodyContainer>
           <Library libraryStatus={libraryStatus}>
+            {data.map(d => {
+              return (
+                <LibrarySongDiv>
+                  <LibraryImgDiv>
+                    <img src={d.cover}/>
+                  </LibraryImgDiv>
+                  <LibrarySongDesc>
+                    <LibrarySongName>{d.name}</LibrarySongName>
+                    <LibrarySongAuthorName>{d.artist}</LibrarySongAuthorName>
+                  </LibrarySongDesc>
+                </LibrarySongDiv>
+              )
+            })}
           </Library>
           <Song libraryStatus={libraryStatus}>
             <SongInfo>
-              <ImgDiv><img src={'https://i.imgur.com/Ti5yQhBh.jpg'}/></ImgDiv>
+              <ImgDiv libraryStatus={libraryStatus}><img src={'https://i.imgur.com/Ti5yQhBh.jpg'}/></ImgDiv>
               <SongName>SuckDIDI</SongName>
               <AuthorName>SUCKDIDILONG</AuthorName>
             </SongInfo>
