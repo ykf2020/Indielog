@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4, MEDIA_QUERY_768} from '../../constants.js'
+import { gray1, gray2, gray3, gray4, green1, MEDIA_QUERY_768} from '../../constants.js'
 export const Container = styled.div`
   position: fixed;
   display: flex;
@@ -84,7 +84,7 @@ export const FontAwesome = styled(FontAwesomeIcon)`
 `
 
 export const Track = styled.div`
-  background: linear-gradient(to right, lightblue, lightgreen);
+  background: linear-gradient(45deg, ${green1}, lightblue);
   width: 100%;
   height: 8px;
   position: absolute;

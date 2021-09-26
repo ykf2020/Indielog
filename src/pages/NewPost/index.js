@@ -7,12 +7,13 @@ import { useHistory } from 'react-router-dom'
 const BlogPostPageContainer = styled.div`
   border: 1px solid green;
   width: 80%;
-  margin: 60px auto 20px;
+  margin: 0 auto 20px;
   max-width: 860px;
   min-height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 80px;
 `
 const Title = styled.h2`
   align-self: flex-start;

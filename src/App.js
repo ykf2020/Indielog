@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
@@ -10,7 +10,18 @@ import NewPost from './pages/NewPost'
 import Music from './pages/Music'
 import MusicPlayer from './components/MusicPlayer'
 import PaddingBottom from './components/PaddingBottom'
+import data from './data.js'
+import { useDispatch } from "react-redux";
+import { setSongs, setCurrentSong } from "./redux/reducers/songReducer";
+
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setSongs(data))
+    dispatch(setCurrentSong(data[0]))
+  }, [])
+
   const [isOpenSignPanel, setIsOpenSignPanel] = useState(false)
   const toggleSignPanel = () => {
     setIsOpenSignPanel(!isOpenSignPanel)

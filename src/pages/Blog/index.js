@@ -10,6 +10,7 @@ const BlogPageContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 5fr;
   padding-left: 60px;
+  padding-top: 80px;
 `
 
 const PostsContainer = styled.div`

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const Padding = styled.div`
+  display:none;
   height: 50px;
 `
 

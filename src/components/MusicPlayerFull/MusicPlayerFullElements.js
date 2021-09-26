@@ -4,15 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { gray1, gray2, gray3, gray4, green1, black1, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
 
 export const Container = styled.div`
-  display: none;
-  background-image: url('https://akstatic.streetvoice.com/song_covers/br/in/bringmesomesoup/eLgqpgYWGVawffdNWb8gYC.jpg?x-oss-process=image/resize,m_fill,h_610,w_610,limit_0/interlace,1/quality,q_95/sharpen,80/format,jpg');
+  display: block;
   background-size: 180%;
   background-position: center;
   position: fixed;
   width: 100%;
   height: 100vh;
-  z-index: 99;
+  z-index: 100;
   overflow: hidden;
+
+  ${({bgImg}) => bgImg && `
+    background-image: url(${bgImg});
+  `}
 
   &:before {
     content: '';
@@ -23,14 +26,6 @@ export const Container = styled.div`
     backdrop-filter: blur(30px) brightness(40%);
     -webkit-backdrop-filter: blur(30px) brightness(40%);
   }
-`
-export const BgFilter = styled.div`
-  background: ${black1};
-  positon: absolute;
-  opacity: 0.7;
-  width: 100%;
-  height: 100%;
-  z-index: -5;
 `
 
 export const Nav = styled.div`
@@ -82,7 +77,7 @@ export const Library = styled.div`
   transition: 0.5s all ease;
   transform: translateX(-100%);
 
-  ${({libraryStatus}) => libraryStatus && `
+  ${({mode}) => (mode===3) && `
     width: 40%;
     opacity:1;
     transform: translateX(0%);
@@ -90,7 +85,7 @@ export const Library = styled.div`
   `}
 
   ${MEDIA_QUERY_1400} {
-    ${({libraryStatus}) => libraryStatus && `
+    ${({mode}) => (mode===3) && `
       width: 50%;
       opacity:1;
       transform: translateX(0%);
@@ -99,7 +94,7 @@ export const Library = styled.div`
   ${MEDIA_QUERY_768} {
     position: absolute;
     z-index: 5;
-    ${({libraryStatus}) => libraryStatus && `
+    ${({mode}) => (mode===3) && `
       width: 100%;
       opacity:1;
       transform: translateX(0%);
@@ -135,7 +130,7 @@ export const LibrarySongDiv = styled.div`
     }
 
     ${({ active }) => active && `
-      background: #FADADD;
+      background: ${green1};
     `}
 `
 
@@ -172,14 +167,14 @@ export const Song = styled.div`
   height: 100%;
   transition: 0.5s all ease;
 
-  ${({libraryStatus}) => libraryStatus && `
+  ${({mode}) => (mode===3) && `
     width: 70%;
     opacity:1;
     transform: translateX(0%);
   `}
 
   ${MEDIA_QUERY_1400} {
-    ${({libraryStatus}) => libraryStatus && `
+    ${({mode}) => (mode===3) && `
       width: 50%;
       opacity:1;
       transform: translateX(0%);
@@ -189,7 +184,7 @@ export const Song = styled.div`
   ${MEDIA_QUERY_768} {
     position: absolute;
     z-index: 3;
-    ${({libraryStatus}) => libraryStatus && `
+    ${({mode}) => (mode===3) && `
       opacity:0;
     `}
   }
@@ -219,7 +214,7 @@ export const ImgDiv = styled.div`
     object-fit: cover;
   }
   ${MEDIA_QUERY_1024} {
-    ${({libraryStatus}) => libraryStatus && `
+    ${({mode}) => (mode===3) && `
       width:  380px;
       height: 380px;
       border-radius: 16px;
@@ -274,16 +269,17 @@ export const Buttons = styled.div`
 `
 
 export const Track = styled.div`
-  background: linear-gradient(to right, lightgreen, white);
+  background: linear-gradient(45deg, ${green1}, lightblue);
   width: 86%;
   height: 10px;
   overflow: hidden;
   position: relative;
   margin: 0 6px;
+  border-radius: 20px;
 `
 
 export const AnimateTrack = styled.div`
-  background: black;
+  background: ${black1};
   width: 100%;
   height: 100%;
   position: absolute;
@@ -331,6 +327,20 @@ export const FontAwesomeControl = styled(FontAwesomeIcon)`
   }
 `
 
+export const LoopButton = styled(FontAwesomeIcon)`
+  color: ${gray3};
+  cursor: pointer;
+  transition: 0.3s all ease;
+  transform: rotate(0.25turn);
+  &:hover {
+    color: white
+  }
+
+  ${({ active }) => active && `
+    color: white;
+  `}
+`
+
 export const ToggleButton = styled(FontAwesomeIcon)`
   color: ${gray3};
   position:absolute;
@@ -342,10 +352,66 @@ export const ToggleButton = styled(FontAwesomeIcon)`
   &:hover {
     color: white;
   }
+
 `
 
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80px;
+`
+
+export const VolumeButtonDiv = styled.div`
+  positon: relative;
+`
+
+export const VolumeDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100px;
+  height: 26px;
+  background: ${gray1};
+  transform: rotate(0.75turn) translate(90%, -160%);
+  border-radius: 8px;
+`
+
+export const VolumeInputRange = styled.input`
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::focus{
+    outline: none;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 10px;
+    width: 10px;
+  }
+`
+
+export const VolumeTrack = styled.div`
+  background: linear-gradient(45deg, ${green1}, lightblue);
+  width: 86%;
+  height: 40%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+`
+
+export const VolumeAnimateTrack = styled.div`
+  background: ${gray3};
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  ${({volume}) => volume && `
+    transform: translateX(${volume*100}%)
+  `}
 `

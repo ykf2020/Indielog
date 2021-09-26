@@ -7,12 +7,13 @@ import { useParams } from 'react-router-dom'
 const BlogPostPageContainer = styled.div`
   border: 1px solid green;
   width: 80%;
-  margin: 100px auto 20px;
+  margin: 0 auto 20px;
   max-width: 860px;
   min-height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 140px;
 `
 
 const PostContainer = styled.div`
