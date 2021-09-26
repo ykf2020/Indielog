@@ -2,10 +2,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Encode Sans Expanded',
-  sans-serif;
+  font-family: 'Encode Sans Expanded', 'Noto Sans TC', sans-serif;
+
 }
 
 body {
-  background: #fafafa
+  background: #fafafa;
 }
+
+/* font-family: 'Dancing Script', cursive;
+font-family: 'Noto Sans TC', sans-serif; */

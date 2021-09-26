@@ -10,6 +10,7 @@ export const Container = styled.div`
   bottom: 0;
   right: 20px;
   align-items: center;
+  z-index: 99;
 
   ${MEDIA_QUERY_768} {
     width: 100%;

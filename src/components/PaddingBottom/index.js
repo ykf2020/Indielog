@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-
+import { gray1 } from '../../constants.js'
 const Padding = styled.div`
-  display:none;
-  height: 50px;
+  display:block;
+  height: 80px;
+  background: ${gray1};
 `
 
 const PaddingBottom = () => {

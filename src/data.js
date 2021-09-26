@@ -56,6 +56,30 @@ const chillHop = [
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10074",
       id: uuidv4(),
     },
+    {
+      name: "Keep Going",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/07/ff35dede32321a8aa0953809812941bcf8a6bd35-1024x1024.jpg",
+      artist: "Swørn",
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=9222",
+      id: uuidv4(),
+    },
+    {
+      name: "Reflection",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/07/ff35dede32321a8aa0953809812941bcf8a6bd35-1024x1024.jpg",
+      artist: "Swørn",
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=9228",
+      id: uuidv4(),
+    },
+    {
+      name: "Beaver Creek",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg",
+      artist: "Aso, Middle School, Aviino",
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=10075",
+      id: uuidv4(),
+    },
     //ADD MORE HERE
 ]
 

@@ -19,6 +19,7 @@ export const SignPanelLogo = styled.h1`
   font-size: 2.5rem;
   position: absolute;
   top: -80px;
+  font-family: 'Dancing Script', cursive;
 `
 
 export const Panel = styled.div`

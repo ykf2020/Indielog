@@ -28,13 +28,7 @@ const MusicPlayerSmall = ({ audioRef }) => {
     dispatch(setSongPlayingInfo({...songPlayingInfo, currentTime: e.target.value}))
   }
   const playSongHandler = () => {
-    if (isPlaying) {
-      audioRef.current.pause()
-      dispatch(setIsPlaying(!isPlaying))
-    } else {
-      audioRef.current.play()
-      dispatch(setIsPlaying(!isPlaying))
-    }
+    dispatch(setIsPlaying(!isPlaying))
   }
 
   return (

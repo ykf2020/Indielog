@@ -75,13 +75,7 @@ const MusicPlayerFull = ({ audioRef }) => {
   }
 
   const playSongHandler = () => {
-    if (isPlaying) {
-      audioRef.current.pause()
-      dispatch(setIsPlaying(!isPlaying))
-    } else {
-      audioRef.current.play()
-      dispatch(setIsPlaying(!isPlaying))
-    }
+    dispatch(setIsPlaying(!isPlaying))
   }
 
   const dragHandler = (e) => {
@@ -96,13 +90,11 @@ const MusicPlayerFull = ({ audioRef }) => {
     }
     if(direction === 'skip-back'){
       if((currentIndex - 1) % songs.length === -1){
-        await dispatch(setCurrentSong(songs[songs.length-1]))
-        if (isPlaying) audioRef.current.play()
+        dispatch(setCurrentSong(songs[songs.length-1]))
         return
       }
-      await dispatch(setCurrentSong(songs[(currentIndex - 1) % songs.length]))
+        dispatch(setCurrentSong(songs[(currentIndex - 1) % songs.length]))
     }
-    if (isPlaying) audioRef.current.play()
   }
 
   const volumeHandler = (e) => {
@@ -115,8 +107,7 @@ const MusicPlayerFull = ({ audioRef }) => {
   }
 
   const songSelectHandler = async (song) => {
-    await dispatch(setCurrentSong(song))
-    if (isPlaying) audioRef.current.play()
+      dispatch(setCurrentSong(song))
   }
 
   useEffect(() => {

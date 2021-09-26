@@ -3,7 +3,7 @@ import MusicPlayerSmall from '../MusicPlayerSmall'
 import MusicPlayerFull from '../MusicPlayerFull'
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentSong } from "../../redux/reducers/songReducer";
-import { setSongPlayingInfo } from "../../redux/reducers/playerControlReducer"
+import { setSongPlayingInfo, setIsPlaying, setMainGetIn } from "../../redux/reducers/playerControlReducer"
 
 const MusicPlayer = () => {
   const audioRef = useRef(null)
@@ -15,7 +15,7 @@ const MusicPlayer = () => {
   const currentSong = useSelector((store) => store.song.currentSong)
   const mode = useSelector((store) => store.playerControl.mode)
   const loop = useSelector((store) => store.playerControl.loop)
-
+  const mainGetIn = useSelector((store) => store.playerControl.mainGetIn)
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime
     const duration = e.target.duration
@@ -33,17 +33,24 @@ const MusicPlayer = () => {
   const songEndHandler = async () => {
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id)
     await dispatch(setCurrentSong(songs[(currentIndex + 1) % songs.length]))
-    if (isPlaying) audioRef.current.play()
+    if (isPlaying) dispatch(setIsPlaying(true))
   }
 
   useEffect(() => {
-    if(mode === 0) audioRef.current.pause()
+    if(mode === 0) dispatch(setIsPlaying(false))
   },[mode])
 
   useEffect(() => {
     console.log(loop)
   },[loop])
 
+  useEffect(() => {
+    if(isPlaying) {
+      audioRef.current.play()
+    } else if (!isPlaying) {
+      audioRef.current.pause()
+    }
+  }, [isPlaying, currentSong, mode])
   return (
     <>
       {(mode === 1 ) && <MusicPlayerSmall audioRef={audioRef} />}
@@ -58,7 +65,6 @@ const MusicPlayer = () => {
         onEnded={songEndHandler}
         loop={loop}
       ></audio>
-
     </>
   )
 }

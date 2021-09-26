@@ -48,6 +48,7 @@ export const NavLogo = styled(Link)`
   margin-left: 12px;
   font-weight: bold;
   text-decoration: none;
+  font-family: 'Dancing Script', cursive;
 `
 
 export const FontAwesome = styled(FontAwesomeIcon)`

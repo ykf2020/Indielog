@@ -14,6 +14,7 @@ const initialState = {
     duration: 0,
     animationPercentage: 0,
   },
+  mainGetIn: false,
 };
 
 export const playerControlReducer = createSlice({
@@ -34,11 +35,14 @@ export const playerControlReducer = createSlice({
     },
     setLoop:(state, action) => {
       state.loop = action.payload;
+    },
+    setMainGetIn:(state, action) => {
+      state.loop = action.payload
     }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setSound, setIsPlaying, setMode, setSongPlayingInfo, setLoop } = playerControlReducer.actions;
+export const { setMainGetIn, setSound, setIsPlaying, setMode, setSongPlayingInfo, setLoop } = playerControlReducer.actions;
 
 export default playerControlReducer.reducer;
