@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4, green1, black1, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, green1, black1, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
 
 export const Container = styled.div`
   display: block;
@@ -152,6 +152,7 @@ export const LibraryImgDiv = styled.div`
   height: 100px;
   border-radius: 10px;
   overflow: hidden;
+  
   img {
     width: 100%;
     height: 100%;
@@ -222,6 +223,13 @@ export const ImgDiv = styled.div`
       margin-bottom:100px
     `}
   }
+
+  ${MEDIA_QUERY_568} {
+    width:  300px;
+    height: 300px;
+    border-radius: 16px;
+    margin-bottom:80px
+  }
 `
 export const SongName = styled.h1`
   font-size: 26px;
@@ -251,6 +259,12 @@ export const ControlPanel = styled.div`
     width:80%;
     padding: 0 20px;
   }
+
+  ${MEDIA_QUERY_768} {
+    width: 100%;
+    padding: 0 20px;
+  }
+
 `
 
 export const Slider = styled.div`
@@ -311,11 +325,13 @@ export const InputRange = styled.input`
 export const SongCurrentTime = styled.p`
   color: white;
   font-size: 14px;
+  margin:0;
 `
 
 export const SongFullTime = styled.p`
   color: white;
   font-size: 14px;
+  margin:0;
 `
 
 export const FontAwesomeControl = styled(FontAwesomeIcon)`

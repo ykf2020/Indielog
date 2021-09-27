@@ -39,6 +39,10 @@ export const NavLogo = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   font-family: 'Dancing Script', cursive;
+
+  &:hover {
+    color: white;
+  }
 `
 
 export const MobileIcon = styled.div`
@@ -58,11 +62,12 @@ export const MobileIcon = styled.div`
 
 export const NavMenu = styled.ul`
   display: flex;
-  align-items: center;
   list-style: none;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   margin-right: -22px;
-
+  margin: auto 0;
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -81,6 +86,9 @@ export const NavLinks = styled(Link)`
   height: 100%;
   cursor: pointer;
 
+  &:hover {
+    color: white;
+  }
 `
 
 export const NavBtn = styled.nav`

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4, green1, MEDIA_QUERY_768} from '../../constants.js'
+import { gray1, gray2, gray3, gray4, green1, MEDIA_QUERY_768, MEDIA_QUERY_568} from '../../constants.js'
 export const Container = styled.div`
   position: fixed;
   display: flex;
@@ -37,6 +37,11 @@ export const ImgDiv = styled.div`
     height: 38px;
     width: 38px;
   }
+
+  ${MEDIA_QUERY_568} {
+    height: 30px;
+    width: 30px;
+  }
 `
 
 export const InfoContainer = styled.div`
@@ -55,11 +60,20 @@ export const InfoContainer = styled.div`
 export const SongName = styled.h2`
   font-size: 16px;
   font-weight: bold;
+
+  ${MEDIA_QUERY_568} {
+    font-size: 12px;
+  }
 `
 
 export const AuthorName = styled.p`
   font-size: 12px;
   color: ${gray3};
+
+  ${MEDIA_QUERY_568} {
+    font-size: 8px;
+    margin-bottom: 0;
+  }
 `
 
 export const IconContainer = styled.div`
@@ -69,6 +83,7 @@ export const IconContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-right: 10px;
+
   ${MEDIA_QUERY_768} {
     align-self: end;
   }

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isPlaying: false,
   loop:false,
-  mode: 1, // 0: turnoff; 1: small player; 2: full player without library; 3: fullPlayer with library
+  mode: 0, // 0: turnoff; 1: small player; 2: full player without library; 3: fullPlayer with library
   sound: {
     mute: false,
     volume:0.5,

@@ -66,7 +66,7 @@ const MusicPlayerFull = ({ audioRef }) => {
 
   const bgImg = useMemo(() => {
     return currentSong.cover
-  },[currentSong])
+  }, [currentSong])
 
   const getTime = (time) => {
     return(

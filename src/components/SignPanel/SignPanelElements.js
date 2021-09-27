@@ -44,14 +44,14 @@ export const CancelButton = styled.button`
   position: absolute;
   color: ${black1};
   right: 14px;
-  top: 14px;
+  top: 12px;
 
   &:before {
     position: absolute;
     content: "x";
     top: 50%;
     left: 50%;
-    transform: translate(-42%, -54%)
+    transform: translate(-42%, -58%)
   }
 
   &:hover {
@@ -79,6 +79,7 @@ export const SignPanelTitle = styled.h2`
 
 export const SignPanelTitleDesc = styled.p`
   margin-top: 20px;
+  margin-bottom: 0;
   align-self: flex-start;
   color: white;
   font-size: 1rem;

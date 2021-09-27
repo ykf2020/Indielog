@@ -5,7 +5,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faPlayCircle, faHeart as faHeartBorder } from '@fortawesome/free-regular-svg-icons'
 import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
-import { gray1, gray2, gray3, gray4, black1, MEDIA_QUERY_1024, MEDIA_QUERY_768 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, black1, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -59,6 +59,10 @@ const Song = styled.div`
   &:hover {
     background: white;
   }
+
+  ${MEDIA_QUERY_568} {
+    padding: 0 0;
+  }
 `
 const SongInfo = styled.div`
   width: 86%;
@@ -74,6 +78,10 @@ const SongName = styled.h3`
   ${MEDIA_QUERY_768} {
     font-size: 1rem;
   }
+
+  ${MEDIA_QUERY_568} {
+    font-size: 0.8rem;
+  }
 `
 const AuthorName = styled.p`
   font-size: 0.8rem;
@@ -81,6 +89,10 @@ const AuthorName = styled.p`
 
   ${MEDIA_QUERY_768} {
     font-size: 0.6rem;
+  }
+
+  ${MEDIA_QUERY_568} {
+    font-size: 0.5rem;
   }
 `
 const SongButtons = styled.div`
@@ -93,7 +105,7 @@ const SongButtons = styled.div`
 `
 
 const NumberDiv = styled.div`
-  width: 60px;
+  width: 36px;
   /* border: 1px solid blue; */
 `
 
@@ -111,6 +123,11 @@ const ImgDiv = styled.div`
   position: relative;
   cursor:pointer;
   z-index:1;
+
+  ${MEDIA_QUERY_568} {
+    height: 50px;
+    width: 50px;
+  }
 
   img {
     width: 100%;
@@ -131,6 +148,10 @@ const SongDesc = styled.div`
 
   ${MEDIA_QUERY_768} {
     margin-left: 16px;
+  }
+
+  ${MEDIA_QUERY_568} {
+    margin-left: 10px;
   }
 `
 

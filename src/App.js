@@ -8,6 +8,7 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import NewPost from './pages/NewPost'
 import Music from './pages/Music'
+import Song from './pages/Song'
 import MusicPlayer from './components/MusicPlayer'
 import PaddingBottom from './components/PaddingBottom'
 import data from './data.js'
@@ -27,34 +28,39 @@ function App() {
     setIsOpenSignPanel(!isOpenSignPanel)
   }
   return (
-    <Router>
-      {isOpenSignPanel &&
-        <SignPanel
-        isOpenSignPanel={isOpenSignPanel}
-        toggleSignPanel={toggleSignPanel}
+    <div className='app'>
+      <Router>
+        {isOpenSignPanel &&
+          <SignPanel
+          isOpenSignPanel={isOpenSignPanel}
+          toggleSignPanel={toggleSignPanel}
+          />
+        }
+        <Header
+          isOpenSignPanel={isOpenSignPanel}
+          toggleSignPanel={toggleSignPanel}
         />
-      }
-      <Header
-        isOpenSignPanel={isOpenSignPanel}
-        toggleSignPanel={toggleSignPanel}
-      />
-      <MusicPlayer />
-      <Switch>
-        <Route exact path='/'>
-          <Music />
-        </Route>
-        <Route exact path='/blog'>
-          <Blog />
-        </Route>
-        <Route path='/blogpost/:postId'>
-          <BlogPost />
-        </Route>
-        <Route>
-          <NewPost path='/new-post' />
-        </Route>
-      </Switch>
-      <PaddingBottom />
-    </Router>
+        <MusicPlayer />
+        <Switch>
+          <Route exact path='/'>
+            <Music />
+          </Route>
+          <Route exact path='/blog'>
+            <Blog />
+          </Route>
+          <Route path='/blogpost/:postId'>
+            <BlogPost />
+          </Route>
+          <Route path='/new-post'>
+            <NewPost />
+          </Route>
+          <Route path='/songs'>
+            <Song />
+          </Route>
+        </Switch>
+        <PaddingBottom />
+      </Router>
+    </div>
   );
 }
 

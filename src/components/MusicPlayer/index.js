@@ -16,6 +16,7 @@ const MusicPlayer = () => {
   const mode = useSelector((store) => store.playerControl.mode)
   const loop = useSelector((store) => store.playerControl.loop)
   const mainGetIn = useSelector((store) => store.playerControl.mainGetIn)
+
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime
     const duration = e.target.duration
