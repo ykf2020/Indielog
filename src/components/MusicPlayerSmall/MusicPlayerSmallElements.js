@@ -50,16 +50,23 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 8px;
-
+  padding: 16px 4px 8px 4px;
   ${MEDIA_QUERY_768} {
     width: 70%;
+  }
+
+  ${MEDIA_QUERY_568} {
+    padding: 8px;
   }
 `
 
 export const SongName = styled.h2`
   font-size: 16px;
   font-weight: bold;
+
+  ${MEDIA_QUERY_768} {
+    font-size: 14px;
+  }
 
   ${MEDIA_QUERY_568} {
     font-size: 12px;
@@ -73,6 +80,10 @@ export const AuthorName = styled.p`
   ${MEDIA_QUERY_568} {
     font-size: 8px;
     margin-bottom: 0;
+  }
+
+  ${MEDIA_QUERY_768} {
+    font-size: 10px;
   }
 `
 

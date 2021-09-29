@@ -1,0 +1,42 @@
+import React, { useState, useEffect }  from 'react'
+import { SidebarContainer, SidebarMenu, SidebarLink, SideBtnWrap, SignPanelBtn, SideMemberDiv, SideMemberImgDiv, MemberHello } from './SidebarElements'
+import firebase from '../../utils/firebase.js'
+import 'firebase/compat/auth';
+
+const SideBar = ({ isOpenSideBar, toggleSideBar, toggleSignPanel }) => {
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    firebase
+      .auth()
+      .onAuthStateChanged((currentUser) => {
+        setUser(currentUser)
+      })
+  },[])
+  const signOut = () => {
+    firebase.auth().signOut()
+  }
+  return (
+    <SidebarContainer isOpenSideBar={isOpenSideBar}>
+        <SidebarMenu>
+          {user ?
+            <SideMemberDiv>
+              <SideMemberImgDiv>
+                <img src={'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
+              </SideMemberImgDiv>
+              <MemberHello>嗨！柴柴</MemberHello>
+            </SideMemberDiv> : ''}
+          <SidebarLink to="/" onClick={toggleSideBar}>聽聽音樂</SidebarLink>
+          <SidebarLink to="/blog" onClick={toggleSideBar}>聊聊音樂</SidebarLink>
+          {user ? <SidebarLink to="/new-song" onClick={toggleSideBar}>上傳音樂</SidebarLink> : ''}
+          {user ? <SidebarLink to="/new-post" onClick={toggleSideBar}>新增文章</SidebarLink> : ''}
+          {user ? <SidebarLink to="/member/collections/songs" onClick={toggleSideBar}>收藏列表</SidebarLink> : ''}
+          {user ? <SidebarLink to="/member/personal-info" onClick={toggleSideBar}>會員資料</SidebarLink> : ''}
+        </SidebarMenu>
+        <SideBtnWrap>
+        {user ?  <SignPanelBtn onClick={() => {toggleSideBar(); signOut()}}>登出</SignPanelBtn> : <SignPanelBtn onClick={() => {toggleSideBar(); toggleSignPanel()}}>註冊 / 登入</SignPanelBtn>}
+        </SideBtnWrap>
+    </SidebarContainer>
+  )
+}
+
+export default SideBar;

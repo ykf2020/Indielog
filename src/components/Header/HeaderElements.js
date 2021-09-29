@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { green1, black1 } from '../../constants.js'
+import { gray2, gray4, green1, green2, black1 } from '../../constants.js'
 export const Nav = styled.nav`
   background: ${black1};
   height: 80px;
@@ -11,7 +11,7 @@ export const Nav = styled.nav`
   font-size: 1rem;
   position: fixed;
   top: 0;
-  z-index: 10;
+  z-index: 1001;
 
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
@@ -53,7 +53,7 @@ export const MobileIcon = styled.div`
     position: absulute;
     top: 0;
     right: 0;
-    transform: translate(-60%, 30%);
+    transform: translate(-60%, 16%);
     font-size: 1.8rem;
     cursor: pointer;
     color: #fff;
@@ -116,5 +116,96 @@ export const NavBtnLink = styled.a`
     transition: all 0.2s ease-in-out;
     background: #fff;
     color: ${black1};
+  }
+`
+
+export const MemberDiv = styled.div`
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+`
+
+
+export const NavMemberImgDiv = styled.div`
+  width:  50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid white;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+export const DropDownContainer = styled.div`
+  position: absolute;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  transform: translate(20px, 45px);
+  width: 150px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(33, 33, 33, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  justify-content: space-between;
+  overflow:hidden;
+
+  ${({isOpenDropDown}) => isOpenDropDown && `
+    transform: translate(20px, 70px) ;
+    opacity: 1;
+  `}
+`
+
+export const DropDownMain = styled.div`
+  width: 100%;
+`
+
+export const DropDownItem = styled(Link)`
+  text-decoration: none;
+  color: ${gray4};
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width:100%;
+  cursor: pointer;
+  padding: 0 6px;
+  border-bottom: 1px solid ${gray2};
+  transition: all 0.3s ease;
+  &:hover {
+    background: ${green2};
+    color: white;
+  }
+
+`
+export const DropDownBottom = styled.div`
+  color: ${gray4};
+  font-size: 1rem;
+  height:50px;
+  width: 100%;
+  padding: 6px 4px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  &:hover {
+    background: ${green2};
+    color: white;
+    font-size: bold;
   }
 `

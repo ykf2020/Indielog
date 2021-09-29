@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
+import data from '../../data.js'
 import { gray1, gray2, gray3, gray4 , black1, green1, MEDIA_QUERY_1400, MEDIA_QUERY_1024, MEDIA_QUERY_978, MEDIA_QUERY_768 } from '../../constants.js'
 import CommentArea from '../../components/CommentArea'
 const SongPageConatainer = styled.div`
@@ -11,13 +13,16 @@ const SongPageConatainer = styled.div`
 const MainInfoBackground = styled.div`
   width: 100%;
   height: 500px;
-  background-image: url('https://i.imgur.com/Ti5yQhBh.jpg');
   background-size: 180%;
   background-position: center;
   position: relative;
   display: flex;
   justify-content: center;
   padding-top: 80px;
+
+  ${({bgImg}) => bgImg && `
+    background-image: url('${bgImg}');
+  `}
 
   &:after {
     content: '';
@@ -213,12 +218,13 @@ const FoldSection = styled.section`
 const FoldInfo = styled.div`
   display: flex;
   flex-direction: column;
-  height: 230px;
-  width: 100%;
+  max-height: auto;
+  height: 100%;
   overflow:hidden;
   transition: all 0.3s ease;
-  ${({isFold}) => isFold && `
-    height: 100%;
+
+  ${({isFold}) => !isFold && `
+    height: 230px;
   `}
 `
 
@@ -334,16 +340,22 @@ const SongUpdate = styled.div`
 `
 
 
+
 const Song = () => {
+  const { songId } = useParams()
   const [foldSection1, setFoldSection1] = useState(false)
   const [foldSection2, setFoldSection2] = useState(false)
+  const [pageData, setPageData] = useState({})
+  useEffect(() => {
+    setPageData(data.find(d => d.id === songId))
+  },[data, songId])
   return (
     <SongPageConatainer>
-      <MainInfoBackground>
+      <MainInfoBackground bgImg={pageData.cover}>
         <MainInfoContainer>
-          <MainImgDiv><img src='https://p3.pstatp.com/origin/pgc-image/04e1adade5804e39a3d2ca067c00550f.jpeg'/></MainImgDiv>
+          <MainImgDiv><img src={pageData.cover}/></MainImgDiv>
           <MainInfoDiv>
-            <MainInfoSongName>奇巧計程車OP1 —— 羊駝好婆</MainInfoSongName>
+            <MainInfoSongName>{pageData.name}</MainInfoSongName>
             <SongInfoCategory>Experimental</SongInfoCategory>
             <MainInfoSongInfoDiv>
             <NumInfo>
@@ -364,7 +376,7 @@ const Song = () => {
           <ArtistInfoLeftDiv>
             <ArtistImgDiv><img src='https://p3.pstatp.com/origin/pgc-image/04e1adade5804e39a3d2ca067c00550f.jpeg'/></ArtistImgDiv>
             <ArtistInfoNames>
-              <ArtistName>奇巧計程車</ArtistName>
+              <ArtistName>{pageData.artist}</ArtistName>
               <AuthorizedDesc>認證創作者</AuthorizedDesc>
             </ArtistInfoNames>
           </ArtistInfoLeftDiv>

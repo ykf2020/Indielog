@@ -10,5 +10,11 @@
   background: #fafafa;
 }
 
+.ck-editor__editable {
+    width: 100%;
+    min-height: 500px;
+
+}
+
 /* font-family: 'Dancing Script', cursive;
 font-family: 'Noto Sans TC', sans-serif; */

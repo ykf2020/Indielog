@@ -10,7 +10,7 @@ export const Container = styled.div`
   position: fixed;
   width: 100%;
   height: 100vh;
-  z-index: 100;
+  z-index: 1002;
   overflow: hidden;
 
   ${({bgImg}) => bgImg && `
@@ -152,7 +152,7 @@ export const LibraryImgDiv = styled.div`
   height: 100px;
   border-radius: 10px;
   overflow: hidden;
-  
+
   img {
     width: 100%;
     height: 100%;

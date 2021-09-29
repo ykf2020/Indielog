@@ -7,6 +7,7 @@ import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
 import { gray1, gray2, gray3, gray4, black1, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Carousellll = styled(Carousel)`
@@ -64,7 +65,9 @@ const Song = styled.div`
     padding: 0 0;
   }
 `
-const SongInfo = styled.div`
+const SongInfo = styled(Link)`
+  text-decoration: none;
+  color: none;
   width: 86%;
   height: 100%;
   /* border: 1px solid orange; */
@@ -72,6 +75,7 @@ const SongInfo = styled.div`
   align-items: center;
 `
 const SongName = styled.h3`
+  color: ${black1};
   font-size: 1.2rem;
   font-weight: bold;
 
@@ -84,6 +88,7 @@ const SongName = styled.h3`
   }
 `
 const AuthorName = styled.p`
+  color: ${gray4};
   font-size: 0.8rem;
   color: ${gray3}
 
@@ -158,7 +163,8 @@ const SongDesc = styled.div`
 const Music = () => {
   const dispatch = useDispatch()
   const songs = useSelector((store) => store.song.songs)
-  const playSong = async (song) => {
+  const playSong = async (e, song) => {
+    e.preventDefault();
     await dispatch(setIsPlaying(true))
     await dispatch(setCurrentSong(song))
     await dispatch(setMode(2))
@@ -205,11 +211,11 @@ const Music = () => {
         {songs.map((song,index) => {
           return (
             <Song>
-              <SongInfo>
+              <SongInfo to={`/songs/${song.id}`}>
                 <NumberDiv>
                   <Number>{index + 1}</Number>
                 </NumberDiv>
-                <ImgDiv onClick={() => playSong(song)}>
+                <ImgDiv onClick={(e) => playSong(e, song)}>
                   <img src={song.cover}/>
                 </ImgDiv>
                 <SongDesc>

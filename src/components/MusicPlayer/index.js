@@ -42,10 +42,6 @@ const MusicPlayer = () => {
   },[mode])
 
   useEffect(() => {
-    console.log(loop)
-  },[loop])
-
-  useEffect(() => {
     if(isPlaying) {
       audioRef.current.play()
     } else if (!isPlaying) {

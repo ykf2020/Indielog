@@ -4,46 +4,120 @@ import firebase from '../../utils/firebase'
 import "firebase/compat/firestore"
 import "firebase/compat/storage"
 import { useHistory } from 'react-router-dom'
+import { gray1, gray2, gray3, gray4, green1, green2 } from '../../constants.js'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import Editor from 'ckeditor5-custom-build/build/ckeditor'
+
+const editorConfiguration = {
+    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'imageInsert', 'MediaEmbed', 'InsertTable', 'Undo', 'Redo' ],
+    heading: {
+        options: [
+            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+        ]
+    },
+    ckfinder: {
+
+    }
+};
+
 const BlogPostPageContainer = styled.div`
-  border: 1px solid green;
   width: 80%;
   margin: 0 auto 20px;
   max-width: 860px;
-  min-height: 800px;
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 100px;
 `
 const Title = styled.h2`
   align-self: flex-start;
+  padding-bottom: 2px;
+  border-bottom: 2px solid ${green1};
 `
 const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+`
 
+const InputSection = styled.section`
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+`
+
+const SectionTitle = styled.h4`
+  font-size: 1rem;
+  color: ${gray4}
 `
 
 const Input = styled.input`
-
-`
-
-const TextArea = styled.textarea`
-
+  height: 40px;
+  outline: none;
+  padding: 0 8px;
+  border: 1px solid ${gray3}
 `
 
 const Select = styled.select`
-
+  width: 200px;
+  outline: none;
+  border: 1px solid ${gray3};
 `
 
-const Image = styled.img`
+const ImgSection = styled.div`
+  display:flex;
+  align-items: flex-end;
+  margin-top: 20px;
+`
 
+const ImageDiv = styled.div`
+  width:  360px;
+  height: 100%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
 const UploadButton = styled.label`
-
+  font-size: 14px;
+  height: 30px;
+  width: 120px;
+  cursor: pointer;
+  background: ${green1};
+  border-radius: 15px;
+  line-height: 30px;
+  margin-left: 20px;
+  text-align: center;
+  color: white;
+  transition: all 0.2s ease;
+  &:hover {
+    background: ${green2}
+  }
 `
 
 const SubmitButton = styled.button`
+  border: none;
+  height: 40px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  background: ${green1};
+  text-align: center;
+  color: white;
+  transition: all 0.2s ease;
 
+  &:hover {
+    background: ${green2}
+  }
 `
 
 const NewPost = () => {
@@ -53,6 +127,7 @@ const NewPost = () => {
   const [topicName, setTopicName] = useState('')
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
+
   useEffect(() => {
     firebase
       .firestore()
@@ -67,7 +142,16 @@ const NewPost = () => {
       })
   },[])
 
-  const previewUrl = file ? URL.createObjectURL(file) : 'https://react.semantic-ui.com/images/wireframe/image.png'
+  const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
+
+  function handleCkeditorContent(e, editor){
+    const data = editor.getData()
+    setContent(data)
+  }
+
+  useEffect(() => {
+    console.log(content)
+  },[content])
 
   function onSubmit(e) {
     e.preventDefault()
@@ -77,7 +161,8 @@ const NewPost = () => {
     const metadata = {
       contentType: file.type
     }
-    fileRef.put(file, metadata).then(() =>{
+
+    fileRef.put(file, metadata).then(() => {
       fileRef.getDownloadURL().then((imageUrl) => {
         documentRef.set({
           title,
@@ -104,22 +189,38 @@ const NewPost = () => {
     <BlogPostPageContainer>
       <Title>發表文章</Title>
       <Form onSubmit={(e) => onSubmit(e)}>
-        <Image  src={previewUrl}/>
-        <UploadButton htmlFor='post-image'>上傳文章圖片</UploadButton>
-        <Input
-          type="file"
-          id='post-image'
-          style={{display: 'none'}}
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='請輸入文章標題'/>
-        <TextArea value={content} onChange={(e) => setContent(e.target.value)} placeholder='請輸入文章內容'/>
-        <Select value={topicName} onChange={(e) => setTopicName(e.target.value)}>
-          {topics.map((topic) => {
-            return <option value={topic.name}>{topic.name}</option>
-          })}
-
-        </Select>
+        <ImgSection>
+          <ImageDiv><img src={previewUrl}/></ImageDiv>
+          <UploadButton htmlFor='post-image'>上傳文章封面</UploadButton>
+          <Input
+            type="file"
+            id='post-image'
+            style={{display: 'none'}}
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </ImgSection>
+        <InputSection>
+          <SectionTitle>選擇主題：</SectionTitle>
+          <Select value={topicName} onChange={(e) => setTopicName(e.target.value)}>
+            {topics.map((topic) => {
+              return <option value={topic.name}>{topic.name}</option>
+            })}
+          </Select>
+        </InputSection>
+        <InputSection>
+          <SectionTitle>文章標題：</SectionTitle>
+          <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='請輸入文章標題'/>
+        </InputSection>
+        <InputSection>
+          <SectionTitle>文章內容：</SectionTitle>
+          <CKEditor
+            editor={Editor}
+            onInit={ editor => {
+            }}
+            onChange={handleCkeditorContent}
+            config={editorConfiguration}
+          />
+        </InputSection>
         <SubmitButton>送出</SubmitButton>
       </Form>
     </BlogPostPageContainer>

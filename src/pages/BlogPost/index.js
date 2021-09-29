@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import firebase from '../../utils/firebase'
 import "firebase/compat/firestore"
 import { useParams } from 'react-router-dom'
-import { gray1, gray2, gray3, gray4, black1, green1, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, black1, green1, green2, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import CommentArea from '../../components/CommentArea'
 const BlogPostPageContainer = styled.div`
   width: 80%;
@@ -48,6 +48,8 @@ const PostContentWrapper = styled.div`
   margin-top: 40px;
   color: #666;
   word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
   p {
     margin: 20px 0;
   }
@@ -55,6 +57,26 @@ const PostContentWrapper = styled.div`
   img {
     margin: 20px 0;
     height: auto;
+    max-width: 100%;
+  }
+
+  a {
+    color: ${green2}
+  }
+
+  a:hover {
+    color: ${green1}
+  }
+
+  blockQuote {
+    border-left: 10px solid ${green1};
+    text-align: center;
+    color: ${gray2};
+    max-width: 100%;
+    padding-left: 10px;
+  }
+
+  iframe {
     max-width: 100%;
   }
 `
@@ -116,6 +138,7 @@ const AuthorImg = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
 `
 
 const AuthorInfo = styled.div`
@@ -172,7 +195,7 @@ const BlogPost = () => {
       <PostTitle>{post.title}</PostTitle>
       <PostPic src={post.imageUrl}></PostPic>
       <PostDesc>{post.createdAt?.toDate().toLocaleString()} | {post.topic}</PostDesc>
-      <PostContentWrapper>{post.content}</PostContentWrapper>
+      <PostContentWrapper dangerouslySetInnerHTML={{__html: post.content}}/>
       </PostContainer>
       <AuthorContainer>
         <AuthorContainerTitle>關於作者</AuthorContainerTitle>

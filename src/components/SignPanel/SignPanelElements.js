@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { green1, black1 } from '../../constants.js'
+
 export const SignPanelContainer = styled.div`
   background: ${green1};
   height: 100vh;
@@ -9,7 +10,7 @@ export const SignPanelContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index:99;
+  z-index:1005;
 
 `
 

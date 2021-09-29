@@ -15,6 +15,8 @@ export const PostContainer = styled.div`
   ${MEDIA_QUERY_568} {
     width: 100vw;
     padding: 0 6px;
+    align-items: center;
+
   }
 `
 
@@ -24,7 +26,8 @@ export const PicWrap = styled.div`
   overflow: hidden;
 
   ${MEDIA_QUERY_568} {
-    height: 100%;
+    width: 100%;
+    margin: auto 0;
   }
 `
 
@@ -39,9 +42,9 @@ export const PostMain = styled.div`
   padding-right: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   word-wrap: break-word;
+  padding-top:10px;
 
 
   ${MEDIA_QUERY_568} {
