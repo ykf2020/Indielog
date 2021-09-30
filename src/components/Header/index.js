@@ -17,20 +17,14 @@ import {
   DropDownBottom,
   MemberDiv
 } from './HeaderElements'
+import { useSelector } from 'react-redux'
 import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth'
 
 const Header = ({ toggleSignPanel, toggleSideBar }) => {
-  const [user, setUser] = useState(null)
+  const user = firebase.auth().currentUser || null
   const [isOpenDropDown, setIsOpenDropDown] = useState(false)
   const dropDownRef = useRef(null)
-  useEffect(() => {
-    firebase
-      .auth()
-      .onAuthStateChanged((currentUser) => {
-        setUser(currentUser)
-      })
-  },[])
   const signOut = () => {
     firebase.auth().signOut()
   }
@@ -74,10 +68,10 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
                 <DropDownItem to='/member/collections/songs'>收藏列表</DropDownItem>
                 <DropDownItem to='/member/personal-info'>會員資料</DropDownItem>
               </DropDownMain>
-              <DropDownBottom>登出</DropDownBottom>
+              <DropDownBottom onClick={signOut}>登出</DropDownBottom>
             </DropDownContainer>
             <NavMemberImgDiv onClick = {() => setIsOpenDropDown(!isOpenDropDown)}>
-              <img src={'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
+              <img src={user.photoURL ? user.photoURL : 'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
             </NavMemberImgDiv>
           </MemberDiv>
           :

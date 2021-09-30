@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import data from '../../data.js'
-import { gray1, gray2, gray3, gray4 , black1, green1, MEDIA_QUERY_1400, MEDIA_QUERY_1024, MEDIA_QUERY_978, MEDIA_QUERY_768 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4 , black1, green1, MEDIA_QUERY_1400, MEDIA_QUERY_1024, MEDIA_QUERY_978, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import CommentArea from '../../components/CommentArea'
 const SongPageConatainer = styled.div`
   width: 100%;
@@ -37,6 +37,10 @@ const MainInfoBackground = styled.div`
   ${MEDIA_QUERY_768} {
     height: 900px;
   }
+
+  ${MEDIA_QUERY_568} {
+    height: 660px;
+  }
 `
 
 const MainInfoContainer = styled.div`
@@ -59,6 +63,10 @@ const MainInfoContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+  }
+
+  ${MEDIA_QUERY_568} {
+    height: 600px;
   }
 `
 
@@ -98,6 +106,11 @@ const MainImgDiv = styled.div`
     width: 460px;
     height: 460px;
   }
+
+  ${MEDIA_QUERY_568} {
+    width: 280px;
+    height: 280px;
+  }
 `
 
 const MainInfoDiv = styled.div`
@@ -123,6 +136,10 @@ const MainInfoDiv = styled.div`
     height: 310px;
   }
 
+  ${MEDIA_QUERY_568} {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const MainInfoSongName = styled.h1`
@@ -133,11 +150,19 @@ const MainInfoSongName = styled.h1`
   ${MEDIA_QUERY_978} {
     font-size: 1.8rem;
   }
+
+  ${MEDIA_QUERY_568} {
+    font-size: 1.3rem;
+  }
 `
 
 const SongInfoCategory = styled.h4`
   font-size: 1.2rem;
-  color: ${gray1}
+  color: ${gray1};
+
+  ${MEDIA_QUERY_568} {
+    font-size: 1rem;
+  }
 `
 
 const MainInfoSongInfoDiv = styled.div`
@@ -162,10 +187,18 @@ const NumInfo = styled.div`
 
 const InfoDesc = styled.h4`
   color: ${gray2};
+
+  ${MEDIA_QUERY_568} {
+    font-size: 1.1rem;
+  }
 `
 
 const InfoDescNum = styled.h3`
   color: ${gray2};
+
+  ${MEDIA_QUERY_568} {
+    font-size: 1.1rem;
+  }
 `
 
 const BodyContainer = styled.div`
@@ -257,7 +290,9 @@ const Content = styled.p`
 `
 
 const ArtistContainer = styled.div`
+  position: relative;
   width: 30%;
+  z-index: 100;
 
   ${MEDIA_QUERY_1400} {
     width: 40%;
@@ -271,6 +306,11 @@ const ArtistContainer = styled.div`
     margin-top: 0px;
     width: 100%;
     padding: 0 80px 0 80px;
+  }
+
+  ${MEDIA_QUERY_568} {
+    width: 100%;
+    padding: 0 10px 0 10px;
   }
 `
 
@@ -299,6 +339,10 @@ const ArtistName = styled.h4`
   color: ${gray4};
   font-size: 1.1rem;
   margin: 0;
+
+  ${MEDIA_QUERY_568} {
+    font-size: 0.8rem;
+  }
 `
 
 const AuthorizedDesc = styled.p`

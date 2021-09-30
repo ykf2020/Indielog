@@ -1,17 +1,11 @@
 import React, { useState, useEffect }  from 'react'
 import { SidebarContainer, SidebarMenu, SidebarLink, SideBtnWrap, SignPanelBtn, SideMemberDiv, SideMemberImgDiv, MemberHello } from './SidebarElements'
+import { useSelector } from 'react-redux'
 import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth';
 
 const SideBar = ({ isOpenSideBar, toggleSideBar, toggleSignPanel }) => {
-  const [user, setUser] = useState(null)
-  useEffect(() => {
-    firebase
-      .auth()
-      .onAuthStateChanged((currentUser) => {
-        setUser(currentUser)
-      })
-  },[])
+  const user = firebase.auth().currentUser || null
   const signOut = () => {
     firebase.auth().signOut()
   }
@@ -21,9 +15,9 @@ const SideBar = ({ isOpenSideBar, toggleSideBar, toggleSignPanel }) => {
           {user ?
             <SideMemberDiv>
               <SideMemberImgDiv>
-                <img src={'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
+                <img src={user ? user.photoURL : 'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
               </SideMemberImgDiv>
-              <MemberHello>嗨！柴柴</MemberHello>
+              <MemberHello>嗨！{user.displayName}</MemberHello>
             </SideMemberDiv> : ''}
           <SidebarLink to="/" onClick={toggleSideBar}>聽聽音樂</SidebarLink>
           <SidebarLink to="/blog" onClick={toggleSideBar}>聊聊音樂</SidebarLink>

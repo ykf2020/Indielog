@@ -8,6 +8,7 @@ import {
   SignPanelChange,
 } from './SignPanelElements.js'
 import firebase from '../../utils/firebase.js'
+import "firebase/compat/firestore"
 import 'firebase/compat/auth';
 const SignUp = ({ setPanelStatus, toggleSignPanel }) => {
   const [email, setEmail] = useState('')
@@ -23,11 +24,22 @@ const SignUp = ({ setPanelStatus, toggleSignPanel }) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        toggleSignPanel()
-        console.log('sign up!')
-        setEmail('')
-        setPassword('')
+      .then((signUpResult) => {
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(signUpResult.user.uid)
+          .set({
+            email,
+            photoURL: '',
+            displayName: '',
+            introduction: '',
+            createdAt: firebase.firestore.Timestamp.now()
+          }).then(() => {
+            toggleSignPanel()
+            setEmail('')
+            setPassword('')
+          })
       })
       .catch((error) => {
         switch(error.code) {

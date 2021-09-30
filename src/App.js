@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import SignPanel from './components/SignPanel'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
@@ -16,11 +16,14 @@ import PaddingBottom from './components/PaddingBottom'
 import CollectionPosts from './pages/CollectionPosts'
 import CollectionSongs from './pages/CollectionSongs'
 import data from './data.js'
-import { useDispatch } from "react-redux";
+import firebase from './utils/firebase.js'
+import 'firebase/compat/auth'
+import { useDispatch, useSelector } from "react-redux";
 import { setSongs, setCurrentSong } from "./redux/reducers/songReducer";
+import { setUser, clearUser } from "./redux/reducers/userReducer";
 
 function App() {
-
+  const user = useSelector((store) => store.user.user)
   const dispatch = useDispatch()
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const toggleSideBar = () => {
@@ -35,12 +38,16 @@ function App() {
   useEffect(() => {
     dispatch(setSongs(data))
     dispatch(setCurrentSong(data[0]))
+    firebase
+      .auth()
+      .onAuthStateChanged((currentUser) => {
+        dispatch(setUser(currentUser))
+    })
   }, [])
-
   return (
     <div className='app'>
       <Router>
-        {isOpenSignPanel &&
+        {(isOpenSignPanel && !user) &&
           <SignPanel
           isOpenSignPanel={isOpenSignPanel}
           toggleSignPanel={toggleSignPanel}
@@ -68,19 +75,19 @@ function App() {
             <BlogPost />
           </Route>
           <Route exact path='/new-post'>
-            <NewPost />
+            {user ? <NewPost /> : <Redirect to='/'/>}
           </Route>
           <Route exact path='/songs/:songId'>
             <Song />
           </Route>
           <Route exact path='/member/personal-info'>
-            <PersonalInfo />
+            {user ? <PersonalInfo /> : <Redirect to='/'/>}
           </Route>
           <Route exact path='/member/collections/posts'>
-            <CollectionPosts />
+            {user ? <CollectionPosts /> : <Redirect to='/'/>}
           </Route>
           <Route exact path='/member/collections/songs'>
-            <CollectionSongs />
+            {user ? <CollectionSongs /> : <Redirect to='/'/>}
           </Route>
         </Switch>
         <PaddingBottom />

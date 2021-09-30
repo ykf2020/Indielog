@@ -71,7 +71,7 @@ const PostContentWrapper = styled.div`
   blockQuote {
     border-left: 10px solid ${green1};
     text-align: center;
-    color: ${gray2};
+    color: ${gray3};
     max-width: 100%;
     padding-left: 10px;
   }
@@ -176,7 +176,7 @@ const AuthorDesc = styled.h4`
 
 const BlogPost = () => {
   const { postId } = useParams()
-  const[post, setPost] = useState({})
+  const [post, setPost] = useState({})
   useEffect(() => {
     firebase
       .firestore()
@@ -186,6 +186,16 @@ const BlogPost = () => {
       .then((docSnapShot) => {
         const data = docSnapShot.data()
         setPost(data)
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(data.author.uid)
+          .get()
+          .then((docSnapShotAuthor) => {
+            setPost(prevState => {
+              return {...prevState, author: docSnapShotAuthor.data()};
+            })
+          })
       })
   },[])
   return (
@@ -199,13 +209,13 @@ const BlogPost = () => {
       </PostContainer>
       <AuthorContainer>
         <AuthorContainerTitle>關於作者</AuthorContainerTitle>
-        <AuthorImg><img src={'https://assets.juksy.com/files/articles/108444/800x_100_w-60934d08db2e1.jpg'}/></AuthorImg>
+        <AuthorImg><img src={post.author?.photoURL ? post.author?.photoURL : 'https://assets.juksy.com/files/articles/108444/800x_100_w-60934d08db2e1.jpg'}/></AuthorImg>
         <AuthorInfo>
-          <AuthorName>海象</AuthorName>
-          <AuthorDesc>只是一個平凡的計程車司機asdadasdasdasdasdasdasdasafldafljfaldldmsaldmslamdl</AuthorDesc>
+          <AuthorName>{post.author?.displayName}</AuthorName>
+          <AuthorDesc>{post.author?.introduction}</AuthorDesc>
         </AuthorInfo>
       </AuthorContainer>
-      <CommentArea/>
+      <CommentArea postId={postId}/>
     </BlogPostPageContainer>
     </>
   )

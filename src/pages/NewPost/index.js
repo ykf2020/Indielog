@@ -127,6 +127,7 @@ const NewPost = () => {
   const [topicName, setTopicName] = useState('')
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
+  const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
 
   useEffect(() => {
     firebase
@@ -142,20 +143,13 @@ const NewPost = () => {
       })
   },[])
 
-  const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
-
   function handleCkeditorContent(e, editor){
     const data = editor.getData()
     setContent(data)
   }
 
-  useEffect(() => {
-    console.log(content)
-  },[content])
-
-  function onSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
-
     const documentRef = firebase.firestore().collection('posts').doc()
     const fileRef = firebase.storage().ref('post-images/' + documentRef.id)
     const metadata = {
@@ -170,10 +164,7 @@ const NewPost = () => {
           topic: topicName,
           createdAt: firebase.firestore.Timestamp.now(),
           author: {
-            displayName: firebase.auth().currentUser.displayName || '',
-            photoURL: firebase.auth().currentUser.photoURL || '',
             uid: firebase.auth().currentUser.uid,
-            email: firebase.auth().currentUser.email
           },
           imageUrl
         })
@@ -188,7 +179,7 @@ const NewPost = () => {
 
     <BlogPostPageContainer>
       <Title>發表文章</Title>
-      <Form onSubmit={(e) => onSubmit(e)}>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <ImgSection>
           <ImageDiv><img src={previewUrl}/></ImageDiv>
           <UploadButton htmlFor='post-image'>上傳文章封面</UploadButton>

@@ -4,6 +4,11 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { gray1, gray2, gray3, gray4, green1, green2, black1, MEDIA_QUERY_568, MEDIA_QUERY_768 } from '../../constants.js'
 import { Link } from 'react-router-dom'
+import firebase from '../../utils/firebase.js'
+import 'firebase/compat/auth'
+import "firebase/compat/firestore"
+import "firebase/compat/storage"
+
 const MemberPageContainer = styled.div`
   width: 80%;
   margin: 0 auto 20px;
@@ -18,7 +23,6 @@ const MemberPageContainer = styled.div`
     width: 100%;
   }
 `
-
 
 const TitleButtonsGroup = styled.div`
   display: flex;
@@ -82,11 +86,10 @@ const InfoTitle = styled.h3`
     position: absolute;
     content:'';
     background: ${green1};
-    width: 112px;
+    width: 100%;
     height: 4px;
     border: none;
     bottom: -6px;
-
   }
 `
 
@@ -232,10 +235,100 @@ const ModalButton = styled.div`
     background: ${green2}
   }
 `
+
+const ModalImgDiv = styled(ImgDiv)`
+  margin-top: 30px;
+`
+
+const ModalUploadButton = styled.label`
+  margin-top: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid ${green1};
+  &: hover {
+    transform: translateY(-3px);
+    border-bottom: 2px solid ${green2};
+  }
+`
+
+const ModalTextArea = styled.textarea`
+  width: 90%;
+  min-height: 300px;
+  color: ${gray4};
+  padding: 10px;
+  font-size: 0.8rem;
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid ${gray3};
+`
+
 const orders = ['會員資料','說讚的音樂','說讚的文章']
 
 const PersonalInfo = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [mode, setMode] = useState(0)
+  const [introduction, setIntroduction] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const [file, setFile] = useState(null)
+  const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
+  const user = firebase.auth().currentUser
+
+  function handleUpdateAvatar(e) {
+    const userRef = firebase.firestore().collection('users').doc(user.uid)
+    const fileRef = firebase.storage().ref('user-avatars/' + user.uid)
+    const metadata = {
+      contentType: file.type
+    }
+
+    fileRef.put(file, metadata).then(() => {
+      fileRef.getDownloadURL().then((imageUrl) => {
+        user.updateProfile({
+          photoURL:imageUrl
+        }).then(() => {
+          userRef.update({
+            photoURL:imageUrl,
+          })
+          .then(() => {
+            setModalIsOpen(false)
+            setFile(null)
+          })
+        })
+      })
+    })
+  }
+
+  function handleEditIntroduction() {
+    if(introduction === '') return
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(user.uid)
+      .update({
+        introduction,
+      }).then(() => {
+        setModalIsOpen(false)
+        setIntroduction(null)
+      })
+  }
+
+  function handleEditDisplayName() {
+    if(displayName === '') return
+    user.updateProfile({
+      displayName,
+    }).then(() => {
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .update({
+          displayName,
+        }).then(() => {
+          setModalIsOpen(false)
+          setDisplayName(null)
+        })
+    })
+  }
+
   return (
       <MemberPageContainer>
         <TitleButtonsGroup>
@@ -248,8 +341,11 @@ const PersonalInfo = () => {
           <InfoSection>
             <InfoElementTitle>頭像</InfoElementTitle>
             <InfoElementMainDiv>
-              <ImgDiv><img src={'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/></ImgDiv>
-              <EditButton onClick={() => setModalIsOpen(!modalIsOpen)}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
+              <ImgDiv><img src={user.photoURL ? user.photoURL : 'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/></ImgDiv>
+              <EditButton
+                onClick={() => {setModalIsOpen(!modalIsOpen);setMode(1)}}>
+                <FontAwesomeIcon size='1x' icon={faPen}/>
+              </EditButton>
             </InfoElementMainDiv>
           </InfoSection>
           <InfoSection>
@@ -262,42 +358,96 @@ const PersonalInfo = () => {
             <InfoElementTitle>密碼</InfoElementTitle>
             <InfoElementMainDiv>
               <Input disabled value={'******'}/>
-              <EditButton onClick={() => setModalIsOpen(!modalIsOpen)}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
+              <EditButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(2)}}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
             </InfoElementMainDiv>
           </InfoSection>
           <InfoSection>
             <InfoElementTitle>暱稱</InfoElementTitle>
             <InfoElementMainDiv>
               <Input disabled value={'香菇肉燥飯'}/>
-              <EditButton onClick={() => setModalIsOpen(!modalIsOpen)}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
+              <EditButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(3)}}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
             </InfoElementMainDiv>
           </InfoSection>
           <InfoSection>
             <InfoElementTitle>自我介紹</InfoElementTitle>
             <IntroductionDiv>
               <IntroductionArea>先帝創業未半，而中道崩殂；今天下三分，益州疲弊，此誠危急存亡之秋也！然侍衞之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。</IntroductionArea>
-              <EditButton onClick={() => setModalIsOpen(!modalIsOpen)}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
+              <EditButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(4)}}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
             </IntroductionDiv>
           </InfoSection>
           {modalIsOpen &&
             <ModalBackground>
-              <ModalPanel>
-                <InfoTitle>修改密碼</InfoTitle>
-                <ModalInnerTop>
+              {mode === 1 &&
+                <ModalPanel>
+                  <InfoTitle>修改頭像</InfoTitle>
+                  <ModalInnerTop>
+                    <ModalImgDiv><img src={previewUrl}/></ModalImgDiv>
+                    <ModalUploadButton htmlFor='post-image'>上傳圖片</ModalUploadButton>
+                    <input
+                    type="file"
+                    id='post-image'
+                    style={{display: 'none'}}
+                    onChange={(e) => setFile(e.target.files[0])}/>
+                  </ModalInnerTop>
+                  <ModalInnerBottom>
+                    <ModalButton onClick={() => {handleUpdateAvatar()}}>送出</ModalButton>
+                    <ModalButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(0)}}>取消</ModalButton>
+                  </ModalInnerBottom>
+                </ModalPanel>
+              }
+              {mode === 2 &&
+                <ModalPanel>
+                  <InfoTitle>修改密碼</InfoTitle>
+                  <ModalInnerTop>
                   <ModalInnerDiv>
-                    <InfoElementTitle>輸入新密碼</InfoElementTitle>
+                    <InfoElementTitle>輸入目前密碼</InfoElementTitle>
                     <Input />
                   </ModalInnerDiv>
-                  <ModalInnerDiv>
-                    <InfoElementTitle>再次輸入新密碼</InfoElementTitle>
-                    <Input />
-                  </ModalInnerDiv>
-                </ModalInnerTop>
-                <ModalInnerBottom>
-                  <ModalButton>送出</ModalButton>
-                  <ModalButton onClick={() => setModalIsOpen(!modalIsOpen)}>取消</ModalButton>
-                </ModalInnerBottom>
-              </ModalPanel>
+                    <ModalInnerDiv>
+                      <InfoElementTitle>輸入新密碼</InfoElementTitle>
+                      <Input />
+                    </ModalInnerDiv>
+                    <ModalInnerDiv>
+                      <InfoElementTitle>再次輸入新密碼</InfoElementTitle>
+                      <Input />
+                    </ModalInnerDiv>
+                  </ModalInnerTop>
+                  <ModalInnerBottom>
+                    <ModalButton>送出</ModalButton>
+                    <ModalButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(0)}}>取消</ModalButton>
+                  </ModalInnerBottom>
+                </ModalPanel>
+              }
+              {mode === 3 &&
+                <ModalPanel>
+                  <InfoTitle>修改暱稱</InfoTitle>
+                  <ModalInnerTop>
+                    <ModalInnerDiv>
+                      <InfoElementTitle>輸入新暱稱</InfoElementTitle>
+                      <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)}/>
+                    </ModalInnerDiv>
+                  </ModalInnerTop>
+                  <ModalInnerBottom>
+                    <ModalButton onClick={handleEditDisplayName}>送出</ModalButton>
+                    <ModalButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(0)}}>取消</ModalButton>
+                  </ModalInnerBottom>
+                </ModalPanel>
+              }
+              {mode === 4 &&
+                <ModalPanel>
+                  <InfoTitle>修改自我介紹</InfoTitle>
+                  <ModalInnerTop>
+                    <ModalInnerDiv>
+                      <InfoElementTitle>輸入自我介紹</InfoElementTitle>
+                      <ModalTextArea value={introduction} onChange={(e) => {setIntroduction(e.target.value)}}/>
+                    </ModalInnerDiv>
+                  </ModalInnerTop>
+                  <ModalInnerBottom>
+                    <ModalButton onClick={handleEditIntroduction}>送出</ModalButton>
+                    <ModalButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(0)}}>取消</ModalButton>
+                  </ModalInnerBottom>
+                </ModalPanel>
+              }
             </ModalBackground>
           }
         </PersonalInfoContainer>
