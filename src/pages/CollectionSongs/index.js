@@ -187,7 +187,6 @@ const CollectionSongs = () => {
     <TitleButtonsGroup>
       <TitleActiveButton>說讚的音樂</TitleActiveButton>
       <TitleNormalButton to='/member/collections/posts'>說讚的文章</TitleNormalButton>
-      <TitleNormalButton to='/member/personal-info'>會員資料</TitleNormalButton>
     </TitleButtonsGroup>
     {data.map((song,index) => {
       return (

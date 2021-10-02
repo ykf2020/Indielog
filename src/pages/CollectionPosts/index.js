@@ -75,7 +75,6 @@ const CollectionPosts = () => {
       <TitleButtonsGroup>
         <TitleActiveButton>說讚的文章</TitleActiveButton>
         <TitleNormalButton to='/member/collections/songs'>說讚的音樂</TitleNormalButton>
-        <TitleNormalButton to='/member/personal-info'>會員資料</TitleNormalButton>
       </TitleButtonsGroup>
       <LinkWithoutDecoration>
         <Post imageUrl={data.imageUrl} title={data.title} createdAt={data.createdAt} topic={data.topic}/>

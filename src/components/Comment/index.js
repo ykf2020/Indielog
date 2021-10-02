@@ -19,7 +19,7 @@ const Comment = ({ currentComment }) => {
   return (
     <CommentDiv>
       <CommentInfo>
-        <CommentorImgDiv><img src={authorInfo.photoURL ? authorInfo.photoURL : 'https://assets.juksy.com/files/articles/108444/800x_100_w-60934d08db2e1.jpg'}/></CommentorImgDiv>
+        <CommentorImgDiv><img src={authorInfo.photoURL ? authorInfo.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
         <CommentorName>{authorInfo.displayName}</CommentorName>
         <CommentorDate>{comment.createdAt.toDate().toLocaleString()}</CommentorDate>
       </CommentInfo>

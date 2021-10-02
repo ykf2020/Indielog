@@ -5,26 +5,30 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import SignPanel from './components/SignPanel'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
+import MusicPlayer from './components/MusicPlayer'
+import PaddingBottom from './components/PaddingBottom'
+import Footer from './components/Footer'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import NewPost from './pages/NewPost'
 import Music from './pages/Music'
 import Song from './pages/Song'
 import PersonalInfo from './pages/PersonalInfo'
-import MusicPlayer from './components/MusicPlayer'
-import PaddingBottom from './components/PaddingBottom'
 import CollectionPosts from './pages/CollectionPosts'
 import CollectionSongs from './pages/CollectionSongs'
+import MyPosts from './pages/MyPosts'
+import EditPost from './pages/EditPost'
+import NewSong from './pages/NewSong'
+
 import data from './data.js'
 import firebase from './utils/firebase.js'
 import 'firebase/compat/auth'
 import { useDispatch, useSelector } from "react-redux";
 import { setSongs, setCurrentSong } from "./redux/reducers/songReducer";
-import { setUser, clearUser } from "./redux/reducers/userReducer";
 
 function App() {
-  const user = useSelector((store) => store.user.user)
   const dispatch = useDispatch()
+  const user = firebase.auth().currentUser
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const toggleSideBar = () => {
     setIsOpenSideBar(!isOpenSideBar)
@@ -38,11 +42,6 @@ function App() {
   useEffect(() => {
     dispatch(setSongs(data))
     dispatch(setCurrentSong(data[0]))
-    firebase
-      .auth()
-      .onAuthStateChanged((currentUser) => {
-        dispatch(setUser(currentUser))
-    })
   }, [])
   return (
     <div className='app'>
@@ -77,6 +76,9 @@ function App() {
           <Route exact path='/new-post'>
             {user ? <NewPost /> : <Redirect to='/'/>}
           </Route>
+          <Route eact path='/new-song'>
+            {user ? <NewSong /> : <Redirect to='/'/>}
+          </Route>
           <Route exact path='/songs/:songId'>
             <Song />
           </Route>
@@ -89,8 +91,15 @@ function App() {
           <Route exact path='/member/collections/songs'>
             {user ? <CollectionSongs /> : <Redirect to='/'/>}
           </Route>
+          <Route exact path='/member/myposts'>
+            {user ? <MyPosts /> : <Redirect to='/'/>}
+          </Route>
+          <Route exact path='/editpost/:postId'>
+            {user ? <EditPost /> : <Redirect to='/'/>}
+          </Route>
         </Switch>
         <PaddingBottom />
+        <Footer />
       </Router>
     </div>
   );

@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { faPlayCircle, faHeart as faHeartBorder } from '@fortawesome/free-regular-svg-icons'
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons'
 import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
-import { gray1, gray2, gray3, gray4, black1, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, black1, peach1, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import { Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -65,9 +65,7 @@ const Song = styled.div`
     padding: 0 0;
   }
 `
-const SongInfo = styled(Link)`
-  text-decoration: none;
-  color: none;
+const SongInfo = styled.div`
   width: 86%;
   height: 100%;
   /* border: 1px solid orange; */
@@ -144,7 +142,9 @@ const ImgDiv = styled.div`
 `
 
 
-const SongDesc = styled.div`
+const SongDesc = styled(Link)`
+  text-decoration: none;
+  color: none;
   display:flex;
   flex-direction: column;
   justify-content: center;
@@ -158,6 +158,30 @@ const SongDesc = styled.div`
   ${MEDIA_QUERY_568} {
     margin-left: 10px;
   }
+`
+
+const LikeButtonDiv = styled.div`
+  min-width: 80px;
+  height: 30px;
+  background: ${gray2};
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  cursor: pointer;
+  color: ${gray3};
+
+  ${({isLiked}) => isLiked && `
+    background: ${peach1};
+    color: white;
+  `}
+`
+
+const LikeNumber = styled.div`
+  font-size: 1rem;
+  height: 100%;
+  margin: 3px 0 0 6px;
 `
 
 const Music = () => {
@@ -211,20 +235,23 @@ const Music = () => {
         {songs.map((song,index) => {
           return (
             <Song>
-              <SongInfo to={`/songs/${song.id}`}>
+              <SongInfo>
                 <NumberDiv>
                   <Number>{index + 1}</Number>
                 </NumberDiv>
                 <ImgDiv onClick={(e) => playSong(e, song)}>
                   <img src={song.cover}/>
                 </ImgDiv>
-                <SongDesc>
+                <SongDesc to={`/songs/${song.id}`}>
                   <SongName>{song?.name}</SongName>
                   <AuthorName>{song?.artist}</AuthorName>
                 </SongDesc>
               </SongInfo>
               <SongButtons>
-                <FontAwesomeIcon size='1x' icon={faHeartBorder}/>
+                <LikeButtonDiv>
+                  <FontAwesomeIcon size='1x' icon={faHeart}/>
+                  <LikeNumber>123</LikeNumber>
+                </LikeButtonDiv>
               </SongButtons>
             </Song>
           )

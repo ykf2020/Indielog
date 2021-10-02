@@ -270,6 +270,7 @@ const PersonalInfo = () => {
   const [introduction, setIntroduction] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [file, setFile] = useState(null)
+  const [shownInfo, setShownInfo] = useState({})
   const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
   const user = firebase.auth().currentUser
 
@@ -329,19 +330,28 @@ const PersonalInfo = () => {
     })
   }
 
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(user.uid)
+      .onSnapshot((userSnapshot) => {
+        setShownInfo(userSnapshot.data())
+      })
+  },[])
+
   return (
       <MemberPageContainer>
         <TitleButtonsGroup>
           <TitleActiveButton>會員資料</TitleActiveButton>
-          <TitleNormalButton to='/member/collections/songs'>說讚的音樂</TitleNormalButton>
-          <TitleNormalButton to='/membet/collections/posts'>說讚的文章</TitleNormalButton>
+          <TitleNormalButton to='/member/myposts'>我的文章</TitleNormalButton>
         </TitleButtonsGroup>
         <PersonalInfoContainer>
           <InfoTitle>基本資料</InfoTitle>
           <InfoSection>
             <InfoElementTitle>頭像</InfoElementTitle>
             <InfoElementMainDiv>
-              <ImgDiv><img src={user.photoURL ? user.photoURL : 'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/></ImgDiv>
+              <ImgDiv><img src={shownInfo.photoURL ? shownInfo.photoURL : '/default-user-image.png'}/></ImgDiv>
               <EditButton
                 onClick={() => {setModalIsOpen(!modalIsOpen);setMode(1)}}>
                 <FontAwesomeIcon size='1x' icon={faPen}/>
@@ -351,7 +361,7 @@ const PersonalInfo = () => {
           <InfoSection>
             <InfoElementTitle>帳號</InfoElementTitle>
             <InfoElementMainDiv>
-              <Input disabled value={'oxox@gmail.com'}/>
+              <Input disabled value={shownInfo.email}/>
             </InfoElementMainDiv>
           </InfoSection>
           <InfoSection>
@@ -364,14 +374,14 @@ const PersonalInfo = () => {
           <InfoSection>
             <InfoElementTitle>暱稱</InfoElementTitle>
             <InfoElementMainDiv>
-              <Input disabled value={'香菇肉燥飯'}/>
+              <Input disabled value={shownInfo.displayName}/>
               <EditButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(3)}}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
             </InfoElementMainDiv>
           </InfoSection>
           <InfoSection>
             <InfoElementTitle>自我介紹</InfoElementTitle>
             <IntroductionDiv>
-              <IntroductionArea>先帝創業未半，而中道崩殂；今天下三分，益州疲弊，此誠危急存亡之秋也！然侍衞之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。</IntroductionArea>
+              <IntroductionArea>{shownInfo.introduction ? shownInfo.introduction : '尚未新增自我介紹'}</IntroductionArea>
               <EditButton onClick={() => {setModalIsOpen(!modalIsOpen);setMode(4)}}><FontAwesomeIcon size='1x' icon={faPen}/></EditButton>
             </IntroductionDiv>
           </InfoSection>
@@ -424,7 +434,7 @@ const PersonalInfo = () => {
                   <ModalInnerTop>
                     <ModalInnerDiv>
                       <InfoElementTitle>輸入新暱稱</InfoElementTitle>
-                      <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)}/>
+                      <Input placeholder='限八個字元以內' value={displayName} onChange={(e) => setDisplayName(e.target.value)}/>
                     </ModalInnerDiv>
                   </ModalInnerTop>
                   <ModalInnerBottom>

@@ -199,9 +199,7 @@ export const SongInfo = styled.div`
   height: 60%;
   width: 50%;
   text-align: center;
-
   ${MEDIA_QUERY_1400} {
-    width:10%;
     padding: 0 40px;
   }
 `

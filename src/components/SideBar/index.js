@@ -15,7 +15,7 @@ const SideBar = ({ isOpenSideBar, toggleSideBar, toggleSignPanel }) => {
           {user ?
             <SideMemberDiv>
               <SideMemberImgDiv>
-                <img src={user ? user.photoURL : 'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
+                <img src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>
               </SideMemberImgDiv>
               <MemberHello>嗨！{user.displayName}</MemberHello>
             </SideMemberDiv> : ''}

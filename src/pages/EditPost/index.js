@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import firebase from '../../utils/firebase'
 import "firebase/compat/firestore"
 import "firebase/compat/storage"
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { gray1, gray2, gray3, gray4, green1, green2 } from '../../constants.js'
 import CKE from '../../components/CKEditor'
 
@@ -104,14 +104,16 @@ const SubmitButton = styled.button`
   }
 `
 
-const NewPost = () => {
+const EditPost = () => {
   const history = useHistory()
+  const { postId } = useParams()
+  const [oldImageURL, setOldImageURL] = useState('')
   const [title, setTitle] = useState('')
-  const [content, setContent] = useState('<p>yoyoyoyo</p>')
+  const [content, setContent] = useState('')
   const [topicName, setTopicName] = useState('')
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
-  const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
+  const previewUrl = file ? URL.createObjectURL(file) : oldImageURL
 
   useEffect(() => {
     firebase
@@ -125,6 +127,19 @@ const NewPost = () => {
         setTopics(data)
         setTopicName(data[0].name)
       })
+      firebase
+        .firestore()
+        .collection('posts')
+        .doc(postId)
+        .get()
+        .then((docSnapShot) => {
+          const data = docSnapShot.data()
+          setTitle(data.title)
+          setContent(data.content)
+          setTopicName(data.topic)
+          setOldImageURL(data.imageUrl)
+          console.log(data.imageUrl)
+        })
   },[])
 
   function handleCkeditorContent(e, editor){
@@ -134,7 +149,7 @@ const NewPost = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const documentRef = firebase.firestore().collection('posts').doc()
+    const documentRef = firebase.firestore().collection('posts').doc(postId)
     const fileRef = firebase.storage().ref('post-images/' + documentRef.id)
     const metadata = {
       contentType: file.type
@@ -142,27 +157,23 @@ const NewPost = () => {
 
     fileRef.put(file, metadata).then(() => {
       fileRef.getDownloadURL().then((imageUrl) => {
-        documentRef.set({
+        documentRef.updata({
           title,
           content,
           topic: topicName,
-          createdAt: firebase.firestore.Timestamp.now(),
-          author: {
-            uid: firebase.auth().currentUser.uid,
-          },
+          updatedAt: firebase.firestore.Timestamp.now(),
           imageUrl
         })
         .then(() => {
-          history.push('/blog')
+          history.push(`/blogpost/${postId}`)
         })
       })
     })
   }
 
   return (
-
     <BlogPostPageContainer>
-      <Title>發表文章</Title>
+      <Title>修改文章</Title>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <ImgSection>
           <ImageDiv><img src={previewUrl}/></ImageDiv>
@@ -178,7 +189,7 @@ const NewPost = () => {
           <SectionTitle>選擇主題：</SectionTitle>
           <Select value={topicName} onChange={(e) => setTopicName(e.target.value)}>
             {topics.map((topic) => {
-              return <option value={topic.name}>{topic.name}</option>
+              return <option selected={topic.name===topicName} value={topic.name}>{topic.name}</option>
             })}
           </Select>
         </InputSection>
@@ -198,4 +209,4 @@ const NewPost = () => {
   )
 }
 
-export default NewPost
+export default EditPost

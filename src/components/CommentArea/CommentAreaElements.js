@@ -1,4 +1,4 @@
-import { gray1, gray2, gray3, gray4, black1, green1, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_978, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, black1, green1, green2, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_978, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
 import styled from 'styled-components'
 
 export const Notice = styled.p`
@@ -97,4 +97,21 @@ export const CommentAddSection = styled.div`
   width:100%;
   border-bottom: 1px solid ${gray2};
   padding-bottom: 10px;
+`
+
+export const SubmitButton = styled.button`
+  height:28px;
+  width:90px;
+  background: ${gray2};
+  color: ${gray3};
+  border-radius: 15px;
+  font-size: 0.8rem;
+  transition: 0.3s all ease;
+  border:none;
+
+  &:hover {
+    background: ${green2};
+    color: white;
+    font-weight: bold;
+  }
 `

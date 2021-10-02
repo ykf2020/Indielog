@@ -124,6 +124,7 @@ export const SignPanelChange = styled.a`
   text-decoration: none;
 
   &:hover {
-    cursor: pointer
+    cursor: pointer;
+    color: white;
   }
 `

@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import firebase from '../../utils/firebase'
 import "firebase/compat/firestore"
 import { useParams } from 'react-router-dom'
-import { gray1, gray2, gray3, gray4, black1, green1, green2, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4, black1, green1, green2, peach1, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import CommentArea from '../../components/CommentArea'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 const BlogPostPageContainer = styled.div`
   width: 80%;
   margin: 0 auto 20px;
@@ -138,7 +140,6 @@ const AuthorImg = styled.div`
     height: 100%;
     object-fit: cover;
   }
-
 `
 
 const AuthorInfo = styled.div`
@@ -174,9 +175,43 @@ const AuthorDesc = styled.h4`
   }
 `
 
+const LikeButtonDiv = styled.div`
+  min-width: 80px;
+  height: 30px;
+  background: ${gray2};
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  cursor: pointer;
+  color: ${gray3};
+
+  ${({isLiked}) => isLiked && `
+    background: ${peach1};
+    color: white;
+  `}
+`
+
+const LikeNumber = styled.div`
+  font-size: 1rem;
+  height: 100%;
+  margin: 3px 0 0 6px;
+`
+
+const LikePush = styled.div`
+  font-size: 0.8rem;
+  color: ${gray3};
+  margin-bottom: 10px;
+`
+
 const BlogPost = () => {
+  const user = firebase.auth().currentUser || {}
   const { postId } = useParams()
   const [post, setPost] = useState({})
+  const [authorInfo, setAuthorInfo] = useState({})
+  const isLiked = post.likedBy?.includes(user.uid)
+
   useEffect(() => {
     firebase
       .firestore()
@@ -184,20 +219,37 @@ const BlogPost = () => {
       .doc(postId)
       .get()
       .then((docSnapShot) => {
-        const data = docSnapShot.data()
-        setPost(data)
         firebase
           .firestore()
           .collection('users')
-          .doc(data.author.uid)
+          .doc(docSnapShot.data().author.uid)
           .get()
-          .then((docSnapShotAuthor) => {
-            setPost(prevState => {
-              return {...prevState, author: docSnapShotAuthor.data()};
-            })
+          .then((authorDocSnapShot) => {
+            setAuthorInfo(authorDocSnapShot.data())
           })
       })
+    firebase
+      .firestore()
+      .collection('posts')
+      .doc(postId)
+      .onSnapshot((docSnapShot) => {
+        const data = docSnapShot.data()
+        setPost(data)
+      })
   },[])
+
+  function toggleLiked() {
+    if(isLiked) {
+      firebase.firestore().collection('posts').doc(postId).update({
+        likedBy: firebase.firestore.FieldValue.arrayRemove(user.uid)
+      })
+    } else {
+      firebase.firestore().collection('posts').doc(postId).update({
+        likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
+      })
+    }
+  }
+
   return (
     <>
     <BlogPostPageContainer>
@@ -207,12 +259,17 @@ const BlogPost = () => {
       <PostDesc>{post.createdAt?.toDate().toLocaleString()} | {post.topic}</PostDesc>
       <PostContentWrapper dangerouslySetInnerHTML={{__html: post.content}}/>
       </PostContainer>
+      <LikePush>覺得文章不錯嗎？按個讚吧！</LikePush>
+      <LikeButtonDiv isLiked={isLiked} onClick={toggleLiked}>
+        <FontAwesomeIcon icon={faHeart} />
+        <LikeNumber>{post.likedBy?.length}</LikeNumber>
+      </LikeButtonDiv>
       <AuthorContainer>
         <AuthorContainerTitle>關於作者</AuthorContainerTitle>
-        <AuthorImg><img src={post.author?.photoURL ? post.author?.photoURL : 'https://assets.juksy.com/files/articles/108444/800x_100_w-60934d08db2e1.jpg'}/></AuthorImg>
+        <AuthorImg><img src={authorInfo?.photoURL ? authorInfo?.photoURL : 'https://assets.juksy.com/files/articles/108444/800x_100_w-60934d08db2e1.jpg'}/></AuthorImg>
         <AuthorInfo>
-          <AuthorName>{post.author?.displayName}</AuthorName>
-          <AuthorDesc>{post.author?.introduction}</AuthorDesc>
+          <AuthorName>{authorInfo?.displayName}</AuthorName>
+          <AuthorDesc>{authorInfo?.introduction}</AuthorDesc>
         </AuthorInfo>
       </AuthorContainer>
       <CommentArea postId={postId}/>

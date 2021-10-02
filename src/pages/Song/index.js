@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import data from '../../data.js'
-import { gray1, gray2, gray3, gray4 , black1, green1, MEDIA_QUERY_1400, MEDIA_QUERY_1024, MEDIA_QUERY_978, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
+import { gray1, gray2, gray3, gray4 , black1, green1, peach1, MEDIA_QUERY_1400, MEDIA_QUERY_1024, MEDIA_QUERY_978, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import CommentArea from '../../components/CommentArea'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const SongPageConatainer = styled.div`
   width: 100%;
   min-height: calc(100vh - 80px);
@@ -50,7 +53,6 @@ const MainInfoContainer = styled.div`
   z-index:5;
   display: flex;
   justify-content: center;
-
   ${MEDIA_QUERY_1400} {
     width:88%
   }
@@ -66,7 +68,7 @@ const MainInfoContainer = styled.div`
   }
 
   ${MEDIA_QUERY_568} {
-    height: 600px;
+    height: 580px;
   }
 `
 
@@ -122,7 +124,6 @@ const MainInfoDiv = styled.div`
   display: flex;
   flex-direction:column;
   padding: 20px 0px 20px 40px;
-
   ${MEDIA_QUERY_978} {
     width: calc(100% - 300px);
     margin-top: 40px;
@@ -139,6 +140,7 @@ const MainInfoDiv = styled.div`
   ${MEDIA_QUERY_568} {
     width: 100%;
     height: 100%;
+
   }
 `
 
@@ -340,7 +342,7 @@ const ArtistName = styled.h4`
   font-size: 1.1rem;
   margin: 0;
 
-  ${MEDIA_QUERY_568} {
+  ${MEDIA_QUERY_978} {
     font-size: 0.8rem;
   }
 `
@@ -363,6 +365,11 @@ const ArtistImgDiv = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
+  ${MEDIA_QUERY_978} {
+    width: 50px;
+    height: 50px;
+  }
 `
 
 const ArtistButton = styled.button`
@@ -373,6 +380,11 @@ const ArtistButton = styled.button`
   border: none;
   background: ${green1};
   transition: all 0.3s ease;
+
+  ${MEDIA_QUERY_978} {
+    width: 54px;
+    font-size:0.5rem;
+  }
 `
 
 const SongUpdate = styled.div`
@@ -381,6 +393,31 @@ const SongUpdate = styled.div`
   color: ${gray3};
   padding: 20px;
   border-bottom: 1px solid ${gray2};
+`
+
+const LikedButtonDiv = styled.div`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid ${gray2};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: ${gray2};
+  margin-left: auto;
+
+  ${MEDIA_QUERY_568} {
+    height: 45px;
+    width: 45px;
+    transform: translateY(-10px);
+  }
+
+  ${({isLiked}) => isLiked && `
+    background: ${peach1};
+    color: white;
+  `}
 `
 
 
@@ -410,6 +447,9 @@ const Song = () => {
               <InfoDesc>喜歡</InfoDesc>
               <InfoDescNum>10,000</InfoDescNum>
             </NumInfo>
+            <LikedButtonDiv>
+              <FontAwesomeIcon icon={faHeart} />
+            </LikedButtonDiv>
             </MainInfoSongInfoDiv>
           </MainInfoDiv>
         </MainInfoContainer>

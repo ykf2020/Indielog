@@ -63,7 +63,7 @@ const SignUp = ({ setPanelStatus, toggleSignPanel }) => {
     <>
       <SignPanelTitle>註冊</SignPanelTitle>
       <SignPanelTitleDesc>帳號</SignPanelTitleDesc>
-      <SignPanelInput type='email' value={email} onChange={(e) => {setEmail(e.target.value)}}></SignPanelInput>
+      <SignPanelInput type='email' placeholder='請輸入 email' value={email} onChange={(e) => {setEmail(e.target.value)}}></SignPanelInput>
       <SignPanelTitleDesc>密碼</SignPanelTitleDesc>
       <SignPanelInput type='password' value={password} onChange={(e) => {setPassword(e.target.value)}}></SignPanelInput>
       <SignPanelTitleDesc>確認密碼</SignPanelTitleDesc>

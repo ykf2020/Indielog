@@ -11,6 +11,7 @@ import {
   CommentTextArea,
   CommentButtons,
   CommentContent,
+  SubmitButton,
 } from './CommentAreaElements.js'
 import Comment from '../Comment'
 import firebase from '../../utils/firebase.js'
@@ -60,13 +61,13 @@ const CommentArea = ({ postId }) => {
         {user ?
           <CommentAddArea>
             <CommentInfo>
-              <CommentorImgDiv><img src={user.photoURL ? user.photoURL : 'https://assets.juksy.com/files/articles/108444/800x_100_w-60934d08db2e1.jpg'}/></CommentorImgDiv>
+              <CommentorImgDiv><img src={user.photoURL ? user.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
               <CommentorName>{user.displayName}</CommentorName>
             </CommentInfo>
             <CommentTextArea placeholder='點此輸入留言...' value={commentInput} onChange={(e)=> setCommentInput(e.target.value)}>
             </CommentTextArea>
             <CommentButtons>
-              <p onClick={handleCommentInputSubmit}>送出留言</p>
+              <SubmitButton onClick={handleCommentInputSubmit}>送出留言</SubmitButton>
             </CommentButtons>
           </CommentAddArea>
           :

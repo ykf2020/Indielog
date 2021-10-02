@@ -27,6 +27,7 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
   const dropDownRef = useRef(null)
   const signOut = () => {
     firebase.auth().signOut()
+    setIsOpenDropDown(false)
   }
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
               <DropDownBottom onClick={signOut}>登出</DropDownBottom>
             </DropDownContainer>
             <NavMemberImgDiv onClick = {() => setIsOpenDropDown(!isOpenDropDown)}>
-              <img src={user.photoURL ? user.photoURL : 'https://cdn.hk01.com/di/media/images/cis/5e4270c8a5e2c82bd6096139.jpg/KNyBGtInTJ6vNZG50MWr4YRe57jWFOUilG8xy5RvMcs?v=w1920'}/>
+              <img src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>
             </NavMemberImgDiv>
           </MemberDiv>
           :
