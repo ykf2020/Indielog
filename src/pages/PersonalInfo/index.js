@@ -4,6 +4,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { gray1, gray2, gray3, gray4, green1, green2, black1, MEDIA_QUERY_568, MEDIA_QUERY_768 } from '../../constants.js'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth'
 import "firebase/compat/firestore"
@@ -272,7 +273,7 @@ const PersonalInfo = () => {
   const [file, setFile] = useState(null)
   const [shownInfo, setShownInfo] = useState({})
   const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
-  const user = firebase.auth().currentUser
+  const user = useSelector((store) => store.user.currentUser)
 
   function handleUpdateAvatar(e) {
     const userRef = firebase.firestore().collection('users').doc(user.uid)

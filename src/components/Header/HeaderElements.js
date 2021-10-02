@@ -155,7 +155,7 @@ export const DropDownContainer = styled.div`
   background: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(33, 33, 33, 0.5);
-  display: flex;
+  display:flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease;
@@ -163,13 +163,17 @@ export const DropDownContainer = styled.div`
   overflow:hidden;
 
   ${({isOpenDropDown}) => isOpenDropDown && `
-    transform: translate(20px, 70px) ;
+    transform: translate(20px, 70px);
     opacity: 1;
   `}
 `
 
 export const DropDownMain = styled.div`
   width: 100%;
+  display:none;
+  ${({isOpenDropDown}) => isOpenDropDown && `
+    display: block;
+  `}
 `
 
 export const DropDownItem = styled(Link)`
@@ -208,4 +212,9 @@ export const DropDownBottom = styled.div`
     color: white;
     font-size: bold;
   }
+
+  display:none;
+  ${({isOpenDropDown}) => isOpenDropDown && `
+    display: flex;
+  `}
 `

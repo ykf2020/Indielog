@@ -23,8 +23,10 @@ import NewSong from './pages/NewSong'
 import data from './data.js'
 import firebase from './utils/firebase.js'
 import 'firebase/compat/auth'
-import { useDispatch, useSelector } from "react-redux";
-import { setSongs, setCurrentSong } from "./redux/reducers/songReducer";
+import { useDispatch, useSelector } from "react-redux"
+import { setUser, clearUser } from './redux/reducers/userReducer'
+import { setSongs, setCurrentSong } from "./redux/reducers/songReducer"
+
 
 function App() {
   const dispatch = useDispatch()
@@ -43,6 +45,14 @@ function App() {
     dispatch(setSongs(data))
     dispatch(setCurrentSong(data[0]))
   }, [])
+
+  useEffect(() => {
+    firebase
+      .auth()
+      .onAuthStateChanged((currentUser) => {
+        dispatch(setUser(currentUser))
+      })
+  },[])
   return (
     <div className='app'>
       <Router>

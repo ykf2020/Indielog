@@ -14,12 +14,13 @@ import {
   SubmitButton,
 } from './CommentAreaElements.js'
 import Comment from '../Comment'
+import { useSelector } from 'react-redux'
 import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth';
 import "firebase/compat/firestore"
 
 const CommentArea = ({ postId }) => {
-  const user = firebase.auth().currentUser
+  const user = useSelector((store) => store.user.currentUser)
   const [commentInput, setCommentInput] = useState('')
   const [comments, setComments] = useState([])
   const handleCommentInputSubmit = () => {

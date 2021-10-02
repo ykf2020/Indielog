@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons'
 import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
@@ -118,8 +118,8 @@ const Number = styled.h4`
 `
 
 const ImgDiv = styled.div`
-  height: 80px;
-  width: 80px;
+  width: 100%;
+  height: 100%;
   /* border: 1px solid black; */
   border-radius: 12px;
   overflow: hidden;
@@ -178,17 +178,47 @@ const LikeButtonDiv = styled.div`
   `}
 `
 
+const ImgContainer = styled.div`
+  height: 80px;
+  width: 80px;
+  position: relative;
+`
+
 const LikeNumber = styled.div`
   font-size: 1rem;
   height: 100%;
   margin: 3px 0 0 6px;
 `
 
+const HoverPlayButton = styled.div`
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  z-index: 10;
+  border-radius: 50%;
+  border: 4px solid white;
+  background: rgba(33, 33, 33, 0.5);
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding-left: 6px;
+  opacity: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+`
+
 const Music = () => {
   const dispatch = useDispatch()
   const songs = useSelector((store) => store.song.songs)
-  const playSong = async (e, song) => {
-    e.preventDefault();
+  const playSong = async (song) => {
     await dispatch(setIsPlaying(true))
     await dispatch(setCurrentSong(song))
     await dispatch(setMode(2))
@@ -239,9 +269,14 @@ const Music = () => {
                 <NumberDiv>
                   <Number>{index + 1}</Number>
                 </NumberDiv>
-                <ImgDiv onClick={(e) => playSong(e, song)}>
-                  <img src={song.cover}/>
-                </ImgDiv>
+                <ImgContainer>
+                  <ImgDiv>
+                    <img src={song.cover}/>
+                  </ImgDiv>
+                  <HoverPlayButton onClick={() => playSong(song)}>
+                    <FontAwesomeIcon size="2x" icon={faPlay} />
+                  </HoverPlayButton>
+                </ImgContainer>
                 <SongDesc to={`/songs/${song.id}`}>
                   <SongName>{song?.name}</SongName>
                   <AuthorName>{song?.artist}</AuthorName>

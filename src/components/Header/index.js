@@ -21,8 +21,9 @@ import { useSelector } from 'react-redux'
 import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth'
 
+
 const Header = ({ toggleSignPanel, toggleSideBar }) => {
-  const user = firebase.auth().currentUser || null
+  const user = useSelector((store) => store.user.currentUser)
   const [isOpenDropDown, setIsOpenDropDown] = useState(false)
   const dropDownRef = useRef(null)
   const signOut = () => {
@@ -63,13 +64,13 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
         {user ?
           <MemberDiv ref={dropDownRef}>
             <DropDownContainer  isOpenDropDown={isOpenDropDown}>
-              <DropDownMain>
+              <DropDownMain isOpenDropDown={isOpenDropDown}>
                 <DropDownItem to='/new-song'>上傳音樂</DropDownItem>
                 <DropDownItem to='/new-post'>新增文章</DropDownItem>
                 <DropDownItem to='/member/collections/songs'>收藏列表</DropDownItem>
                 <DropDownItem to='/member/personal-info'>會員資料</DropDownItem>
               </DropDownMain>
-              <DropDownBottom onClick={signOut}>登出</DropDownBottom>
+              <DropDownBottom isOpenDropDown={isOpenDropDown} onClick={signOut}>登出</DropDownBottom>
             </DropDownContainer>
             <NavMemberImgDiv onClick = {() => setIsOpenDropDown(!isOpenDropDown)}>
               <img src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>

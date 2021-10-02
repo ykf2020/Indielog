@@ -19,7 +19,6 @@ const SignIn = ({ setPanelStatus, toggleSignPanel }) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         toggleSignPanel()
-        console.log('log in!')
         setEmail('')
         setPassword('')
       })

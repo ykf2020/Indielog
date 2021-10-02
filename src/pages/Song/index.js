@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import data from '../../data.js'
 import { gray1, gray2, gray3, gray4 , black1, green1, peach1, MEDIA_QUERY_1400, MEDIA_QUERY_1024, MEDIA_QUERY_978, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../constants.js'
 import CommentArea from '../../components/CommentArea'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const SongPageConatainer = styled.div`
@@ -395,7 +395,20 @@ const SongUpdate = styled.div`
   border-bottom: 1px solid ${gray2};
 `
 
+const ButtonsGroup = styled.div`
+  width: 140px;
+  display:flex;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: 10px;
+
+  ${MEDIA_QUERY_568} {
+    width: 120px;
+  }
+`
+
 const LikedButtonDiv = styled.div`
+  color: ${gray2};
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -405,12 +418,10 @@ const LikedButtonDiv = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: ${gray2};
-  margin-left: auto;
 
   ${MEDIA_QUERY_568} {
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
     transform: translateY(-10px);
   }
 
@@ -447,9 +458,14 @@ const Song = () => {
               <InfoDesc>喜歡</InfoDesc>
               <InfoDescNum>10,000</InfoDescNum>
             </NumInfo>
-            <LikedButtonDiv>
-              <FontAwesomeIcon icon={faHeart} />
-            </LikedButtonDiv>
+            <ButtonsGroup>
+              <LikedButtonDiv>
+                <FontAwesomeIcon icon={faPlay} />
+              </LikedButtonDiv>
+              <LikedButtonDiv>
+                <FontAwesomeIcon icon={faHeart} />
+              </LikedButtonDiv>
+            </ButtonsGroup>
             </MainInfoSongInfoDiv>
           </MainInfoDiv>
         </MainInfoContainer>
