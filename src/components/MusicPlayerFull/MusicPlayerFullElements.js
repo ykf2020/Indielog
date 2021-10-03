@@ -199,13 +199,19 @@ export const SongInfo = styled.div`
   height: 60%;
   width: 50%;
   text-align: center;
+
   ${MEDIA_QUERY_1400} {
     padding: 0 40px;
   }
+  ${MEDIA_QUERY_568} {
+    width: 100%;
+    padding: 0 20px;
+    height: 56%;
+  }
 `
 export const ImgDiv = styled.div`
-  width:  480px;
-  height: 480px;
+  width:  330px;
+  height: 330px;
   border-radius: 20px;
   overflow: hidden;
   img {
@@ -215,30 +221,42 @@ export const ImgDiv = styled.div`
   }
   ${MEDIA_QUERY_1024} {
     ${({mode}) => (mode===3) && `
-      width:  380px;
-      height: 380px;
+      width:  300px;
+      height: 300px;
       border-radius: 16px;
       margin-bottom:100px
     `}
   }
 
   ${MEDIA_QUERY_568} {
-    width:  300px;
-    height: 300px;
+    width:  260px;
+    height: 260px;
     border-radius: 16px;
-    margin-bottom:80px
+    margin-bottom: 40px
   }
 `
 export const SongName = styled.h1`
   font-size: 26px;
   font-weight: bold;
   color: white;
-  margin-top: 20px;
+  margin-top: 10px;
+
+  ${MEDIA_QUERY_568} {
+    font-size: 18px;
+    width:100%;
+    margin-top: 0px;
+  }
 `
 
 export const AuthorName = styled.p`
   font-size: 18px;
   color: white;
+
+  ${MEDIA_QUERY_568} {
+    font-size: 12px;
+    width:100%;
+    margin-bottom: 0;
+  }
 `
 
 export const ControlPanel = styled.div`
@@ -342,6 +360,10 @@ export const FontAwesomeControl = styled(FontAwesomeIcon)`
   }
 `
 
+export const MainFontAwesomeControl = styled(FontAwesomeControl)`
+  margin-left: 4px;
+`
+
 export const LoopButton = styled(FontAwesomeIcon)`
   color: ${gray3};
   cursor: pointer;
@@ -429,4 +451,10 @@ export const VolumeAnimateTrack = styled.div`
   ${({volume}) => volume && `
     transform: translateX(${volume*100}%)
   `}
+`
+export const InnerButoons = styled.div`
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `

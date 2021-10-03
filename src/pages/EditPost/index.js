@@ -151,24 +151,34 @@ const EditPost = () => {
     e.preventDefault()
     const documentRef = firebase.firestore().collection('posts').doc(postId)
     const fileRef = firebase.storage().ref('post-images/' + documentRef.id)
-    const metadata = {
-      contentType: file.type
-    }
-
-    fileRef.put(file, metadata).then(() => {
-      fileRef.getDownloadURL().then((imageUrl) => {
-        documentRef.updata({
-          title,
-          content,
-          topic: topicName,
-          updatedAt: firebase.firestore.Timestamp.now(),
-          imageUrl
-        })
-        .then(() => {
-          history.push(`/blogpost/${postId}`)
+    if(file) {
+      const metadata = {
+        contentType: file.type
+      }
+      fileRef.put(file, metadata).then(() => {
+        fileRef.getDownloadURL().then((imageUrl) => {
+          documentRef.update({
+            title,
+            content,
+            topic: topicName,
+            updatedAt: firebase.firestore.Timestamp.now(),
+            imageUrl
+          })
+          .then(() => {
+            history.push(`/blogpost/${postId}`)
+          })
         })
       })
-    })
+    } else {
+      documentRef.update({
+        title,
+        content,
+        topic: topicName,
+        updatedAt: firebase.firestore.Timestamp.now(),
+      }).then(() => {
+        history.push(`/blogpost/${postId}`)
+      })
+    }
   }
 
   return (
@@ -200,6 +210,7 @@ const EditPost = () => {
         <InputSection>
           <SectionTitle>文章內容：</SectionTitle>
           <CKE
+            data={content}
             handleCkeditorContent={handleCkeditorContent}
           />
         </InputSection>

@@ -8,6 +8,7 @@ import SideBar from './components/SideBar'
 import MusicPlayer from './components/MusicPlayer'
 import PaddingBottom from './components/PaddingBottom'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import NewPost from './pages/NewPost'
@@ -73,6 +74,7 @@ function App() {
           toggleSideBar={toggleSideBar}
         />
         <MusicPlayer />
+        <ScrollToTop />
         <Switch>
           <Route exact path='/'>
             <Music />

@@ -15,10 +15,11 @@ const editorConfiguration = {
 
     }
 };
-const CKE = ({ handleCkeditorContent }) => {
+const CKE = ({ handleCkeditorContent, data }) => {
   return (
     <>
       <CKEditor
+        data={data}
         editor={Editor}
         onInit={ editor => {
         }}

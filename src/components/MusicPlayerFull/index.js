@@ -32,7 +32,9 @@ import {
   VolumeButtonDiv,
   VolumeInputRange,
   VolumeTrack,
-  VolumeAnimateTrack
+  VolumeAnimateTrack,
+  InnerButoons,
+  MainFontAwesomeControl
 } from './MusicPlayerFullElements.js'
 import {
   faPause,
@@ -174,9 +176,11 @@ const MusicPlayerFull = ({ audioRef }) => {
               </Slider>
               <Buttons>
                 <LoopButton onClick={() => dispatch(setLoop(!loop)) } active={loop} size='1x' icon={faUndo} />
-                <FontAwesomeControl onClick={() => {skipTrackHandler('skip-back')}} size='1x' icon={faChevronLeft} />
-                <FontAwesomeControl onClick={playSongHandler} size='2x' icon={isPlaying ? faPause : faPlay} />
-                <FontAwesomeControl onClick={() => {skipTrackHandler('skip-forward')}} size='1x' icon={faChevronRight} />
+                <InnerButoons>
+                  <FontAwesomeControl onClick={() => {skipTrackHandler('skip-back')}} size='1x' icon={faChevronLeft} />
+                  <MainFontAwesomeControl onClick={playSongHandler} size='2x' icon={isPlaying ? faPause : faPlay} />
+                  <FontAwesomeControl onClick={() => {skipTrackHandler('skip-forward')}} size='1x' icon={faChevronRight} />
+                </InnerButoons>
                 <VolumeButtonDiv>
                   <FontAwesomeControl size='1x' icon={sound.mute ? faVolumeMute : faVolumeUp} onClick={() => setVolumeBarIsShown(!volumeBarIsShown)}/>
                   {volumeBarIsShown && (
