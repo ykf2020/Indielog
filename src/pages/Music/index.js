@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
-import { Carousel } from 'react-bootstrap';
+import Carou from '../../components/Carousel/index.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase, { toggleSongLiked } from '../../utils/firebase'
 import {
@@ -25,11 +25,6 @@ import {
   HoverPlayButton,
 } from './MusicElements.js'
 
-import styled from 'styled-components'
-const Carousellll = styled(Carousel)`
-  width: 100%;
-`
-
 
 const Music = () => {
   const dispatch = useDispatch()
@@ -41,7 +36,6 @@ const Music = () => {
     await dispatch(setMode(2))
   }
 
-
   function toggleLiked(isLiked, songId) {
     if(!user) {
       alert('請先登入會員才能按讚～')
@@ -51,41 +45,7 @@ const Music = () => {
   }
   return (
     <Container >
-      <Carousellll>
-        <Carousel.Item interval={3000}>
-          <img
-            className="d-block w-100"
-            src="https://akstatic.streetvoice.com/features/2021/09/22/63715e5bfb7b4b7389fa753481358595.png?x-oss-process=image/resize,m_fill,h_480,w_1250,limit_0/interlace,1/quality,q_95/sharpen,80/format,jpg"
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3></h3>
-            <p></p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={3000}>
-          <img
-            className="d-block w-100"
-            src="https://akstatic.streetvoice.com/features/2021/09/22/2488e888be394ad7b49571a8f2869bc0.png?x-oss-process=image/resize,m_fill,h_480,w_1250,limit_0/interlace,1/quality,q_95/sharpen,80/format,jpg"
-            alt="Second slide"
-          />
-          <Carousel.Caption>
-            <h3></h3>
-            <p></p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={3000}>
-          <img
-            className="d-block w-100"
-            src="https://akstatic.streetvoice.com/features/2021/09/20/32cf86ea6f5740d0abdfad037bdcc232.png?x-oss-process=image/resize,m_fill,h_480,w_1250,limit_0/interlace,1/quality,q_95/sharpen,80/format,jpg"
-            alt="Third slide"
-          />
-          <Carousel.Caption>
-            <h3></h3>
-            <p></p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousellll>
+      <Carou />
       <SongsList>
         <Title>熱門排行</Title>
         {songs.map((song,index) => {

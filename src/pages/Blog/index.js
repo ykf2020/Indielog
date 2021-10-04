@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Post from '../../components/Post'
-import firebase, { getTopics, getPostsWithoutTopic, getPostsWithTopic } from '../../utils/firebase'
-import "firebase/compat/firestore"
+import { getTopics, getPostsAmount, getSeedPosts, getChangePagePosts } from '../../utils/firebase'
 import { useLocation } from 'react-router-dom'
 import {
   BlogPageContainer,
@@ -10,48 +9,46 @@ import {
   Title,
   TopicsWrap,
   Topic,
-  PostLink
+  PostLink,
+  PaginatorContainer,
+  PageBtn
 } from './BlogElements.js'
+
+
 
 
 const Blog = () => {
   const [topics, setTopics] = useState([])
   const [posts, setPosts] = useState([])
+  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const lastPostSnapshotRef = useRef()
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
   const currentTopic = urlSearchParams.get('topic')
+
   useEffect(() => {
     getTopics(setTopics)
   },[])
+
   useEffect(() => {
-    if(!currentTopic) {
-      firebase
-        .firestore()
-        .collection('posts')
-        .orderBy('createdAt','desc')
-        .get()
-        .then((collectionSnapShot) => {
-          const data = collectionSnapShot.docs.map((doc) => {
-            const id = doc.id
-            return {...doc.data(),id}
-          })
-          setPosts(data)
-        })
-    } else {
-      firebase
-        .firestore()
-        .collection('posts')
-        .where('topic','==',currentTopic)
-        .get()
-        .then((collectionSnapShot) => {
-          const data = collectionSnapShot.docs.map((doc) => {
-            const id = doc.id
-            return {...doc.data(),id}
-          })
-          setPosts(data)
-        })
-    }
+    getPostsAmount(currentTopic, 5, setTotalPages)
+    getSeedPosts(currentTopic, 5, setPosts)
+    setCurrentPage(1)
   },[currentTopic])
+
+  function nextPage(){
+    if(currentPage === totalPages) return
+    const lastRefPlace = 5 * (currentPage)
+    getChangePagePosts(currentTopic, 5, setPosts, lastRefPlace)
+    setCurrentPage((currentPage+1))
+  }
+  function prevPage(){
+    if(currentPage === 1) return
+    const lastRefPlace = 5 * (currentPage-2)
+    getChangePagePosts(currentTopic, 5, setPosts, lastRefPlace)
+    setCurrentPage((currentPage-1))
+  }
 
   return (
     <BlogPageContainer>
@@ -83,6 +80,10 @@ const Blog = () => {
                     />
                 </PostLink>
         })}
+      <PaginatorContainer>
+        {(totalPages > 1 && currentPage !== 1 ) && <PageBtn onClick={prevPage}>＜</PageBtn>}
+        {(totalPages > 1 && currentPage !== totalPages ) && <PageBtn onClick={nextPage}>＞</PageBtn>}
+      </PaginatorContainer>
       </PostsContainer>
     </BlogPageContainer>
   )

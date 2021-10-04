@@ -136,24 +136,67 @@ export const getPostWithAuthorInfo = (postId, handlePost, handleAuthorInfo) => {
   })
 }
 
-export const getPostsWithoutTopic = (handlePosts) => {
-  postsDb.orderBy('createdAt','desc').get().then((collectionSnapShot) => {
-    const data = collectionSnapShot.docs.map((doc) => {
-      const id = doc.id
-      return {...doc.data(),id}
+export const getSeedPosts = (topic, limit, handlePosts) => {
+  if(!topic) {
+    postsDb.orderBy('createdAt','desc').limit(limit).get().then((collectionSnapShot) => {
+      const data = collectionSnapShot.docs.map((doc) => {
+        const id = doc.id
+        return {...doc.data(),id}
+      })
+      handlePosts(data)
     })
-    handlePosts(data)
-  })
+  } else {
+    postsDb.orderBy('createdAt','desc').where('topic','==',topic).limit(limit).get().then((collectionSnapShot) => {
+      const data = collectionSnapShot.docs.map((doc) => {
+        const id = doc.id
+        return {...doc.data(),id}
+      })
+      handlePosts(data)
+    })
+  }
 }
 
-export const getPostsWithTopic = (topic, handlePosts) => {
-  postsDb.orderBy('createdAt','desc').where('topic','==',topic).get().then((collectionSnapShot) => {
-    const data = collectionSnapShot.docs.map((doc) => {
-      const id = doc.id
-      return {...doc.data(),id}
+export const getChangePagePosts = (topic, limit, handlePosts, lastRefPlace) => {
+  if(!topic) {
+    postsDb.orderBy('createdAt','desc').get().then((collectionSnapShot) => {
+      const ref = collectionSnapShot.docs[lastRefPlace]
+      postsDb.orderBy('createdAt','desc').startAt(ref).limit(limit).get().then(snapshot => {
+        const data = snapshot.docs.map((doc) => {
+          const id = doc.id
+          return {...doc.data(),id}
+        })
+        handlePosts(data)
+      })
     })
-    handlePosts(data)
-  })
+  } else {
+    postsDb.orderBy('createdAt','desc').where('topic','==',topic).get().then((collectionSnapShot) => {
+      const ref = collectionSnapShot.docs[lastRefPlace]
+      postsDb.orderBy('createdAt','desc').limit(limit).startAt(ref).get().then(snapshot => {
+        const data = snapshot.docs.map((doc) => {
+          const id = doc.id
+          return {...doc.data(),id}
+        })
+        handlePosts(data)
+      })
+    })
+  }
+}
+
+export const getPostsAmount = (topic, limit, handlePosts) => {
+  if(!topic) {
+    postsDb.get().then(collectionSnapShot => {
+      const amount = collectionSnapShot.size
+      const pages = amount % limit === 0 ? amount / limit : Math.ceil(amount / limit);
+      handlePosts(pages)
+    })
+  } else {
+    postsDb.where('topic','==',topic).get().then(collectionSnapShot => {
+      const amount = collectionSnapShot.size
+      const pages = amount % limit === 0 ? amount / limit : Math.ceil(amount / limit);
+      handlePosts(pages)
+    })
+  }
+
 }
 
 export const addNewPost = (image, postInfo, handleSuccess) => {

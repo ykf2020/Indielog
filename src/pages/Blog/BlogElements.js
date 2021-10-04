@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { gray3, green2, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568  } from '../../constants.js'
+import { gray3, green2, gray4, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568  } from '../../constants.js'
 
 
 export const BlogPageContainer = styled.div`
@@ -105,4 +105,32 @@ export const Topic = styled(Link)`
 
 export const PostLink = styled(Link)`
   text-decoration: none;
+`
+
+export const PaginatorContainer = styled.div`
+  margin-top: 30px;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const PageBtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  margin: 0 10px;
+  border-radius: 50%;
+  border: 1px solid ${gray4};
+  font-size: 12px;
+  cursor: pointer;
+  transiton: all 0.2s ease;
+  &:hover {
+    color: white;
+    background: ${gray4};
+    border: none;
+  }
 `
