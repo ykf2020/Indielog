@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
-import "firebase/compat/storage"
+import { getTopicsAndSetDefaultTopic, addNewPost } from '../../utils/firebase'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import CKE from '../../components/CKEditor'
 import {
   BlogPostPageContainer,
@@ -27,52 +26,31 @@ const NewPost = () => {
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
   const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
-
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection('topics')
-      .get()
-      .then((collectionSnapShot) => {
-        const data = collectionSnapShot.docs.map((doc) => {
-          return doc.data()
-        })
-        setTopics(data)
-        setTopicName(data[0].name)
-      })
-  },[])
+  const user = useSelector((store) => store.user.currentUser)
 
   function handleCkeditorContent(e, editor){
     const data = editor.getData()
     setContent(data)
   }
 
+  function handleNewPostSucceed(postId){
+    history.push(`/blogpost/${postId}`)
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
-    const documentRef = firebase.firestore().collection('posts').doc()
-    const fileRef = firebase.storage().ref('post-images/' + documentRef.id)
-    const metadata = {
-      contentType: file.type
+    const postInfo = {
+      title,
+      content,
+      topic: topicName,
+      userId: user.uid,
     }
-
-    fileRef.put(file, metadata).then(() => {
-      fileRef.getDownloadURL().then((imageUrl) => {
-        documentRef.set({
-          title,
-          content,
-          topic: topicName,
-          createdAt: firebase.firestore.Timestamp.now(),
-          author: {
-            uid: firebase.auth().currentUser.uid,
-          },
-          imageUrl
-        })
-        .then(() => {
-          history.push('/blog')
-        })
-      })
-    })
+    addNewPost(file, postInfo, handleNewPostSucceed)
   }
+
+  useEffect(() => {
+    getTopicsAndSetDefaultTopic(setTopics, setTopicName)
+  },[])
 
   return (
 

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
-import "firebase/compat/storage"
+import { getTopics, getPost, updatePost, updatePostWithNewPic } from '../../utils/firebase'
 import { useHistory, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import CKE from '../../components/CKEditor'
 import {
   BlogPostPageContainer,
@@ -28,69 +27,42 @@ const EditPost = () => {
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
   const previewUrl = file ? URL.createObjectURL(file) : oldImageURL
-
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection('topics')
-      .get()
-      .then((collectionSnapShot) => {
-        const data = collectionSnapShot.docs.map((doc) => {
-          return doc.data()
-        })
-        setTopics(data)
-        setTopicName(data[0].name)
-      })
-      firebase
-        .firestore()
-        .collection('posts')
-        .doc(postId)
-        .get()
-        .then((docSnapShot) => {
-          const data = docSnapShot.data()
-          setTitle(data.title)
-          setContent(data.content)
-          setTopicName(data.topic)
-          setOldImageURL(data.imageUrl)
-        })
-  },[])
+  const user = useSelector((store) => store.user.currentUser)
+  function handleGetPageData(data){
+    setTitle(data.title)
+    setContent(data.content)
+    setTopicName(data.topic)
+    setOldImageURL(data.imageUrl)
+  }
 
   function handleCkeditorContent(e, editor){
     const data = editor.getData()
     setContent(data)
   }
 
+  function handleEditPostSucceed(postId){
+    history.push(`/blogpost/${postId}`)
+  }
+
+  useEffect(() => {
+    getTopics(setTopics)
+    getPost(postId, handleGetPageData)
+  },[])
+
+
+
   function handleSubmit(e) {
     e.preventDefault()
-    const documentRef = firebase.firestore().collection('posts').doc(postId)
-    const fileRef = firebase.storage().ref('post-images/' + documentRef.id)
+    const postInfo = {
+      title,
+      content,
+      topic: topicName,
+      userId: user.uid,
+    }
     if(file) {
-      const metadata = {
-        contentType: file.type
-      }
-      fileRef.put(file, metadata).then(() => {
-        fileRef.getDownloadURL().then((imageUrl) => {
-          documentRef.update({
-            title,
-            content,
-            topic: topicName,
-            updatedAt: firebase.firestore.Timestamp.now(),
-            imageUrl
-          })
-          .then(() => {
-            history.push(`/blogpost/${postId}`)
-          })
-        })
-      })
+      updatePostWithNewPic(postId, postInfo, handleEditPostSucceed)
     } else {
-      documentRef.update({
-        title,
-        content,
-        topic: topicName,
-        updatedAt: firebase.firestore.Timestamp.now(),
-      }).then(() => {
-        history.push(`/blogpost/${postId}`)
-      })
+      updatePost(postId, postInfo, handleEditPostSucceed)
     }
   }
 

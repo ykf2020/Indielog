@@ -76,21 +76,26 @@ const MusicPlayerFull = ({ audioRef }) => {
     )
   }
 
-  const playSongHandler = () => {
+  function playSongHandler(){
     dispatch(setIsPlaying(!isPlaying))
   }
 
-  const dragHandler = (e) => {
+  function dragHandler(e){
     audioRef.current.currentTime = e.target.value
     dispatch(setSongPlayingInfo({...songPlayingInfo, currentTime: e.target.value}))
   }
 
-  const skipTrackHandler = async (direction) => {
+  async function skipTrackHandler(direction){
     let currentIndex = songs.findIndex((song) => song.id === currentSong.id)
-    if(direction === 'skip-forward'){
+    if(direction === 'skip-forward') {
       await dispatch(setCurrentSong(songs[(currentIndex + 1) % songs.length]))
     }
     if(direction === 'skip-back'){
+      if(songPlayingInfo.currentTime > 10) {
+        audioRef.current.currentTime = 0
+        dispatch(setSongPlayingInfo({...songPlayingInfo, currentTime: 0}))
+        return
+      }
       if((currentIndex - 1) % songs.length === -1){
         dispatch(setCurrentSong(songs[songs.length-1]))
         return
@@ -99,7 +104,7 @@ const MusicPlayerFull = ({ audioRef }) => {
     }
   }
 
-  const volumeHandler = (e) => {
+  function volumeHandler(e){
     if(e.target.value == 0) {
       dispatch(setSound({ ...sound, mute:true, volume: e.target.value}))
     } else {
@@ -108,7 +113,7 @@ const MusicPlayerFull = ({ audioRef }) => {
     audioRef.current.volume = e.target.value
   }
 
-  const songSelectHandler = async (song) => {
+  async function songSelectHandler(song){
       dispatch(setCurrentSong(song))
   }
 
@@ -118,10 +123,8 @@ const MusicPlayerFull = ({ audioRef }) => {
         setVolumeBarIsShown(false);
       }
     }
-    // Bind
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // dispose
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [volumeBarRef]);

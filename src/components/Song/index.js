@@ -1,5 +1,3 @@
-
-
 const Song = (song ,index) => {
   return (
     <Song>

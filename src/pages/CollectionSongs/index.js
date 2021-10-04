@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
+import { getLikedSongs } from '../../utils/firebase'
 import { useSelector } from "react-redux";
 import {
   MemberPageContainer,
@@ -20,20 +19,11 @@ import {
 const CollectionSongs = () => {
   const user = useSelector((store) => store.user.currentUser)
   const [likedSongs, setLikedSongs] = useState([])
+
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('songs')
-      .where('likedBy', 'array-contains', user.uid)
-      .get()
-      .then((collectionSnapShot) => {
-        const data = collectionSnapShot.docs.map((doc) => {
-          const id = doc.id
-          return {...doc.data(),id}
-        })
-        setLikedSongs(data)
-      })
+    getLikedSongs(user.uid, setLikedSongs)
   },[])
+  
   return (
     <MemberPageContainer>
     <TitleButtonsGroup>

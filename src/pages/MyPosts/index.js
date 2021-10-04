@@ -2,9 +2,8 @@ import Post from '../../components/Post'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
-import "firebase/compat/auth"
+import { deletePost, getMyPostsOnSnapshot } from '../../utils/firebase'
+import { useSelector } from 'react-redux'
 import {
   MemberPageContainer,
   TitleButtonsGroup,
@@ -17,22 +16,13 @@ import {
 } from './MyPostsElements.js'
 
 const MyPosts = () => {
-  const user = firebase.auth().currentUser
   const [posts, setPosts] = useState([])
+  const user = useSelector((store) => store.user.currentUser)
 
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('posts')
-      .where('author.uid','==', user.uid)
-      .onSnapshot((collectionSnapshot) => {
-        const data = collectionSnapshot.docs.map((doc) => {
-          const id = doc.id
-          return { ...doc.data(), id }
-        })
-        setPosts(data)
-      })
+    getMyPostsOnSnapshot(user.uid, setPosts)
   },[])
+  
   return (
     <MemberPageContainer>
       <TitleButtonsGroup>
@@ -47,7 +37,7 @@ const MyPosts = () => {
             </LinkWithoutDecoration>
             <ButtonsGroup>
               <LinkWithoutDecoration to={`/editpost/${post.id}`}><Button><FontAwesomeIcon icon={faPen}/></Button></LinkWithoutDecoration>
-              <Button><FontAwesomeIcon icon={faTrash}/></Button>
+              <Button onClick={() => {deletePost(post.id)}}><FontAwesomeIcon icon={faTrash}/></Button>
             </ButtonsGroup>
           </PostDiv>
         )

@@ -18,16 +18,15 @@ import {
   MemberDiv
 } from './HeaderElements'
 import { useSelector } from 'react-redux'
-import firebase from '../../utils/firebase.js'
-import 'firebase/compat/auth'
-
+import { signOut as fireSignOut } from '../../utils/firebase.js'
 
 const Header = ({ toggleSignPanel, toggleSideBar }) => {
   const user = useSelector((store) => store.user.currentUser)
   const [isOpenDropDown, setIsOpenDropDown] = useState(false)
   const dropDownRef = useRef(null)
+  
   const signOut = () => {
-    firebase.auth().signOut()
+    fireSignOut()
     setIsOpenDropDown(false)
   }
 
@@ -37,10 +36,8 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
         setIsOpenDropDown(false);
       }
     }
-    // Bind
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // dispose
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropDownRef]);

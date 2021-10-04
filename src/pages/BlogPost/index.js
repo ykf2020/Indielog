@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
+import { getPostWithAuthorInfo, togglePostLiked } from '../../utils/firebase'
 import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import CommentArea from '../../components/CommentArea'
@@ -33,29 +32,7 @@ const BlogPost = () => {
   const isLiked = post.likedBy?.includes(user?.uid)
 
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('posts')
-      .doc(postId)
-      .get()
-      .then((docSnapShot) => {
-        firebase
-          .firestore()
-          .collection('users')
-          .doc(docSnapShot.data().author.uid)
-          .get()
-          .then((authorDocSnapShot) => {
-            setAuthorInfo(authorDocSnapShot.data())
-          })
-      })
-    firebase
-      .firestore()
-      .collection('posts')
-      .doc(postId)
-      .onSnapshot((docSnapShot) => {
-        const data = docSnapShot.data()
-        setPost(data)
-      })
+    getPostWithAuthorInfo(postId, setPost, setAuthorInfo)
   },[])
 
   function toggleLiked() {
@@ -63,15 +40,7 @@ const BlogPost = () => {
       alert('請先登入會員才能按讚～')
       return
     }
-    if(isLiked) {
-      firebase.firestore().collection('posts').doc(postId).update({
-        likedBy: firebase.firestore.FieldValue.arrayRemove(user.uid)
-      })
-    } else {
-      firebase.firestore().collection('posts').doc(postId).update({
-        likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
-      })
-    }
+    togglePostLiked(isLiked, postId, user.uid)
   }
 
   return (

@@ -8,58 +8,25 @@ import {
   SignPanelChange,
   Warning
 } from './SignPanelElements.js'
-import firebase from '../../utils/firebase.js'
-import "firebase/compat/firestore"
-import 'firebase/compat/auth';
+import { signUp } from '../../utils/firebase.js'
 const SignUp = ({ setPanelStatus, toggleSignPanel }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSubmit = (e) => {
+  function handleSignUpSucceed(){
+    toggleSignPanel()
+    setEmail('')
+    setPassword('')
+  }
+  function handleSubmit(){
     if(passwordConfirm !== password) {
       setErrorMessage('密碼輸入錯誤')
       return
     }
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((signUpResult) => {
-        firebase
-          .firestore()
-          .collection('users')
-          .doc(signUpResult.user.uid)
-          .set({
-            email,
-            photoURL: '',
-            displayName: '',
-            introduction: '',
-            createdAt: firebase.firestore.Timestamp.now()
-          }).then(() => {
-            toggleSignPanel()
-            setEmail('')
-            setPassword('')
-          })
-      })
-      .catch((error) => {
-        switch(error.code) {
-          case "auth/email-already-in-use":
-            setErrorMessage('信箱已存在')
-            break
-          case "auth/invalid-email":
-            setErrorMessage('信箱格式錯誤')
-            break
-          case "auth/weak-password":
-            setErrorMessage('密碼強度不足')
-            break
-          default:
-            setErrorMessage(error.code)
-        }
-      })
+    signUp(email, password, handleSignUpSucceed, setErrorMessage)
   }
-
-
   return (
     <>
       <SignPanelTitle>註冊</SignPanelTitle>

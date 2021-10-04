@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Post from '../../components/Post'
-import firebase from '../../utils/firebase'
+import firebase, { getTopics, getPostsWithoutTopic, getPostsWithTopic } from '../../utils/firebase'
 import "firebase/compat/firestore"
 import { useLocation } from 'react-router-dom'
 import {
@@ -14,7 +14,6 @@ import {
 } from './BlogElements.js'
 
 
-
 const Blog = () => {
   const [topics, setTopics] = useState([])
   const [posts, setPosts] = useState([])
@@ -22,17 +21,7 @@ const Blog = () => {
   const urlSearchParams = new URLSearchParams(location.search)
   const currentTopic = urlSearchParams.get('topic')
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('topics')
-      .get()
-      .then((collectionSnapShot) => {
-        const data = collectionSnapShot.docs.map((doc) => {
-          const id = doc.id
-          return {...doc.data(),id}
-        })
-        setTopics(data)
-      })
+    getTopics(setTopics)
   },[])
   useEffect(() => {
     if(!currentTopic) {
@@ -86,7 +75,7 @@ const Blog = () => {
       </TopicsContainer>
       <PostsContainer>
         {posts.map((post) => {
-          return <PostLink to={`/blogpost/${post.id}`}>
+          return <PostLink key={post.id} to={`/blogpost/${post.id}`}>
                     <Post key={post.id}
                           createdAt={post.createdAt.toDate().toLocaleString([],{year: 'numeric', month: 'numeric', day: 'numeric'})}
                           imageUrl={post.imageUrl} topic={post.topic}

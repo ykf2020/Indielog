@@ -8,36 +8,19 @@ import {
   SignPanelChange,
   Warning
 } from './SignPanelElements.js'
-import firebase from '../../utils/firebase.js'
-import 'firebase/compat/auth';
+import { signIn } from '../../utils/firebase.js'
+
 const SignIn = ({ setPanelStatus, toggleSignPanel }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
-  const handleSubmit = (e) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        toggleSignPanel()
-        setEmail('')
-        setPassword('')
-      })
-      .catch((error) => {
-        switch(error.code) {
-          case "auth/invalid-email":
-            setErrorMessage('信箱格式錯誤')
-            break
-          case "auth/user-not-found":
-            setErrorMessage('信箱不存在')
-            break
-          case "auth/wrong-password":
-            setErrorMessage('密碼錯誤')
-            break
-          default:
-            setErrorMessage(error.code)
-        }
-      })
+  function signInSucceed(){
+    toggleSignPanel()
+    setEmail('')
+    setPassword('')
+  }
+  function handleSubmit(){
+    signIn(email, password, signInSucceed, setErrorMessage)
   }
   return (
     <>

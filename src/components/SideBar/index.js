@@ -1,13 +1,9 @@
 import { SidebarContainer, SidebarMenu, SidebarLink, SideBtnWrap, SignPanelBtn, SideMemberDiv, SideMemberImgDiv, MemberHello } from './SidebarElements'
 import { useSelector } from 'react-redux'
-import firebase from '../../utils/firebase.js'
-import 'firebase/compat/auth'
+import { signOut } from '../../utils/firebase.js'
 
 const SideBar = ({ isOpenSideBar, toggleSideBar, toggleSignPanel }) => {
   const user = useSelector((store) => store.user.currentUser)
-  const signOut = () => {
-    firebase.auth().signOut()
-  }
   return (
     <SidebarContainer isOpenSideBar={isOpenSideBar}>
         <SidebarMenu>

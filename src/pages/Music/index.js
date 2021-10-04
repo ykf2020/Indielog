@@ -5,8 +5,7 @@ import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
+import firebase, { toggleSongLiked } from '../../utils/firebase'
 import {
   Container,
   SongsList,
@@ -41,21 +40,14 @@ const Music = () => {
     await dispatch(setCurrentSong(song))
     await dispatch(setMode(2))
   }
+
+
   function toggleLiked(isLiked, songId) {
-    console.log(songId)
     if(!user) {
       alert('請先登入會員才能按讚～')
       return
     }
-    if(isLiked) {
-      firebase.firestore().collection('songs').doc(songId).update({
-        likedBy: firebase.firestore.FieldValue.arrayRemove(user.uid)
-      })
-    } else {
-      firebase.firestore().collection('songs').doc(songId).update({
-        likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
-      })
-    }
+    toggleSongLiked(isLiked, songId, user.uid)
   }
   return (
     <Container >

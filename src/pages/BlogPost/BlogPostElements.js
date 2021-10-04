@@ -36,6 +36,12 @@ export const PostTitle = styled.h1`
   font-weight: bold;
   font-size: 2rem;
   margin: 0 80px 40px;
+
+  ${MEDIA_QUERY_568} {
+    width: 100%;
+    font-size: 1.2rem;
+    margin: 0 14px 40px;
+  }
 `
 
 export const PostContentWrapper = styled.div`

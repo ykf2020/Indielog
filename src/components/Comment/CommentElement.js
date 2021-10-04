@@ -45,17 +45,24 @@ img {
 `
 
 export const CommentorName = styled.h4`
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   margin-left: 6px;
+
+  ${MEDIA_QUERY_568} {
+    font-size: 0.7rem;
+  }
 `
 
 export const CommentorDate = styled.p`
+  color: ${gray3};
   display: flexbox;
   font-size: 0.8rem;
   line-height: 0.8rem;
-  margin-left: 6px;
-  padding-top: 14px;
-  color: ${gray3}
+  margin: 0 6px 6px 4px;
+
+  ${MEDIA_QUERY_568} {
+    font-size: 0.4rem
+  }
 `
 
 export const CommentButtons = styled.div`

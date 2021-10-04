@@ -13,48 +13,23 @@ import {
 } from './CommentAreaElements.js'
 import Comment from '../Comment'
 import { useSelector } from 'react-redux'
-import firebase from '../../utils/firebase.js'
-import 'firebase/compat/auth';
-import "firebase/compat/firestore"
+import { addNewComment, getCommentsOnSnapshot } from '../../utils/firebase.js'
 
 const CommentArea = ({ area, id }) => {
   const user = useSelector((store) => store.user.currentUser)
   const [commentInput, setCommentInput] = useState('')
   const [comments, setComments] = useState([])
-  const handleCommentInputSubmit = () => {
-    firebase
-      .firestore()
-      .collection(area)
-      .doc(id)
-      .collection('comments')
-      .doc()
-      .set({
-        content: commentInput,
-        createdAt: firebase.firestore.Timestamp.now(),
-        authorUid: user.uid,
-      }).then(() => {
-        setCommentInput('')
-      })
+
+  function handleCommentInputSubmit(){
+    addNewComment(area, id, commentInput, user.uid).then(() => {
+      setCommentInput('')
+    })
   }
 
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection(area)
-      .doc(id)
-      .collection('comments')
-      .orderBy('createdAt','desc')
-      .onSnapshot((collectionSnapShot) => {
-         const data = collectionSnapShot.docs.map((doc) => {
-           return {
-             authorUid: doc.data().authorUid,
-             content: doc.data().content,
-             createdAt: doc.data().createdAt
-           }
-         })
-         setComments(data)
-      })
+    getCommentsOnSnapshot(area, id, setComments)
   },[area, id])
+
   return (
     <CommentsContainer>
       <CommentAddSection>

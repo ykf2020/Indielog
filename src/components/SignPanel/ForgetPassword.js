@@ -8,16 +8,14 @@ import {
   SignPanelChange,
   Warning
 } from './SignPanelElements.js'
-import firebase from '../../utils/firebase.js'
-import 'firebase/compat/auth';
+import { forgetPassword } from '../../utils/firebase.js'
 
 const ForgetPassword = ({ setPanelStatus, toggleSignPanel }) => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-  const handleSubmit = (e) => {
-    firebase
-      .auth()
-      .sendPasswordResetEmail(email)
+
+  function handleSubmit(){
+    forgetPassword(email)
       .then(() => {
         setEmail('')
         setMessage('更改密碼確認信已寄至信箱，請查收')

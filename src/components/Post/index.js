@@ -12,5 +12,4 @@ const Post = ({imageUrl, title, createdAt, topic}) => {
       </PostContainer>
   )
 }
-
 export default Post

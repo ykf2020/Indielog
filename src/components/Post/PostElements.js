@@ -15,7 +15,6 @@ export const PostContainer = styled.div`
   ${MEDIA_QUERY_568} {
     width: 100vw;
     padding: 0 6px;
-    align-items: center;
 
   }
 `
@@ -44,18 +43,23 @@ export const PostMain = styled.div`
   flex-direction: column;
   align-items: flex-start;
   word-wrap: break-word;
-  padding-top:10px;
-
+  padding-top: 10px;
 
   ${MEDIA_QUERY_568} {
     width: 280px;
+    padding-top:0px;
   }
-
 `
 
 export const PostInfo = styled.p`
   color: ${green1};
   font-size: 0.7rem;
+
+  ${MEDIA_QUERY_568} {
+    margin: 0;
+    font-size: 8px;
+  }
+
 `
 
 export const PostTitle = styled.h2`

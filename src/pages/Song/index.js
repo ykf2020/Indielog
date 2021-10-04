@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import firebase from '../../utils/firebase'
-import "firebase/compat/firestore"
+import { getSongOnSnapShot, toggleSongLiked } from '../../utils/firebase'
 import CommentArea from '../../components/CommentArea'
 import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -56,30 +55,17 @@ const Song = () => {
     await dispatch(setMode(2))
   }
 
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection('songs')
-      .doc(songId)
-      .onSnapshot((docSnapshot) => {
-        setPageData(docSnapshot.data())
-      })
-  },[songId])
   function toggleLiked() {
     if(!user) {
       alert('請先登入會員才能按讚～')
       return
     }
-    if(isLiked) {
-      firebase.firestore().collection('songs').doc(songId).update({
-        likedBy: firebase.firestore.FieldValue.arrayRemove(user.uid)
-      })
-    } else {
-      firebase.firestore().collection('songs').doc(songId).update({
-        likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
-      })
-    }
+    toggleSongLiked(isLiked, songId, user.uid)
   }
+
+  useEffect(() => {
+    getSongOnSnapShot(songId, setPageData)
+  },[songId])
   return (
     <SongPageConatainer>
       <MainInfoBackground bgImg={pageData.cover}>

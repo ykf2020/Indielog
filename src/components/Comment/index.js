@@ -1,20 +1,14 @@
 import { Comment as CommentDiv, CommentInfo, CommentorImgDiv, CommentorName, CommentorDate, CommentContent, CommentButtons } from './CommentElement.js'
 import { useState, useEffect } from 'react'
-import firebase from '../../utils/firebase.js'
-import "firebase/compat/firestore"
+import { getAuthorInfo } from '../../utils/firebase.js'
 
 const Comment = ({ currentComment }) => {
   const [authorInfo, setAuthorInfo] = useState({})
+
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('users')
-      .doc(currentComment.authorUid)
-      .get()
-      .then((userSnapShot) => {
-        setAuthorInfo(userSnapShot.data())
-      })
+    getAuthorInfo(currentComment.authorUid, setAuthorInfo)
   },[currentComment])
+  
   return (
     <CommentDiv>
       <CommentInfo>

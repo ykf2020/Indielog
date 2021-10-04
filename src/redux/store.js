@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import userReducer from "./reducers/userReducer"
-import songReducer from "./reducers/songReducer"
+import songReducer, { setSongs, setCurrentSong } from "./reducers/songReducer"
 import playerControlReducer from "./reducers/playerControlReducer"
 
 export const store = configureStore({
@@ -9,4 +9,10 @@ export const store = configureStore({
     song: songReducer,
     playerControl: playerControlReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [setSongs, setCurrentSong]
+      },
+    }),
 });
