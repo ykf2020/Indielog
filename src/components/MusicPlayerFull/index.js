@@ -157,9 +157,9 @@ const MusicPlayerFull = ({ audioRef }) => {
             })}
           </Library>
           <Song mode={mode}>
-            <SongInfo>
+            <SongInfo mode={mode}>
               <ImgDiv mode={mode}><img src={currentSong.cover}/></ImgDiv>
-              <SongName>{currentSong.name}</SongName>
+              <SongName mode={mode}>{currentSong.name}</SongName>
               <AuthorName>{currentSong.artist}</AuthorName>
             </SongInfo>
             <ControlPanel>

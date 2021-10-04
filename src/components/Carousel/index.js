@@ -15,8 +15,6 @@ const Carou = () => {
           alt="First slide"
         />
         <Carousel.Caption>
-          <h3></h3>
-          <p></p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={3000}>
@@ -26,8 +24,6 @@ const Carou = () => {
           alt="Second slide"
         />
         <Carousel.Caption>
-          <h3></h3>
-          <p></p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={3000}>
@@ -37,8 +33,6 @@ const Carou = () => {
           alt="Third slide"
         />
         <Carousel.Caption>
-          <h3></h3>
-          <p></p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousellll>

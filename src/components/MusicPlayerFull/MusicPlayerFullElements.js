@@ -75,7 +75,7 @@ export const Library = styled.div`
   width: 0;
   height: 84%;
   padding: 1rem 0;
-  transition: 0.5s all ease;
+  transition: 0.3s all ease;
   transform: translateX(-100%);
 
   ${({mode}) => (mode===3) && `
@@ -124,7 +124,7 @@ export const LibrarySongDiv = styled.div`
     align-items: center;
     padding: 1rem 2rem 1rem 3rem;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.2s ease;
 
     &:hover {
       background: ${green1}
@@ -176,7 +176,7 @@ export const Song = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  transition: 0.5s all ease;
+  transition: 0.3s all ease;
 
   ${({mode}) => (mode===3) && `
     width: 70%;
@@ -205,9 +205,22 @@ export const SongInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items:center;
+  justify-content: center;
   height: 60%;
-  width: 50%;
+  width: 70%;
   text-align: center;
+
+  ${MEDIA_QUERY_1400} {
+    ${({mode}) => (mode===3) && `
+      width: 90%;
+    `}
+  }
+
+  ${MEDIA_QUERY_1024} {
+    ${({mode}) => (mode===3) && `
+      width: 95%;
+    `}
+  }
 
   ${MEDIA_QUERY_768} {
     width: 100%;
@@ -233,7 +246,6 @@ export const ImgDiv = styled.div`
       width:  300px;
       height: 300px;
       border-radius: 16px;
-      margin-bottom:100px
     `}
   }
 
@@ -244,11 +256,17 @@ export const ImgDiv = styled.div`
     margin-bottom: 40px
   }
 `
-export const SongName = styled.h1`
-  font-size: 26px;
+export const SongName = styled.div`
+  font-size: 22px;
   font-weight: bold;
   color: white;
   margin-top: 20px;
+
+  ${MEDIA_QUERY_1024} {
+    ${({mode}) => (mode===3) && `
+      font-size: 16px;
+    `}
+  }
 
   ${MEDIA_QUERY_568} {
     font-size: 18px;
@@ -257,7 +275,7 @@ export const SongName = styled.h1`
   }
 `
 
-export const AuthorName = styled.p`
+export const AuthorName = styled.div`
   font-size: 18px;
   color: white;
 

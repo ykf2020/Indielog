@@ -1,8 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import SignPanel from './components/SignPanel'
-import Header from './components/Header'
-import SideBar from './components/SideBar'
 import Controls from './components/Controls'
 import MusicPlayer from './components/MusicPlayer'
 import PaddingBottom from './components/PaddingBottom'
