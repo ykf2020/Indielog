@@ -11,7 +11,7 @@ export const Container = styled.div`
   right: 20px;
   align-items: center;
   z-index: 99;
-
+  box-shadow: 0px 0px 6px rgba(33, 33, 33, 0.3); 
   ${MEDIA_QUERY_768} {
     width: 100%;
     right: 0;
@@ -51,6 +51,7 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 16px 4px 8px 4px;
+
   ${MEDIA_QUERY_768} {
     width: 70%;
   }
@@ -61,15 +62,15 @@ export const InfoContainer = styled.div`
 `
 
 export const SongName = styled.h2`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 
   ${MEDIA_QUERY_768} {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   ${MEDIA_QUERY_568} {
-    font-size: 12px;
+    font-size: 10px;
   }
 `
 
@@ -77,14 +78,15 @@ export const AuthorName = styled.p`
   font-size: 12px;
   color: ${gray3};
 
+  ${MEDIA_QUERY_768} {
+    font-size: 10px;
+  }
+
   ${MEDIA_QUERY_568} {
     font-size: 8px;
     margin-bottom: 0;
   }
 
-  ${MEDIA_QUERY_768} {
-    font-size: 10px;
-  }
 `
 
 export const IconContainer = styled.div`

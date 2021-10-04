@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import SignPanel from './components/SignPanel'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
@@ -20,18 +20,16 @@ import CollectionSongs from './pages/CollectionSongs'
 import MyPosts from './pages/MyPosts'
 import EditPost from './pages/EditPost'
 import NewSong from './pages/NewSong'
-
-import data from './data.js'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import firebase from './utils/firebase.js'
 import 'firebase/compat/auth'
-import { useDispatch, useSelector } from "react-redux"
 import { setUser, clearUser } from './redux/reducers/userReducer'
 import { setSongs, setCurrentSong } from "./redux/reducers/songReducer"
 
 
 function App() {
   const dispatch = useDispatch()
-  const user = firebase.auth().currentUser
+  const user = useSelector((store) => store.user.currentUser)
   const [isOpenSideBar, setIsOpenSideBar] = useState(false)
   const toggleSideBar = () => {
     setIsOpenSideBar(!isOpenSideBar)
@@ -43,8 +41,17 @@ function App() {
   }
 
   useEffect(() => {
-    dispatch(setSongs(data))
-    dispatch(setCurrentSong(data[0]))
+    firebase
+      .firestore()
+      .collection('songs')
+      .onSnapshot((collectionSnapShot) => {
+        const data = collectionSnapShot.docs.map((doc) => {
+          const id = doc.id
+          return {...doc.data(),id}
+        })
+        dispatch(setSongs(data))
+        dispatch(setCurrentSong(data[0]))
+      })
   }, [])
 
   useEffect(() => {

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { green1, black1 } from '../../constants.js'
-
+import { green1, black1, warning } from '../../constants.js'
 export const SignPanelContainer = styled.div`
   background: ${green1};
   height: 100vh;
@@ -21,14 +20,14 @@ export const SignPanelLogo = styled.h1`
   position: absolute;
   top: -80px;
   font-family: 'Dancing Script', cursive;
+  margin: 0 auto;
 `
 
 export const Panel = styled.div`
-  background: #000;
+  background: ${black1};
   border-radius: 20px;
   margin: 0 auto;
   width: 400px;
-  height: 500px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -72,10 +71,11 @@ export const PanelInnerWrap = styled.div`
 `
 
 export const SignPanelTitle = styled.h2`
-  margin-top: 38px;
+  margin-top: 20px;
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
+  margin-bottom: 0;
 `
 
 export const SignPanelTitleDesc = styled.p`
@@ -116,6 +116,7 @@ export const LinkGroups = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 20px;
 `
 
 export const SignPanelChange = styled.a`
@@ -127,4 +128,21 @@ export const SignPanelChange = styled.a`
     cursor: pointer;
     color: white;
   }
+`
+
+export const Warning = styled.div`
+  border: none;
+  border-radius: 6px;
+  margin-top:10px;
+  padding: 0 10px;
+  min-height: 34px;
+  width: 100%;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  background: ${warning};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

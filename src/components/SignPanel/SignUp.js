@@ -6,6 +6,7 @@ import {
   SignPanelInput,
   LinkGroups,
   SignPanelChange,
+  Warning
 } from './SignPanelElements.js'
 import firebase from '../../utils/firebase.js'
 import "firebase/compat/firestore"
@@ -62,6 +63,7 @@ const SignUp = ({ setPanelStatus, toggleSignPanel }) => {
   return (
     <>
       <SignPanelTitle>註冊</SignPanelTitle>
+      {errorMessage && <Warning>{errorMessage}</Warning>}
       <SignPanelTitleDesc>帳號</SignPanelTitleDesc>
       <SignPanelInput type='email' placeholder='請輸入 email' value={email} onChange={(e) => {setEmail(e.target.value)}}></SignPanelInput>
       <SignPanelTitleDesc>密碼</SignPanelTitleDesc>
@@ -72,7 +74,6 @@ const SignUp = ({ setPanelStatus, toggleSignPanel }) => {
       <LinkGroups>
         <SignPanelChange onClick={() => {setPanelStatus('signin')}}>登入</SignPanelChange>
       </LinkGroups>
-      {errorMessage && <h1 style={{color:'red'}}>{errorMessage}</h1>}
     </>
   )
 }

@@ -19,15 +19,15 @@ import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth';
 import "firebase/compat/firestore"
 
-const CommentArea = ({ postId }) => {
+const CommentArea = ({ area, id }) => {
   const user = useSelector((store) => store.user.currentUser)
   const [commentInput, setCommentInput] = useState('')
   const [comments, setComments] = useState([])
   const handleCommentInputSubmit = () => {
     firebase
       .firestore()
-      .collection('posts')
-      .doc(postId)
+      .collection(area)
+      .doc(id)
       .collection('comments')
       .doc()
       .set({
@@ -38,12 +38,14 @@ const CommentArea = ({ postId }) => {
         setCommentInput('')
       })
   }
+
   useEffect(() => {
     firebase
       .firestore()
-      .collection('posts')
-      .doc(postId)
+      .collection(area)
+      .doc(id)
       .collection('comments')
+      .orderBy('createdAt','desc')
       .onSnapshot((collectionSnapShot) => {
          const data = collectionSnapShot.docs.map((doc) => {
            return {
@@ -75,7 +77,7 @@ const CommentArea = ({ postId }) => {
           <Notice>請先<span>登入</span>以留言</Notice>
         }
       </CommentAddSection>
-      {comments.map(comment => {
+      {comments.map((comment) => {
         return (
           <Comment currentComment={comment}>
           </Comment>

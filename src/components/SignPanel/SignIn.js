@@ -6,6 +6,7 @@ import {
   SignPanelInput,
   LinkGroups,
   SignPanelChange,
+  Warning
 } from './SignPanelElements.js'
 import firebase from '../../utils/firebase.js'
 import 'firebase/compat/auth';
@@ -41,6 +42,7 @@ const SignIn = ({ setPanelStatus, toggleSignPanel }) => {
   return (
     <>
       <SignPanelTitle>登入</SignPanelTitle>
+      {errorMessage && <Warning>{errorMessage}</Warning>}
       <SignPanelTitleDesc>帳號</SignPanelTitleDesc>
       <SignPanelInput type='email' value={email} onChange={(e) => {setEmail(e.target.value)}}></SignPanelInput>
       <SignPanelTitleDesc>密碼</SignPanelTitleDesc>
@@ -48,9 +50,8 @@ const SignIn = ({ setPanelStatus, toggleSignPanel }) => {
       <SignPanelButton onClick={(e) => {handleSubmit(e)}}>送出</SignPanelButton>
       <LinkGroups>
         <SignPanelChange onClick={() => {setPanelStatus('signup')}}>註冊帳號</SignPanelChange>
-        <SignPanelChange onClick={() => {setPanelStatus('forget')}}>忘記密碼</SignPanelChange>
+        <SignPanelChange onClick={() => {setPanelStatus('forget');console.log('yoyo')}}>忘記密碼</SignPanelChange>
       </LinkGroups>
-      {errorMessage && <h1 style={{color:'red'}}>{errorMessage}</h1>}
     </>
   )
 }
