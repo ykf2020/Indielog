@@ -7,6 +7,7 @@ import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
+import { setCurrentTitle } from "../../redux/reducers/pageTitleReducer"
 import {
   SongPageConatainer,
   SongInfoCategory,
@@ -66,11 +67,20 @@ const Song = () => {
   useEffect(() => {
     getSongOnSnapShot(songId, setPageData)
   },[songId])
+
+  useEffect(() => {
+    if(!pageData) return
+    dispatch(setCurrentTitle(pageData.name))
+    return () => {
+      dispatch(setCurrentTitle('Indielog'))
+    }
+  },[pageData])
+
   return (
     <SongPageConatainer>
       <MainInfoBackground bgImg={pageData.cover}>
         <MainInfoContainer>
-          <MainImgDiv><img src={pageData.cover}/></MainImgDiv>
+          <MainImgDiv><img alt='' src={pageData.cover}/></MainImgDiv>
           <MainInfoDiv>
             <MainInfoSongName>{pageData.name}</MainInfoSongName>
             <SongInfoCategory>Experimental</SongInfoCategory>
@@ -99,7 +109,7 @@ const Song = () => {
         <ArtistContainer>
         <ArtistInfo>
           <ArtistInfoLeftDiv>
-            <ArtistImgDiv><img src={pageData.cover}/></ArtistImgDiv>
+            <ArtistImgDiv><img alt='' src={pageData.cover}/></ArtistImgDiv>
             <ArtistInfoNames>
               <ArtistName>{pageData.artist}</ArtistName>
               <AuthorizedDesc>認證創作者</AuthorizedDesc>
@@ -113,7 +123,7 @@ const Song = () => {
           <FoldSection>
             <FoldInfo isFold={foldSection1}>
               <h3>介紹</h3>
-                <Content>{pageData.introduction}</Content>
+                <Content dangerouslySetInnerHTML={{__html: pageData.introduction}} />
             </FoldInfo>
             <FoldingCover isFold={foldSection1}>
               <CoverDesc onClick={() => setFoldSection1(!foldSection1)}>{foldSection1 ? '收合' : '...查看更多'}</CoverDesc>
@@ -122,7 +132,7 @@ const Song = () => {
           <FoldSection >
             <FoldInfo isFold={foldSection2}>
               <h3>歌詞</h3>
-                <Content>{pageData.lyrics}</Content>
+                <Content dangerouslySetInnerHTML={{__html: pageData.lyrics}} />
             </FoldInfo>
             <FoldingCover isFold={foldSection2}>
               <CoverDesc onClick={() => setFoldSection2(!foldSection2)}>{foldSection2 ? '收合' : '...查看更多'}</CoverDesc>

@@ -45,7 +45,7 @@ const MusicPlayerSmall = ({ audioRef }) => {
           <AnimateTrack animationPercentage={songPlayingInfo.animationPercentage}/>
         </Track>
         <ImgDiv>
-          <img src={currentSong.cover}/>
+          <img alt='' src={currentSong.cover}/>
         </ImgDiv>
         <InfoContainer>
           <SongName>{currentSong.name}</SongName>

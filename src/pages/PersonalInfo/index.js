@@ -121,7 +121,7 @@ const PersonalInfo = () => {
           <InfoSection>
             <InfoElementTitle>頭像</InfoElementTitle>
             <InfoElementMainDiv>
-              <ImgDiv><img src={shownInfo.photoURL ? shownInfo.photoURL : '/default-user-image.png'}/></ImgDiv>
+              <ImgDiv><img alt='' src={shownInfo.photoURL ? shownInfo.photoURL : '/default-user-image.png'}/></ImgDiv>
               <EditButton
                 onClick={() => {setModalIsOpen(!modalIsOpen);setMode(1)}}>
                 <FontAwesomeIcon size='1x' icon={faPen}/>
@@ -161,7 +161,7 @@ const PersonalInfo = () => {
                 <ModalPanel>
                   <InfoTitle>修改頭像</InfoTitle>
                   <ModalInnerTop>
-                    <ModalImgDiv><img src={previewUrl}/></ModalImgDiv>
+                    <ModalImgDiv><img alt='' src={previewUrl}/></ModalImgDiv>
                     <ModalUploadButton htmlFor='post-image'>上傳圖片</ModalUploadButton>
                     <input
                     type="file"

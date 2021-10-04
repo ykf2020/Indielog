@@ -71,7 +71,7 @@ const EditPost = () => {
       <Title>修改文章</Title>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <ImgSection>
-          <ImageDiv><img src={previewUrl}/></ImageDiv>
+          <ImageDiv><img alt='' src={previewUrl}/></ImageDiv>
           <UploadButton htmlFor='post-image'>上傳文章封面</UploadButton>
           <Input
             type="file"

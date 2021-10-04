@@ -37,7 +37,7 @@ const CommentArea = ({ area, id }) => {
         {user ?
           <CommentAddArea>
             <CommentInfo>
-              <CommentorImgDiv><img src={user.photoURL ? user.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
+              <CommentorImgDiv><img alt='' src={user.photoURL ? user.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
               <CommentorName>{user.displayName}</CommentorName>
             </CommentInfo>
             <CommentTextArea placeholder='點此輸入留言...' value={commentInput} onChange={(e)=> setCommentInput(e.target.value)}>

@@ -5,7 +5,7 @@ import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
 import Carou from '../../components/Carousel/index.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import firebase, { toggleSongLiked } from '../../utils/firebase'
+import { toggleSongLiked } from '../../utils/firebase'
 import {
   Container,
   SongsList,
@@ -58,7 +58,7 @@ const Music = () => {
                 </NumberDiv>
                 <ImgContainer>
                   <ImgDiv>
-                    <img src={song?.cover}/>
+                    <img alt='' src={song?.cover}/>
                   </ImgDiv>
                   <HoverPlayButton onClick={() => playSong(song)}>
                     <FontAwesomeIcon size="2x" icon={faPlay} />

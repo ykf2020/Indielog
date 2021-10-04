@@ -3,7 +3,7 @@ const Post = ({imageUrl, title, createdAt, topic}) => {
   return (
       <PostContainer>
         <PicWrap>
-          <PostPic src={imageUrl}/>
+          <PostPic alt='' src={imageUrl}/>
         </PicWrap>
         <PostMain>
           <PostInfo>{createdAt} | {topic}</PostInfo>

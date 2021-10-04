@@ -24,7 +24,7 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
   const user = useSelector((store) => store.user.currentUser)
   const [isOpenDropDown, setIsOpenDropDown] = useState(false)
   const dropDownRef = useRef(null)
-  
+
   const signOut = () => {
     fireSignOut()
     setIsOpenDropDown(false)
@@ -70,7 +70,7 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
               <DropDownBottom isOpenDropDown={isOpenDropDown} onClick={signOut}>登出</DropDownBottom>
             </DropDownContainer>
             <NavMemberImgDiv onClick = {() => setIsOpenDropDown(!isOpenDropDown)}>
-              <img src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>
+              <img alt='' src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>
             </NavMemberImgDiv>
           </MemberDiv>
           :

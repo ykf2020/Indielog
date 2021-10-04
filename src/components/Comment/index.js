@@ -8,11 +8,11 @@ const Comment = ({ currentComment }) => {
   useEffect(() => {
     getAuthorInfo(currentComment.authorUid, setAuthorInfo)
   },[currentComment])
-  
+
   return (
     <CommentDiv>
       <CommentInfo>
-        <CommentorImgDiv><img src={authorInfo.photoURL ? authorInfo.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
+        <CommentorImgDiv><img alt='' src={authorInfo.photoURL ? authorInfo.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
         <CommentorName>{authorInfo.displayName}</CommentorName>
         <CommentorDate>{currentComment.createdAt.toDate().toLocaleString()}</CommentorDate>
       </CommentInfo>

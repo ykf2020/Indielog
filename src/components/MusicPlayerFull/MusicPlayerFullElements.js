@@ -12,7 +12,7 @@ export const Container = styled.div`
   height: 100vh;
   z-index: 1002;
   overflow: hidden;
-
+  
   ${({bgImg}) => bgImg && `
     background-image: url(${bgImg});
   `}
@@ -77,12 +77,13 @@ export const Library = styled.div`
   padding: 1rem 0;
   transition: 0.3s all ease;
   transform: translateX(-100%);
+  overflow-Y: scroll;
 
   ${({mode}) => (mode===3) && `
     width: 40%;
     opacity:1;
     transform: translateX(0%);
-    overflow-Y: scroll;
+
   `}
 
   ${MEDIA_QUERY_1400} {

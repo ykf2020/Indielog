@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Post from '../../components/Post'
 import { getTopics, getPostsAmount, getSeedPosts, getChangePagePosts } from '../../utils/firebase'
 import { useLocation } from 'react-router-dom'
@@ -22,7 +22,6 @@ const Blog = () => {
   const [posts, setPosts] = useState([])
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const lastPostSnapshotRef = useRef()
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
   const currentTopic = urlSearchParams.get('topic')

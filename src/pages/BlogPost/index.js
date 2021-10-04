@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getPostWithAuthorInfo, togglePostLiked } from '../../utils/firebase'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom'
 import CommentArea from '../../components/CommentArea'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,9 +22,11 @@ import {
   LikePush,
   LikeNumber
 } from './BlogPostElements.js'
+import { setCurrentTitle } from "../../redux/reducers/pageTitleReducer"
 
 
 const BlogPost = () => {
+  const dispatch = useDispatch()
   const user = useSelector((store) => store.user.currentUser)
   const { postId } = useParams()
   const [post, setPost] = useState({})
@@ -34,6 +36,15 @@ const BlogPost = () => {
   useEffect(() => {
     getPostWithAuthorInfo(postId, setPost, setAuthorInfo)
   },[])
+
+  useEffect(() => {
+    if(!post) return
+    dispatch(setCurrentTitle(post.title))
+
+    return () => {
+      dispatch(setCurrentTitle('Indielog'))
+    }
+  },[post])
 
   function toggleLiked() {
     if(!user) {

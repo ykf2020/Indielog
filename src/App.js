@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import Controls from './components/Controls'
 import MusicPlayer from './components/MusicPlayer'
 import PaddingBottom from './components/PaddingBottom'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import PageTitle from './components/PageTitle'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import NewPost from './pages/NewPost'
@@ -24,6 +24,7 @@ function App() {
   return (
     <div className='app'>
       <Router>
+        <PageTitle />
         <Controls />
         <MusicPlayer />
         <ScrollToTop />

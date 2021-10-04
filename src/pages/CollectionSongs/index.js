@@ -23,7 +23,7 @@ const CollectionSongs = () => {
   useEffect(() => {
     getLikedSongs(user.uid, setLikedSongs)
   },[])
-  
+
   return (
     <MemberPageContainer>
     <TitleButtonsGroup>
@@ -38,7 +38,7 @@ const CollectionSongs = () => {
               <Number>{index + 1}</Number>
             </NumberDiv>
             <ImgDiv>
-              <img src={song.cover}/>
+              <img alt='' src={song.cover}/>
             </ImgDiv>
             <SongDesc>
               <SongName>{song?.name}</SongName>
