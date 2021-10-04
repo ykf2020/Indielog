@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import { green1, black1, warning } from '../../constants.js'
 export const SignPanelContainer = styled.div`
   background: ${green1};

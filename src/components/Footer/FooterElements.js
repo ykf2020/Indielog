@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { green1, green2, black2, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_978 } from '../../constants.js'
+import { green1, black2, MEDIA_QUERY_568, MEDIA_QUERY_768 } from '../../constants.js'
 
 export const FooterContainer = styled.footer`
   background-color: ${black2};

@@ -13,7 +13,6 @@ import {
   SongInfoCategory,
   MainInfoBackground,
   MainInfoContainer,
-  BgFilter,
   MainImgDiv,
   MainInfoDiv,
   MainInfoSongName,

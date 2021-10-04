@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4, green1, MEDIA_QUERY_768, MEDIA_QUERY_568} from '../../constants.js'
+import { gray2, gray3, gray4, green1, MEDIA_QUERY_768, MEDIA_QUERY_568} from '../../constants.js'
 export const Container = styled.div`
   position: fixed;
   display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.div`
   right: 20px;
   align-items: center;
   z-index: 99;
-  box-shadow: 0px 0px 6px rgba(33, 33, 33, 0.3); 
+  box-shadow: 0px 0px 6px rgba(33, 33, 33, 0.3);
   ${MEDIA_QUERY_768} {
     width: 100%;
     right: 0;
@@ -50,8 +50,7 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 16px 4px 8px 4px;
-
+  padding: 10px 4px 12px 6px;
   ${MEDIA_QUERY_768} {
     width: 70%;
   }
@@ -61,9 +60,13 @@ export const InfoContainer = styled.div`
   }
 `
 
-export const SongName = styled.h2`
-  font-size: 14px;
+export const SongName = styled.div`
+  font-size: 13px;
   font-weight: bold;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   ${MEDIA_QUERY_768} {
     font-size: 12px;
@@ -74,9 +77,12 @@ export const SongName = styled.h2`
   }
 `
 
-export const AuthorName = styled.p`
+export const AuthorName = styled.div`
   font-size: 12px;
   color: ${gray3};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   ${MEDIA_QUERY_768} {
     font-size: 10px;

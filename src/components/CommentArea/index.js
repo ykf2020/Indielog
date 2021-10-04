@@ -7,10 +7,8 @@ import {
   CommentInfo,
   CommentorImgDiv,
   CommentorName,
-  CommentorDate,
   CommentTextArea,
   CommentButtons,
-  CommentContent,
   SubmitButton,
 } from './CommentAreaElements.js'
 import Comment from '../Comment'
@@ -56,7 +54,7 @@ const CommentArea = ({ area, id }) => {
          })
          setComments(data)
       })
-  },[])
+  },[area, id])
   return (
     <CommentsContainer>
       <CommentAddSection>

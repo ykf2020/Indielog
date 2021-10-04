@@ -29,6 +29,7 @@ export const PostsContainer = styled.div`
 export const TopicsContainer = styled.div`
   max-height:200px;
   border-radius: 6px;
+  width: 400px;
   border: 1px solid ${gray3};
   margin-top: 40px;
   display: flex;

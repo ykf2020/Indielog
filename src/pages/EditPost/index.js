@@ -52,7 +52,6 @@ const EditPost = () => {
           setContent(data.content)
           setTopicName(data.topic)
           setOldImageURL(data.imageUrl)
-          console.log(data.imageUrl)
         })
   },[])
 

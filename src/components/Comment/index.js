@@ -14,7 +14,7 @@ const Comment = ({ currentComment }) => {
       .then((userSnapShot) => {
         setAuthorInfo(userSnapShot.data())
       })
-  },[])
+  },[currentComment])
   return (
     <CommentDiv>
       <CommentInfo>
@@ -23,7 +23,6 @@ const Comment = ({ currentComment }) => {
         <CommentorDate>{currentComment.createdAt.toDate().toLocaleString()}</CommentorDate>
       </CommentInfo>
       <CommentContent>
-        {console.log(currentComment.content)}
         {currentComment.content}
       </CommentContent>
       <CommentButtons>

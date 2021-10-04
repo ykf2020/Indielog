@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray2, gray3, gray4, green1, black1, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
+import { gray1, gray3, green1, black1, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
 
 export const Container = styled.div`
   display: block;
@@ -137,14 +137,23 @@ export const LibrarySongDiv = styled.div`
 
 export const LibrarySongDesc = styled.div`
   padding-left: 1rem;
+  width: calc(100% - 100px);
 `
 
-export const LibrarySongName = styled.h3`
+export const LibrarySongName = styled.div`
+  width:100%;
   font-size: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 
-export const LibrarySongAuthorName = styled.h4`
+export const LibrarySongAuthorName = styled.div`
+  width:100%;
   font-size: 0.7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 
 export const LibraryImgDiv = styled.div`
@@ -200,11 +209,11 @@ export const SongInfo = styled.div`
   width: 50%;
   text-align: center;
 
-  ${MEDIA_QUERY_1400} {
-    padding: 0 40px;
-  }
-  ${MEDIA_QUERY_568} {
+  ${MEDIA_QUERY_768} {
     width: 100%;
+  }
+
+  ${MEDIA_QUERY_568} {
     padding: 0 20px;
     height: 56%;
   }
@@ -239,7 +248,7 @@ export const SongName = styled.h1`
   font-size: 26px;
   font-weight: bold;
   color: white;
-  margin-top: 10px;
+  margin-top: 20px;
 
   ${MEDIA_QUERY_568} {
     font-size: 18px;

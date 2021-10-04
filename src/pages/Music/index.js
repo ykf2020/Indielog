@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons'
-import { faPlayCircle } from '@fortawesome/free-regular-svg-icons'
 import { setCurrentSong } from "../../redux/reducers/songReducer";
 import { setMode, setIsPlaying } from "../../redux/reducers/playerControlReducer"
 import { Carousel } from 'react-bootstrap';

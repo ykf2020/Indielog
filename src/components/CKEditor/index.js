@@ -11,6 +11,9 @@ const editorConfiguration = {
             { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
         ]
     },
+    mediaEmbed: {
+        previewsInData: true
+    },
     ckfinder: {
 
     }

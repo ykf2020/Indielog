@@ -8,7 +8,7 @@ import {
   FontAwesome,
   Track,
   AnimateTrack,
-  InputRange
+  InputRange,
  } from './MusicPlayerSmallElements.js'
 import {
   faSlidersH,

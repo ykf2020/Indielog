@@ -1,4 +1,3 @@
-import React, { useState, useEffect }  from 'react'
 import { SidebarContainer, SidebarMenu, SidebarLink, SideBtnWrap, SignPanelBtn, SideMemberDiv, SideMemberImgDiv, MemberHello } from './SidebarElements'
 import { useSelector } from 'react-redux'
 import firebase from '../../utils/firebase.js'

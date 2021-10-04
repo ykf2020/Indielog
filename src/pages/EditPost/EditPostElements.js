@@ -1,4 +1,4 @@
-import { gray1, gray2, gray3, gray4, green1, green2 } from '../../constants.js'
+import { gray3, gray4, green1, green2 } from '../../constants.js'
 import styled from 'styled-components'
 export const BlogPostPageContainer = styled.div`
   width: 80%;

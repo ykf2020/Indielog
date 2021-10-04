@@ -39,6 +39,7 @@ const Blog = () => {
       firebase
         .firestore()
         .collection('posts')
+        .orderBy('createdAt','desc')
         .get()
         .then((collectionSnapShot) => {
           const data = collectionSnapShot.docs.map((doc) => {

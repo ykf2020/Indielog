@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { gray1, gray2, gray3, gray4, green1, green2, black1, MEDIA_QUERY_568, MEDIA_QUERY_768 } from '../../constants.js'
+import { gray2, gray3, green1, black1, MEDIA_QUERY_568 } from '../../constants.js'
 import { Link } from 'react-router-dom'
 
 export const MemberPageContainer = styled.div`

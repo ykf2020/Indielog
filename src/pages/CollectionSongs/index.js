@@ -1,7 +1,4 @@
 import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { faHeart as faHeartBorder } from '@fortawesome/free-regular-svg-icons'
 import firebase from '../../utils/firebase'
 import "firebase/compat/firestore"
 import { useSelector } from "react-redux";
@@ -10,12 +7,10 @@ import {
   TitleButtonsGroup,
   TitleNormalButton,
   TitleActiveButton,
-  LinkWithoutDecoration,
   Song,
   SongInfo,
   SongName,
   AuthorName,
-  SongButtons,
   NumberDiv,
   Number,
   ImgDiv,

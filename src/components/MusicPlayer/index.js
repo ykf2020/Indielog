@@ -3,7 +3,7 @@ import MusicPlayerSmall from '../MusicPlayerSmall'
 import MusicPlayerFull from '../MusicPlayerFull'
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentSong } from "../../redux/reducers/songReducer";
-import { setSongPlayingInfo, setIsPlaying, setMainGetIn } from "../../redux/reducers/playerControlReducer"
+import { setSongPlayingInfo, setIsPlaying } from "../../redux/reducers/playerControlReducer"
 
 const MusicPlayer = () => {
   const audioRef = useRef(null)
@@ -15,7 +15,6 @@ const MusicPlayer = () => {
   const currentSong = useSelector((store) => store.song.currentSong)
   const mode = useSelector((store) => store.playerControl.mode)
   const loop = useSelector((store) => store.playerControl.loop)
-  const mainGetIn = useSelector((store) => store.playerControl.mainGetIn)
 
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime

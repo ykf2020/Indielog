@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { gray1, gray2, gray3, gray4, green1, green2 } from '../../constants.js'
+import { gray3, gray4, green1, green2 } from '../../constants.js'
 export const BlogPostPageContainer = styled.div`
   width: 80%;
   margin: 0 auto 20px;

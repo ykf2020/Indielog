@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { green1, black1, MEDIA_QUERY_568 } from '../../constants.js'
 

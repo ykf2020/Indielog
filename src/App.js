@@ -23,7 +23,7 @@ import NewSong from './pages/NewSong'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import firebase from './utils/firebase.js'
 import 'firebase/compat/auth'
-import { setUser, clearUser } from './redux/reducers/userReducer'
+import { setUser } from './redux/reducers/userReducer'
 import { setSongs, setCurrentSong } from "./redux/reducers/songReducer"
 
 

@@ -1,4 +1,4 @@
-import { gray1, gray2, gray3, gray4, black1, green1, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_978, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../constants.js'
+import { gray3, gray4, MEDIA_QUERY_568 } from '../../constants.js'
 import styled from 'styled-components'
 
 export const Comment = styled.div`
