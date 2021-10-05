@@ -12,7 +12,7 @@ export const Container = styled.div`
   height: 100vh;
   z-index: 1002;
   overflow: hidden;
-  
+
   ${({bgImg}) => bgImg && `
     background-image: url(${bgImg});
   `}
@@ -38,10 +38,9 @@ export const Nav = styled.div`
   positon: fixed;
 `
 
-export const NavLogo = styled(Link)`
+export const NavLogo = styled.div`
   color: white;
   justify-self: flex-start;
-  cursor: pointer;
   font-size: 1.5rem;
   display: flex;
   align-items: center;

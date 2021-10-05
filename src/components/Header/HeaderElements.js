@@ -126,6 +126,7 @@ export const MemberDiv = styled.div`
   display:flex;
   align-items: center;
   justify-content: center;
+  margin-left: 61px;
 `
 
 
