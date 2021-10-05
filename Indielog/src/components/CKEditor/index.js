@@ -24,7 +24,7 @@ const CKE = ({ handleCkeditorContent, data }) => {
       <CKEditor
         data={data}
         editor={Editor}
-        onInit={ editor => {
+        onReady={ editor => {
         }}
         onChange={handleCkeditorContent}
         config={editorConfiguration}

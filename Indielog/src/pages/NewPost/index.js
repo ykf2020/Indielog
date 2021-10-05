@@ -16,7 +16,7 @@ import {
   UploadButton,
   SubmitButton
 } from './NewPostElements.js'
-
+import Loading from '../../components/Loading'
 
 const NewPost = () => {
   const history = useHistory()
@@ -25,6 +25,7 @@ const NewPost = () => {
   const [topicName, setTopicName] = useState('')
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const previewUrl = file ? URL.createObjectURL(file) : '/image.png'
   const user = useSelector((store) => store.user.currentUser)
 
@@ -34,6 +35,7 @@ const NewPost = () => {
   }
 
   function handleNewPostSucceed(postId){
+    setIsLoading(false)
     history.push(`/blogpost/${postId}`)
   }
 
@@ -45,6 +47,7 @@ const NewPost = () => {
       topic: topicName,
       userId: user.uid,
     }
+    setIsLoading(true)
     addNewPost(file, postInfo, handleNewPostSucceed)
   }
 
@@ -55,6 +58,7 @@ const NewPost = () => {
   return (
 
     <BlogPostPageContainer>
+      {isLoading && <Loading /> }
       <Title>發表文章</Title>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <ImgSection>

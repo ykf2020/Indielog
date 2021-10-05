@@ -333,7 +333,7 @@ export const updatePostWithNewPic = (postId, image, postInfo, handleSuccess) => 
 }
 
 export const getMyPostsOnSnapshot = (userId, handlePosts) => {
-  postsDb.where('author.uid','==', userId).onSnapshot((collectionSnapshot) => {
+  postsDb.orderBy('createdAt','desc').where('author.uid','==', userId).onSnapshot((collectionSnapshot) => {
     const data = collectionSnapshot.docs.map((doc) => {
       const id = doc.id
       return { ...doc.data(), id }
@@ -355,7 +355,7 @@ export const togglePostLiked = (isLiked, postId, userId) => {
 }
 
 export const getLikedPosts = (userId, handlePosts) => {
-  postsDb.where('likedBy', 'array-contains', userId).get().then((collectionSnapShot) => {
+  postsDb.orderBy('createdAt','desc').where('likedBy', 'array-contains', userId).get().then((collectionSnapShot) => {
     const data = collectionSnapShot.docs.map((doc) => {
       const id = doc.id
       return {...doc.data(),id}
@@ -403,7 +403,7 @@ export const addNewComment = (area, id, commentContent, authorId) => {
 
 // songs
 export const getLikedSongs = (userId, handleSongs) => {
-  songsDb.where('likedBy', 'array-contains', userId).get().then((collectionSnapShot) => {
+  songsDb.orderBy('createdAt','desc').where('likedBy', 'array-contains', userId).get().then((collectionSnapShot) => {
     const data = collectionSnapShot.docs.map((doc) => {
       const id = doc.id
       return {...doc.data(),id}

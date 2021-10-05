@@ -16,6 +16,7 @@ import {
   UploadButton,
   SubmitButton
 } from './EditPostElements.js'
+import Loading from '../../components/Loading'
 
 const EditPost = () => {
   const history = useHistory()
@@ -26,6 +27,7 @@ const EditPost = () => {
   const [topicName, setTopicName] = useState('')
   const [file, setFile] = useState(null)
   const [topics, setTopics] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const previewUrl = file ? URL.createObjectURL(file) : oldImageURL
   const user = useSelector((store) => store.user.currentUser)
   function handleGetPageData(data){
@@ -41,6 +43,7 @@ const EditPost = () => {
   }
 
   function handleEditPostSucceed(postId){
+    setIsLoading(false)
     history.push(`/blogpost/${postId}`)
   }
 
@@ -59,6 +62,7 @@ const EditPost = () => {
       topic: topicName,
       userId: user.uid,
     }
+    setIsLoading(true)
     if(file) {
       updatePostWithNewPic(postId, postInfo, handleEditPostSucceed)
     } else {
@@ -68,6 +72,7 @@ const EditPost = () => {
 
   return (
     <BlogPostPageContainer>
+      {isLoading && <Loading /> }
       <Title>修改文章</Title>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <ImgSection>
