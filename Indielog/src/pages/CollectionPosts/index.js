@@ -24,7 +24,7 @@ const CollectionPosts = () => {
       </TitleButtonsGroup>
       {likedPosts.map((post) => {
         return (
-          <LinkWithoutDecoration to={`/blogpost/${post.id}`}>
+          <LinkWithoutDecoration key={post.id} to={`/blogpost/${post.id}`}>
             <Post imageUrl={post.imageUrl} title={post.title} createdAt={post.createdAt.toDate().toLocaleString()} topic={post.topic}/>
           </LinkWithoutDecoration>
         )

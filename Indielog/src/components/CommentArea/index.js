@@ -13,18 +13,24 @@ import {
 } from './CommentAreaElements.js'
 import Comment from '../Comment'
 import { useSelector } from 'react-redux'
-import { addNewComment, getCommentsOnSnapshot } from '../../utils/firebase.js'
+import { addNewComment, getCommentsOnSnapshot, userInfoOnSnapShot } from '../../utils/firebase.js'
 
 const CommentArea = ({ area, id }) => {
   const user = useSelector((store) => store.user.currentUser)
   const [commentInput, setCommentInput] = useState('')
   const [comments, setComments] = useState([])
+  const [currentUser, setCurrentUser] = useState({})
 
   function handleCommentInputSubmit(){
     addNewComment(area, id, commentInput, user.uid).then(() => {
       setCommentInput('')
     })
   }
+
+  useEffect(() => {
+    if(!user) return
+    userInfoOnSnapShot(user.uid, setCurrentUser)
+  },[user])
 
   useEffect(() => {
     getCommentsOnSnapshot(area, id, setComments)
@@ -37,8 +43,8 @@ const CommentArea = ({ area, id }) => {
         {user ?
           <CommentAddArea>
             <CommentInfo>
-              <CommentorImgDiv><img alt='' src={user.photoURL ? user.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
-              <CommentorName>{user.displayName}</CommentorName>
+              <CommentorImgDiv><img alt='' src={currentUser?.photoURL ? currentUser?.photoURL : '/default-user-image.png'}/></CommentorImgDiv>
+              <CommentorName>{currentUser?.displayName}</CommentorName>
             </CommentInfo>
             <CommentTextArea placeholder='點此輸入留言...' value={commentInput} onChange={(e)=> setCommentInput(e.target.value)}>
             </CommentTextArea>

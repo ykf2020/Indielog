@@ -1,18 +1,24 @@
+import { useState, useEffect } from 'react'
 import { SidebarContainer, SidebarMenu, SidebarLink, SideBtnWrap, SignPanelBtn, SideMemberDiv, SideMemberImgDiv, MemberHello } from './SidebarElements'
 import { useSelector } from 'react-redux'
-import { signOut } from '../../utils/firebase.js'
+import { signOut, userInfoOnSnapShot } from '../../utils/firebase.js'
 
 const SideBar = ({ isOpenSideBar, toggleSideBar, toggleSignPanel }) => {
   const user = useSelector((store) => store.user.currentUser)
+  const [currentUser, setCurrentUser] = useState({})
+  useEffect(() => {
+    if(!user) return
+    userInfoOnSnapShot(user.uid, setCurrentUser)
+  },[user])
   return (
     <SidebarContainer isOpenSideBar={isOpenSideBar}>
         <SidebarMenu>
           {user ?
             <SideMemberDiv>
               <SideMemberImgDiv>
-                <img alt='' src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>
+                <img alt='' src={currentUser?.photoURL ? currentUser.photoURL : '/default-user-image.png'}/>
               </SideMemberImgDiv>
-              <MemberHello>嗨！{user.displayName}</MemberHello>
+              <MemberHello>嗨！{currentUser?.displayName}</MemberHello>
             </SideMemberDiv> : ''}
           <SidebarLink to="/" onClick={toggleSideBar}>聽聽音樂</SidebarLink>
           <SidebarLink to="/blog" onClick={toggleSideBar}>聊聊音樂</SidebarLink>

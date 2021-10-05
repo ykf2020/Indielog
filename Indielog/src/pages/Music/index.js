@@ -33,7 +33,7 @@ const Music = () => {
   async function playSong(song){
     await dispatch(setIsPlaying(true))
     await dispatch(setCurrentSong(song))
-    await dispatch(setMode(2))
+    await dispatch(setMode(1))
   }
 
   function toggleLiked(isLiked, songId) {

@@ -16,6 +16,7 @@ const topicsDb = db.collection('topics')
 
 
 // auth
+
 export const signUp = (email, password, handleSuccess, handleErrMessage) => {
   auth.createUserWithEmailAndPassword(email, password).then((signUpResult) => {
     usersDb.doc(signUpResult.user.uid).set({
@@ -73,9 +74,7 @@ export const checkUserStatus = (handleUser) => {
     if(user) {
       handleUser({
         uid: user.uid,
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL
+        email: user.email
       })
     } else {
       handleUser(null)
@@ -109,7 +108,7 @@ export const updatePassword = (userEmail, oldPassword, newPassword, handleSucces
 
 export const updateDisplayName = (userId, newDisplayName, handleSuccess, handleError) => {
   firebase.auth().currentUser.updateProfile({
-    newDisplayName,
+    displayName: newDisplayName,
   }).then(() => {
     usersDb.doc(userId).update({
         displayName: newDisplayName,
@@ -158,6 +157,12 @@ export const updateImage = (userId, file, handleSuccess, handleError) => {
     })
   }).catch(err => {
     handleError('上傳失敗，請稍後再試')
+  })
+}
+
+export const userInfoOnSnapShot = (userId, handleUser) => {
+  usersDb.doc(userId).onSnapshot(userSnapshot => {
+    handleUser(userSnapshot.data())
   })
 }
 

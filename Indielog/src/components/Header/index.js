@@ -18,17 +18,23 @@ import {
   MemberDiv
 } from './HeaderElements'
 import { useSelector } from 'react-redux'
-import { signOut as fireSignOut } from '../../utils/firebase.js'
+import { signOut as fireSignOut, userInfoOnSnapShot } from '../../utils/firebase.js'
 
 const Header = ({ toggleSignPanel, toggleSideBar }) => {
   const user = useSelector((store) => store.user.currentUser)
   const [isOpenDropDown, setIsOpenDropDown] = useState(false)
   const dropDownRef = useRef(null)
+  const [currentUser, setCurrentUser] = useState({})
 
   const signOut = () => {
     fireSignOut()
     setIsOpenDropDown(false)
   }
+
+  useEffect(() => {
+    if(!user) return
+    userInfoOnSnapShot(user.uid, setCurrentUser)
+  },[user])
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -70,7 +76,7 @@ const Header = ({ toggleSignPanel, toggleSideBar }) => {
               <DropDownBottom isOpenDropDown={isOpenDropDown} onClick={signOut}>登出</DropDownBottom>
             </DropDownContainer>
             <NavMemberImgDiv onClick = {() => setIsOpenDropDown(!isOpenDropDown)}>
-              <img alt='' src={user.photoURL ? user.photoURL : '/default-user-image.png'}/>
+              <img alt='' src={currentUser.photoURL ? currentUser.photoURL : '/default-user-image.png'}/>
             </NavMemberImgDiv>
           </MemberDiv>
           :

@@ -32,7 +32,7 @@ const CollectionSongs = () => {
     </TitleButtonsGroup>
     {likedSongs.map((song,index) => {
       return (
-        <Song>
+        <Song key={song.id}>
           <SongInfo to={`/songs/${song.id}`}>
             <NumberDiv>
               <Number>{index + 1}</Number>
