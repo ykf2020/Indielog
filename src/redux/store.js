@@ -13,8 +13,6 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [setSongs, setCurrentSong]
-      },
+      serializableCheck: false
     }),
 });

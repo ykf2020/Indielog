@@ -144,7 +144,7 @@ const MusicPlayerFull = ({ audioRef }) => {
           <Library mode={mode}>
             {songs.map(song => {
               return (
-                <LibrarySongDiv onClick={() => songSelectHandler(song)} active={song.id === currentSong.id}>
+                <LibrarySongDiv key={song.id} onClick={() => songSelectHandler(song)} active={song.id === currentSong.id}>
                   <LibraryImgDiv>
                     <img alt='' src={song.cover}/>
                   </LibraryImgDiv>
@@ -166,10 +166,10 @@ const MusicPlayerFull = ({ audioRef }) => {
               <Slider>
                 <SongCurrentTime>{getTime(songPlayingInfo.currentTime)}</SongCurrentTime>
                 <Track>
-                  <InputRange 
+                  <InputRange
                     min={0}
-                    max={songPlayingInfo.duration}
-                    value={songPlayingInfo.currentTime}
+                    max={songPlayingInfo?.duration}
+                    value={songPlayingInfo?.currentTime}
                     onChange={dragHandler}
                     type="range"
                   />

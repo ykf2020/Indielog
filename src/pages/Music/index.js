@@ -51,7 +51,7 @@ const Music = () => {
         {songs.map((song,index) => {
           const isLiked = song?.likedBy.includes(user?.uid)
           return (
-            <Song>
+            <Song key={song?.id}>
               <SongInfo>
                 <NumberDiv>
                   <Number>{index + 1}</Number>
@@ -72,7 +72,7 @@ const Music = () => {
               <SongButtons>
                 <LikeButtonDiv isLiked={isLiked} onClick={() => toggleLiked(isLiked, song.id)}>
                   <FontAwesomeIcon size='1x' icon={faHeart}/>
-                  <LikeNumber>{song?.likedBy.length}</LikeNumber>
+                  <LikeNumber isLiked={isLiked}>{song?.likedBy.length}</LikeNumber>
                 </LikeButtonDiv>
               </SongButtons>
             </Song>

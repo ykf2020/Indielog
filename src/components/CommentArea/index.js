@@ -52,7 +52,7 @@ const CommentArea = ({ area, id }) => {
       </CommentAddSection>
       {comments.map((comment) => {
         return (
-          <Comment currentComment={comment}>
+          <Comment key={comment.id} currentComment={comment}>
           </Comment>
         )
       })}

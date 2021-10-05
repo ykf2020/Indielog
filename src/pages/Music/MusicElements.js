@@ -11,10 +11,8 @@ export const Container = styled.div`
   positon: relative;
   z-index:1;
   background: ${gray1};
-  /* border: 1px solid blue; */
 `
 export const SongsList = styled.section`
-  /* border: 1px solid pink; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,7 +35,6 @@ export const Title = styled.h2`
   margin: 20px 0 0 0;
 `
 export const Song = styled.div`
-  /* border: 1px solid yellow; */
   position: relative;
   display: flex;
   align-items: center;
@@ -57,7 +54,6 @@ export const Song = styled.div`
 export const SongInfo = styled.div`
   width: 86%;
   height: 100%;
-  /* border: 1px solid orange; */
   display: flex;
   align-items: center;
 `
@@ -90,14 +86,17 @@ export const AuthorName = styled.p`
 export const SongButtons = styled.div`
   width: 14%;
   height: 100%;
-  /* border: 1px solid orange; */
   display: flex;
   justify-content: end;
   align-items: center;
+
+  ${MEDIA_QUERY_568} {
+    justify-content: center;
+    align-items: flex-start;
+  }
 `
 export const NumberDiv = styled.div`
-  width: 36px;
-  /* border: 1px solid blue; */
+  width: 28px;
 `
 export const Number = styled.h4`
   font-size:1rem;
@@ -106,7 +105,6 @@ export const Number = styled.h4`
 export const ImgDiv = styled.div`
   width: 100%;
   height: 100%;
-  /* border: 1px solid black; */
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -132,15 +130,15 @@ export const SongDesc = styled(Link)`
   display:flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 40px;
+  margin-left: 30px;
   padding-top: 10px;
-
   ${MEDIA_QUERY_768} {
     margin-left: 16px;
   }
 
   ${MEDIA_QUERY_568} {
     margin-left: 10px;
+    width: 180px;
   }
 `
 export const LikeButtonDiv = styled.div`
@@ -153,22 +151,48 @@ export const LikeButtonDiv = styled.div`
   justify-content: center;
   padding: 0 12px;
   cursor: pointer;
+  position: relative;
   color: ${gray3};
 
   ${({isLiked}) => isLiked && `
     background: ${peach1};
     color: white;
   `}
+
+  ${MEDIA_QUERY_568} {
+    margin-top: 34px;
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+  }
 `
 export const ImgContainer = styled.div`
   height: 80px;
   width: 80px;
   position: relative;
+
+  ${MEDIA_QUERY_568} {
+    height: 50px;
+    width: 50px;
+  }
 `
 export const LikeNumber = styled.div`
   font-size: 1rem;
   height: 100%;
   margin: 3px 0 0 6px;
+
+
+
+  ${MEDIA_QUERY_568} {
+    ${({isLiked}) => isLiked && `
+      color: ${peach1};
+    `}
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(5px, 24px);
+  }
+
 `
 export const HoverPlayButton = styled.div`
   width: 90%;

@@ -303,7 +303,9 @@ export const getAuthorInfo = (authorId, handleAuthorInfo) => {
 export const getCommentsOnSnapshot = (area, id, handleComments) => {
   db.collection(area).doc(id).collection('comments').orderBy('createdAt','asc').onSnapshot((collectionSnapShot) => {
      const data = collectionSnapShot.docs.map((doc) => {
+       const id = doc.id
        return {
+         id,
          authorUid: doc.data().authorUid,
          content: doc.data().content,
          createdAt: doc.data().createdAt
