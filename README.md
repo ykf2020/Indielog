@@ -3,6 +3,7 @@
 A social platform for **sharing music infos**, users can **listen to music and browse posts at the same time** without being disrupted by page changing. Users can also like and comment the song or posts, add to favorites.  
 
 ## Demo
+![](https://github.com/ykf2020/Indielog/blob/master/README/001.gif?raw=true)
 - Link: https://indielog-172c8.web.app/
 - Test account
     - E-mail: test1@indielog.com
