@@ -7,7 +7,7 @@ A social platform for **sharing music infos**, users can **listen to music and b
 - Test account
     - E-mail: test1@indielog.com
     - Password: testtest
-- Test account
+- Test account2
     - E-mail: test2@gmail.com
     - Password: testtest
 
@@ -31,29 +31,29 @@ A social platform for **sharing music infos**, users can **listen to music and b
 
 ## User Flow
 ### Flow Chart
-![](./Indielog/README/flowchart.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/flowchart.png?raw=true)
 
 ## Features
 ### 1. Playing music with small or full screen player
-![](./Indielog/README/001.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/001.gif?raw=true)
 
 ### 2. A complete music player with song switching, volume control, loop control, and a song library
-![](./Indielog/README/002.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/002.gif?raw=true)
 
 ### 3. Listen to music and browse posts at the same time
-![](./Indielog/README/003.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/003.gif?raw=true)
 
 ### 4. Song info page which users can like the song and leave comments
-![](./Indielog/README/004.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/004.gif?raw=true)
 
 ### 5. A user friendly post adding page
-![](./Indielog/README/005.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/005.gif?raw=true)
 
 ### 6. Songs and posts collections
-![](./Indielog/README/006.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/006.gif?raw=true)
 
 ### 7. Edit personal infos easily
-![](./Indielog/README/007.gif)
+![](https://github.com/ykf2020/Indielog/blob/master/README/007.gif?raw=true)
 
 
 ## Future Features
