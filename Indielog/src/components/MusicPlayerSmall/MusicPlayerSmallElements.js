@@ -1,6 +1,13 @@
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray2, gray3, gray4, green1, MEDIA_QUERY_768, MEDIA_QUERY_568} from '../../utils/constants.js'
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  gray2,
+  gray3,
+  gray4,
+  green1,
+  MEDIA_QUERY_768,
+  MEDIA_QUERY_568,
+} from "../../utils/constants.js";
 export const Container = styled.div`
   position: fixed;
   display: flex;
@@ -18,7 +25,7 @@ export const Container = styled.div`
     height: 50px;
     justify-content: space-between;
   }
-`
+`;
 
 export const ImgDiv = styled.div`
   margin-left: 10px;
@@ -42,7 +49,7 @@ export const ImgDiv = styled.div`
     height: 30px;
     width: 30px;
   }
-`
+`;
 
 export const InfoContainer = styled.div`
   height: 100%;
@@ -58,7 +65,7 @@ export const InfoContainer = styled.div`
   ${MEDIA_QUERY_568} {
     padding: 8px;
   }
-`
+`;
 
 export const SongName = styled.div`
   font-size: 13px;
@@ -75,7 +82,7 @@ export const SongName = styled.div`
   ${MEDIA_QUERY_568} {
     font-size: 10px;
   }
-`
+`;
 
 export const AuthorName = styled.div`
   font-size: 12px;
@@ -92,8 +99,7 @@ export const AuthorName = styled.div`
     font-size: 8px;
     margin-bottom: 0;
   }
-
-`
+`;
 
 export const IconContainer = styled.div`
   height: 100%;
@@ -106,7 +112,7 @@ export const IconContainer = styled.div`
   ${MEDIA_QUERY_768} {
     align-self: end;
   }
-`
+`;
 export const FontAwesome = styled(FontAwesomeIcon)`
   color: ${gray3};
   cursor: pointer;
@@ -116,7 +122,7 @@ export const FontAwesome = styled(FontAwesomeIcon)`
     transform: scale(1.2);
     color: ${gray4};
   }
-`
+`;
 
 export const Track = styled.div`
   background: linear-gradient(45deg, ${green1}, lightblue);
@@ -125,13 +131,13 @@ export const Track = styled.div`
   position: absolute;
   overflow: hidden;
   top: -8px;
-  border-radius: 4px 4px 0 0 ;
+  border-radius: 4px 4px 0 0;
 
   ${MEDIA_QUERY_768} {
     height: 6px;
     top: -6px;
   }
-`
+`;
 
 export const AnimateTrack = styled.div`
   background: ${gray2};
@@ -141,10 +147,12 @@ export const AnimateTrack = styled.div`
   top: 0;
   left: 0;
   pointer-events: none;
-  ${({animationPercentage}) => animationPercentage && `
+  ${({ animationPercentage }) =>
+    animationPercentage &&
+    `
     transform: translateX(${animationPercentage}%)
   `}
-`
+`;
 
 export const InputRange = styled.input`
   width: 100%;
@@ -152,7 +160,7 @@ export const InputRange = styled.input`
   background: transparent;
   cursor: pointer;
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 
@@ -161,4 +169,4 @@ export const InputRange = styled.input`
     height: 16px;
     width: 16px;
   }
-`
+`;

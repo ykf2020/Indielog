@@ -1,10 +1,15 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { green1, black2, MEDIA_QUERY_568, MEDIA_QUERY_768 } from '../../utils/constants.js'
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import {
+  green1,
+  black2,
+  MEDIA_QUERY_568,
+  MEDIA_QUERY_768,
+} from "../../utils/constants.js";
 
 export const FooterContainer = styled.footer`
   background-color: ${black2};
-`
+`;
 
 export const FooterWrap = styled.div`
   padding: 48px 24px;
@@ -14,7 +19,7 @@ export const FooterWrap = styled.div`
   align-items: center;
   max-width: 1100px;
   margin: 0 auto;
-`
+`;
 
 export const FooterLinksContainer = styled.div`
   display: flex;
@@ -23,7 +28,7 @@ export const FooterLinksContainer = styled.div`
   ${MEDIA_QUERY_768} {
     padding-top: 32px;
   }
-`
+`;
 
 export const FooterLinksWrapper = styled.div`
   display: flex;
@@ -31,7 +36,7 @@ export const FooterLinksWrapper = styled.div`
   ${MEDIA_QUERY_768} {
     flex-direction: column;
   }
-`
+`;
 
 export const FooterLinkItems = styled.div`
   display: flex;
@@ -48,12 +53,12 @@ export const FooterLinkItems = styled.div`
     padding: 10px;
     width: 100%;
   }
-`
+`;
 
 export const FooterLinkTitle = styled.h1`
   font-size: 14px;
   margin-bottom: 16px;
-`
+`;
 
 export const FooterLink = styled(Link)`
   color: #fff;
@@ -65,12 +70,12 @@ export const FooterLink = styled(Link)`
     color: #01bf71;
     transition: 0.3s ease-out;
   }
-`
+`;
 
 export const SocialMedia = styled.section`
   max-width: 1000px;
   width: 100%;
-`
+`;
 
 export const SocialMediaWrap = styled.div`
   display: flex;
@@ -82,7 +87,7 @@ export const SocialMediaWrap = styled.div`
   ${MEDIA_QUERY_768} {
     flex-direction: column;
   }
-`
+`;
 
 export const SocialLogo = styled(Link)`
   color: #fff;
@@ -93,23 +98,20 @@ export const SocialLogo = styled(Link)`
   display: flex;
   align-items: center;
   margin-bottom: 16px;
-  font-family: 'Dancing Script', cursive;
-
-`
+  font-family: "Dancing Script", cursive;
+`;
 
 export const WebsiteRights = styled.small`
   color: #fff;
   margin-bottom: 16px;
-`
+`;
 
 export const SocialIcons = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 240px;
-
-
-`
+`;
 
 export const SocialIconLink = styled.a`
   color: #fff;
@@ -118,4 +120,4 @@ export const SocialIconLink = styled.a`
   &:hover {
     color: ${green1};
   }
-`
+`;

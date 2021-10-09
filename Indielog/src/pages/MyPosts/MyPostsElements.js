@@ -1,6 +1,13 @@
-import { gray2, gray3, green1, green2, black1, MEDIA_QUERY_568 } from '../../utils/constants.js'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import {
+  gray2,
+  gray3,
+  green1,
+  green2,
+  black1,
+  MEDIA_QUERY_568,
+} from "../../utils/constants.js";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 export const MemberPageContainer = styled.div`
   width: 80%;
   margin: 0 auto 20px;
@@ -14,13 +21,13 @@ export const MemberPageContainer = styled.div`
   ${MEDIA_QUERY_568} {
     width: 100%;
   }
-`
+`;
 export const TitleButtonsGroup = styled.div`
   display: flex;
   width: 100%;
   padding: 10px 0 20px;
   border-bottom: 1px solid ${gray2};
-`
+`;
 export const TitleNormalButton = styled(Link)`
   text-decoration: none;
   line-height: 2.2rem;
@@ -38,7 +45,7 @@ export const TitleNormalButton = styled(Link)`
     font-size: 0.6rem;
     margin: 10px 12px;
   }
-`
+`;
 export const TitleActiveButton = styled.button`
   border-radius: 30px;
   color: white;
@@ -51,16 +58,16 @@ export const TitleActiveButton = styled.button`
     font-size: 0.6rem;
     padding: 6px 4px;
   }
-`
+`;
 export const LinkWithoutDecoration = styled(Link)`
   text-decoration: none;
-`
+`;
 export const PostDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 export const ButtonsGroup = styled.div`
   margin-top: 30px;
   width: 180px;
@@ -68,14 +75,14 @@ export const ButtonsGroup = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 1px solid ${gray2};
-`
+`;
 export const Button = styled.div`
   height: 28px;
   width: 28px;
   border-radius: 50%;
   background: ${green1};
   color: white;
-  cursor:pointer;
+  cursor: pointer;
   margin: 0 10px;
   display: flex;
   justify-content: center;
@@ -84,4 +91,4 @@ export const Button = styled.div`
   &:hover {
     background: ${green2};
   }
-`
+`;

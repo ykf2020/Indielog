@@ -1,17 +1,27 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { gray1, gray2, gray3, gray4, black1, peach1, MEDIA_QUERY_1024, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../utils/constants.js'
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import {
+  gray1,
+  gray2,
+  gray3,
+  gray4,
+  black1,
+  peach1,
+  MEDIA_QUERY_1024,
+  MEDIA_QUERY_768,
+  MEDIA_QUERY_568,
+} from "../../utils/constants.js";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items:center;
-  width:100%;
+  align-items: center;
+  width: 100%;
   padding-top: 80px;
   positon: relative;
-  z-index:1;
+  z-index: 1;
   background: ${gray1};
-`
+`;
 export const SongsList = styled.section`
   display: flex;
   flex-direction: column;
@@ -26,14 +36,14 @@ export const SongsList = styled.section`
   ${MEDIA_QUERY_768} {
     width: 100%;
   }
-`
+`;
 export const Title = styled.h2`
-  width:100%;
+  width: 100%;
   border-bottom: 4px solid ${gray2};
   border-radius: 2px;
   padding: 30px 10px;
   margin: 20px 0 0 0;
-`
+`;
 export const Song = styled.div`
   position: relative;
   display: flex;
@@ -50,13 +60,13 @@ export const Song = styled.div`
   ${MEDIA_QUERY_568} {
     padding: 0 0;
   }
-`
+`;
 export const SongInfo = styled.div`
   width: 86%;
   height: 100%;
   display: flex;
   align-items: center;
-`
+`;
 export const SongName = styled.h3`
   color: ${black1};
   font-size: 1.2rem;
@@ -69,20 +79,18 @@ export const SongName = styled.h3`
   ${MEDIA_QUERY_568} {
     font-size: 0.8rem;
   }
-`
+`;
 export const AuthorName = styled.p`
   color: ${gray4};
   font-size: 0.8rem;
-  color: ${gray3}
-
-  ${MEDIA_QUERY_768} {
+  color: ${gray3} ${MEDIA_QUERY_768} {
     font-size: 0.6rem;
   }
 
   ${MEDIA_QUERY_568} {
     font-size: 0.5rem;
   }
-`
+`;
 export const SongButtons = styled.div`
   width: 14%;
   height: 100%;
@@ -94,22 +102,22 @@ export const SongButtons = styled.div`
     justify-content: center;
     align-items: flex-start;
   }
-`
+`;
 export const NumberDiv = styled.div`
   width: 28px;
-`
+`;
 export const Number = styled.h4`
-  font-size:1rem;
+  font-size: 1rem;
   color: ${black1};
-`
+`;
 export const ImgDiv = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  cursor:pointer;
-  z-index:1;
+  cursor: pointer;
+  z-index: 1;
 
   ${MEDIA_QUERY_568} {
     height: 50px;
@@ -123,11 +131,11 @@ export const ImgDiv = styled.div`
     position: relative;
     z-index: 2;
   }
-`
+`;
 export const SongDesc = styled(Link)`
   text-decoration: none;
   color: none;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: 30px;
@@ -140,7 +148,7 @@ export const SongDesc = styled(Link)`
     margin-left: 10px;
     width: 180px;
   }
-`
+`;
 export const LikeButtonDiv = styled.div`
   min-width: 80px;
   height: 30px;
@@ -154,7 +162,9 @@ export const LikeButtonDiv = styled.div`
   position: relative;
   color: ${gray3};
 
-  ${({isLiked}) => isLiked && `
+  ${({ isLiked }) =>
+    isLiked &&
+    `
     background: ${peach1};
     color: white;
   `}
@@ -165,7 +175,7 @@ export const LikeButtonDiv = styled.div`
     width: 30px;
     height: 30px;
   }
-`
+`;
 export const ImgContainer = styled.div`
   height: 80px;
   width: 80px;
@@ -175,16 +185,16 @@ export const ImgContainer = styled.div`
     height: 50px;
     width: 50px;
   }
-`
+`;
 export const LikeNumber = styled.div`
   font-size: 1rem;
   height: 100%;
   margin: 3px 0 0 6px;
 
-
-
   ${MEDIA_QUERY_568} {
-    ${({isLiked}) => isLiked && `
+    ${({ isLiked }) =>
+      isLiked &&
+      `
       color: ${peach1};
     `}
     position: absolute;
@@ -192,8 +202,7 @@ export const LikeNumber = styled.div`
     left: 0;
     transform: translate(5px, 24px);
   }
-
-`
+`;
 export const HoverPlayButton = styled.div`
   width: 90%;
   height: 90%;
@@ -202,8 +211,8 @@ export const HoverPlayButton = styled.div`
   border-radius: 50%;
   border: 4px solid white;
   background: rgba(33, 33, 33, 0.5);
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
@@ -217,4 +226,4 @@ export const HoverPlayButton = styled.div`
   &:hover {
     opacity: 1;
   }
-`
+`;

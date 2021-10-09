@@ -2,8 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Encode Sans Expanded', 'Noto Sans TC', sans-serif;
-
+  font-family: "Encode Sans Expanded", "Noto Sans TC", sans-serif;
 }
 
 .app {
@@ -11,9 +10,8 @@
 }
 
 .ck-editor__editable {
-    width: 100%;
-    min-height: 500px;
-
+  width: 100%;
+  min-height: 500px;
 }
 
 /* font-family: 'Dancing Script', cursive;

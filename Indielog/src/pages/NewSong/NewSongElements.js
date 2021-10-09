@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 export const PageContainer = styled.div`
   width: 100%;
   margin: 0 auto 20px;
@@ -7,9 +7,9 @@ export const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 100px;
-`
+`;
 export const ImgDiv = styled.div`
-  width:  400px;
+  width: 400px;
   height: 400px;
   overflow: hidden;
 
@@ -18,9 +18,9 @@ export const ImgDiv = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 
 export const Announcement = styled.h3`
   margin-top: 20px;
   font-size: 1rem;
-`
+`;

@@ -1,8 +1,8 @@
-import { gray3, gray4, MEDIA_QUERY_568 } from '../../utils/constants.js'
-import styled from 'styled-components'
+import { gray3, gray4, MEDIA_QUERY_568 } from "../../utils/constants.js";
+import styled from "styled-components";
 
 export const Comment = styled.div`
-  margin: 30px 0 ;
+  margin: 30px 0;
   min-height: 180px;
   width: 100%;
   background: white;
@@ -10,7 +10,7 @@ export const Comment = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 1px 1px 7px rgba(33, 33, 33, 0.2);
-`
+`;
 
 export const CommentInfo = styled.div`
   display: flex;
@@ -19,9 +19,9 @@ export const CommentInfo = styled.div`
   padding-left: 20px;
 
   ${MEDIA_QUERY_568} {
-    padding-left: 10px
+    padding-left: 10px;
   }
-`
+`;
 
 export const CommentContent = styled.div`
   min-height: 114px;
@@ -29,20 +29,20 @@ export const CommentContent = styled.div`
   padding: 0 40px;
   color: ${gray4};
   word-wrap: break-word;
-`
+`;
 
 export const CommentorImgDiv = styled.div`
-width:  40px;
-height: 40px;
-border-radius: 50%;
-overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
 
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-`
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
 
 export const CommentorName = styled.h4`
   font-size: 1.1rem;
@@ -51,7 +51,7 @@ export const CommentorName = styled.h4`
   ${MEDIA_QUERY_568} {
     font-size: 0.7rem;
   }
-`
+`;
 
 export const CommentorDate = styled.p`
   color: ${gray3};
@@ -61,9 +61,9 @@ export const CommentorDate = styled.p`
   margin: 0 6px 6px 4px;
 
   ${MEDIA_QUERY_568} {
-    font-size: 0.4rem
+    font-size: 0.4rem;
   }
-`
+`;
 
 export const CommentButtons = styled.div`
   height: 36px;
@@ -71,4 +71,4 @@ export const CommentButtons = styled.div`
   display: flex;
   justify-content: center;
   aling-items: center;
-`
+`;

@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { green1, black1, MEDIA_QUERY_568 } from '../../utils/constants.js'
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { green1, black1, MEDIA_QUERY_568 } from "../../utils/constants.js";
 
 export const SidebarContainer = styled.aside`
   position: fixed;
@@ -15,9 +15,9 @@ export const SidebarContainer = styled.aside`
   top: 0;
   right: 0;
   transition: 0.3s ease-in-out;
-  opacity: ${({ isOpenSideBar }) => (isOpenSideBar ? '100%' : '0')};
-  right: ${({ isOpenSideBar }) => (isOpenSideBar ? '0' : '-100%')};
-`
+  opacity: ${({ isOpenSideBar }) => (isOpenSideBar ? "100%" : "0")};
+  right: ${({ isOpenSideBar }) => (isOpenSideBar ? "0" : "-100%")};
+`;
 
 export const SidebarMenu = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ export const SidebarMenu = styled.div`
   height: 700px;
   text-align: center;
   padding: 20px 0;
-`
+`;
 
 export const SidebarLink = styled(Link)`
   font-size: 1.5rem;
@@ -37,7 +37,7 @@ export const SidebarLink = styled(Link)`
   text-decoration: none;
   color: #fff;
   cursor: pointer;
-  margin: 20px 0 ;
+  margin: 20px 0;
   &:hover {
     color: ${green1};
     transition: 0.2s ease-in-out;
@@ -45,14 +45,14 @@ export const SidebarLink = styled(Link)`
 
   ${MEDIA_QUERY_568} {
     font-size: 1rem;
-    margin: 10px 0 ;
+    margin: 10px 0;
   }
-`
+`;
 
 export const SideBtnWrap = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 export const SignPanelBtn = styled.button`
   border-radius: 50px;
@@ -77,7 +77,7 @@ export const SignPanelBtn = styled.button`
     font-size: 14px;
     padding: 12px 50px;
   }
-`
+`;
 
 export const SideMemberDiv = styled.div`
   height: 80px;
@@ -85,10 +85,10 @@ export const SideMemberDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`
+`;
 
 export const SideMemberImgDiv = styled.div`
-  width:  45px;
+  width: 45px;
   height: 45px;
   border-radius: 50%;
   border: 3px solid white;
@@ -100,9 +100,9 @@ export const SideMemberImgDiv = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 export const MemberHello = styled.div`
   margin: 4px 0;
   color: white;
   font-size: 1rem;
-`
+`;

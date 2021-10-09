@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isPlaying: false,
-  loop:false,
+  loop: false,
   mode: 0, // 0: turnoff; 1: small player; 2: full player without library; 3: fullPlayer with library
   sound: {
     mute: false,
-    volume:0.5,
-    prevVolume:0.5,
+    volume: 0.5,
+    prevVolume: 0.5,
   },
   songPlayingInfo: {
     currentTime: 0,
@@ -25,7 +25,7 @@ export const playerControlReducer = createSlice({
       state.isPlaying = action.payload;
     },
     setMode: (state, action) => {
-      state.mode = action.payload
+      state.mode = action.payload;
     },
     setSongPlayingInfo: (state, action) => {
       state.songPlayingInfo = action.payload;
@@ -33,16 +33,23 @@ export const playerControlReducer = createSlice({
     setSound: (state, action) => {
       state.sound = action.payload;
     },
-    setLoop:(state, action) => {
+    setLoop: (state, action) => {
       state.loop = action.payload;
     },
-    setMainGetIn:(state, action) => {
-      state.loop = action.payload
-    }
+    setMainGetIn: (state, action) => {
+      state.loop = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setMainGetIn, setSound, setIsPlaying, setMode, setSongPlayingInfo, setLoop } = playerControlReducer.actions;
+export const {
+  setMainGetIn,
+  setSound,
+  setIsPlaying,
+  setMode,
+  setSongPlayingInfo,
+  setLoop,
+} = playerControlReducer.actions;
 
 export default playerControlReducer.reducer;

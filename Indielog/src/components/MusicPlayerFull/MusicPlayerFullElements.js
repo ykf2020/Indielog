@@ -1,6 +1,15 @@
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gray1, gray3, green1, black1, MEDIA_QUERY_568, MEDIA_QUERY_768, MEDIA_QUERY_1024, MEDIA_QUERY_1400 } from '../../utils/constants.js'
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  gray1,
+  gray3,
+  green1,
+  black1,
+  MEDIA_QUERY_568,
+  MEDIA_QUERY_768,
+  MEDIA_QUERY_1024,
+  MEDIA_QUERY_1400,
+} from "../../utils/constants.js";
 
 export const Container = styled.div`
   display: block;
@@ -12,12 +21,14 @@ export const Container = styled.div`
   z-index: 1002;
   overflow: hidden;
 
-  ${({bgImg}) => bgImg && `
+  ${({ bgImg }) =>
+    bgImg &&
+    `
     background-image: url(${bgImg});
   `}
 
   &:before {
-    content: '';
+    content: "";
     position: fixed;
     z-index: -2;
     width: 100%;
@@ -25,7 +36,7 @@ export const Container = styled.div`
     backdrop-filter: blur(30px) brightness(40%);
     -webkit-backdrop-filter: blur(30px) brightness(40%);
   }
-`
+`;
 
 export const Nav = styled.div`
   display: flex;
@@ -35,7 +46,7 @@ export const Nav = styled.div`
   height: 16%;
   padding: 0 10%;
   positon: fixed;
-`
+`;
 
 export const NavLogo = styled.div`
   color: white;
@@ -46,8 +57,8 @@ export const NavLogo = styled.div`
   margin-left: 12px;
   font-weight: bold;
   text-decoration: none;
-  font-family: 'Dancing Script', cursive;
-`
+  font-family: "Dancing Script", cursive;
+`;
 
 export const FontAwesome = styled(FontAwesomeIcon)`
   color: ${gray3};
@@ -57,14 +68,14 @@ export const FontAwesome = styled(FontAwesomeIcon)`
   &:hover {
     color: white;
   }
-`
+`;
 
 export const BodyContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   position: relative;
-`
+`;
 
 export const Library = styled.div`
   display: flex;
@@ -75,9 +86,11 @@ export const Library = styled.div`
   padding: 1rem 0;
   transition: 0.3s all ease;
   transform: translateX(-100%);
-  overflow-Y: scroll;
+  overflow-y: scroll;
 
-  ${({mode}) => (mode===3) && `
+  ${({ mode }) =>
+    mode === 3 &&
+    `
     width: 40%;
     opacity:1;
     transform: translateX(0%);
@@ -85,7 +98,9 @@ export const Library = styled.div`
   `}
 
   ${MEDIA_QUERY_1400} {
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       width: 50%;
       opacity:1;
       transform: translateX(0%);
@@ -94,7 +109,9 @@ export const Library = styled.div`
   ${MEDIA_QUERY_768} {
     position: absolute;
     z-index: 5;
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       width: 100%;
       opacity:1;
       transform: translateX(0%);
@@ -114,49 +131,50 @@ export const Library = styled.div`
     border-radius: 20px;
     border: transparent;
   }
-
-`
+`;
 
 export const LibrarySongDiv = styled.div`
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 1rem 2rem 1rem 3rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem 1rem 3rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
 
-    &:hover {
-      background: ${green1}
-    }
+  &:hover {
+    background: ${green1};
+  }
 
-    ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
       background: ${green1};
     `}
-`
+`;
 
 export const LibrarySongDesc = styled.div`
   padding-left: 1rem;
   width: calc(100% - 100px);
-`
+`;
 
 export const LibrarySongName = styled.div`
-  width:100%;
+  width: 100%;
   font-size: 1rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`
+`;
 
 export const LibrarySongAuthorName = styled.div`
-  width:100%;
+  width: 100%;
   font-size: 0.7rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`
+`;
 
 export const LibraryImgDiv = styled.div`
-  width:  100px;
+  width: 100px;
   height: 100px;
   border-radius: 10px;
   overflow: hidden;
@@ -166,7 +184,7 @@ export const LibraryImgDiv = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 
 export const Song = styled.div`
   position: relative;
@@ -177,14 +195,18 @@ export const Song = styled.div`
   height: 100%;
   transition: 0.3s all ease;
 
-  ${({mode}) => (mode===3) && `
+  ${({ mode }) =>
+    mode === 3 &&
+    `
     width: 70%;
     opacity:1;
     transform: translateX(0%);
   `}
 
   ${MEDIA_QUERY_1400} {
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       width: 50%;
       opacity:1;
       transform: translateX(0%);
@@ -194,29 +216,35 @@ export const Song = styled.div`
   ${MEDIA_QUERY_768} {
     position: absolute;
     z-index: 3;
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       opacity:0;
     `}
   }
-`
+`;
 
 export const SongInfo = styled.div`
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   height: 60%;
   width: 70%;
   text-align: center;
 
   ${MEDIA_QUERY_1400} {
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       width: 90%;
     `}
   }
 
   ${MEDIA_QUERY_1024} {
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       width: 95%;
     `}
   }
@@ -229,9 +257,9 @@ export const SongInfo = styled.div`
     padding: 0 20px;
     height: 56%;
   }
-`
+`;
 export const ImgDiv = styled.div`
-  width:  330px;
+  width: 330px;
   height: 330px;
   border-radius: 20px;
   overflow: hidden;
@@ -241,7 +269,9 @@ export const ImgDiv = styled.div`
     object-fit: cover;
   }
   ${MEDIA_QUERY_1024} {
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       width:  300px;
       height: 300px;
       border-radius: 16px;
@@ -249,12 +279,12 @@ export const ImgDiv = styled.div`
   }
 
   ${MEDIA_QUERY_568} {
-    width:  260px;
+    width: 260px;
     height: 260px;
     border-radius: 16px;
-    margin-bottom: 40px
+    margin-bottom: 40px;
   }
-`
+`;
 export const SongName = styled.div`
   font-size: 22px;
   font-weight: bold;
@@ -262,17 +292,19 @@ export const SongName = styled.div`
   margin-top: 20px;
 
   ${MEDIA_QUERY_1024} {
-    ${({mode}) => (mode===3) && `
+    ${({ mode }) =>
+      mode === 3 &&
+      `
       font-size: 16px;
     `}
   }
 
   ${MEDIA_QUERY_568} {
     font-size: 18px;
-    width:100%;
+    width: 100%;
     margin-top: 0px;
   }
-`
+`;
 
 export const AuthorName = styled.div`
   font-size: 18px;
@@ -280,10 +312,10 @@ export const AuthorName = styled.div`
 
   ${MEDIA_QUERY_568} {
     font-size: 12px;
-    width:100%;
+    width: 100%;
     margin-bottom: 0;
   }
-`
+`;
 
 export const ControlPanel = styled.div`
   display: flex;
@@ -293,12 +325,12 @@ export const ControlPanel = styled.div`
   position: relative;
 
   ${MEDIA_QUERY_1400} {
-    width:70%;
+    width: 70%;
     padding: 0 40px;
   }
 
   ${MEDIA_QUERY_1024} {
-    width:80%;
+    width: 80%;
     padding: 0 20px;
   }
 
@@ -306,8 +338,7 @@ export const ControlPanel = styled.div`
     width: 100%;
     padding: 0 20px;
   }
-
-`
+`;
 
 export const Slider = styled.div`
   display: flex;
@@ -315,15 +346,15 @@ export const Slider = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 30px;
-`
+`;
 
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-around;
-  align-items:center;
+  align-items: center;
   margin-top: 60px;
   width: 100%;
-`
+`;
 
 export const Track = styled.div`
   background: linear-gradient(45deg, ${green1}, lightblue);
@@ -333,7 +364,7 @@ export const Track = styled.div`
   position: relative;
   margin: 0 6px;
   border-radius: 20px;
-`
+`;
 
 export const AnimateTrack = styled.div`
   background: ${black1};
@@ -343,10 +374,12 @@ export const AnimateTrack = styled.div`
   top: 0;
   left: 0;
   pointer-events: none;
-  ${({animationPercentage}) => animationPercentage && `
+  ${({ animationPercentage }) =>
+    animationPercentage &&
+    `
     transform: translateX(${animationPercentage}%)
   `}
-`
+`;
 
 export const InputRange = styled.input`
   width: 100%;
@@ -354,7 +387,7 @@ export const InputRange = styled.input`
   background: transparent;
   cursor: pointer;
 
-  &::focus{
+  &::focus {
     outline: none;
   }
 
@@ -363,18 +396,18 @@ export const InputRange = styled.input`
     height: 16px;
     width: 16px;
   }
-`
+`;
 export const SongCurrentTime = styled.p`
   color: white;
   font-size: 14px;
-  margin:0;
-`
+  margin: 0;
+`;
 
 export const SongFullTime = styled.p`
   color: white;
   font-size: 14px;
-  margin:0;
-`
+  margin: 0;
+`;
 
 export const FontAwesomeControl = styled(FontAwesomeIcon)`
   color: ${gray3};
@@ -382,13 +415,13 @@ export const FontAwesomeControl = styled(FontAwesomeIcon)`
   transition: 0.3s all ease;
 
   &:hover {
-    color: white
+    color: white;
   }
-`
+`;
 
 export const MainFontAwesomeControl = styled(FontAwesomeControl)`
   margin-left: 4px;
-`
+`;
 
 export const LoopButton = styled(FontAwesomeIcon)`
   color: ${gray3};
@@ -396,17 +429,19 @@ export const LoopButton = styled(FontAwesomeIcon)`
   transition: 0.3s all ease;
   transform: rotate(0.25turn);
   &:hover {
-    color: white
+    color: white;
   }
 
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
     color: white;
   `}
-`
+`;
 
 export const ToggleButton = styled(FontAwesomeIcon)`
   color: ${gray3};
-  position:absolute;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
   transition: 0.3s all ease;
@@ -415,18 +450,17 @@ export const ToggleButton = styled(FontAwesomeIcon)`
   &:hover {
     color: white;
   }
-
-`
+`;
 
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80px;
-`
+`;
 
 export const VolumeButtonDiv = styled.div`
   positon: relative;
-`
+`;
 
 export const VolumeDiv = styled.div`
   display: flex;
@@ -438,7 +472,7 @@ export const VolumeDiv = styled.div`
   background: ${gray1};
   transform: rotate(0.75turn) translate(90%, -160%);
   border-radius: 8px;
-`
+`;
 
 export const VolumeInputRange = styled.input`
   width: 100%;
@@ -446,7 +480,7 @@ export const VolumeInputRange = styled.input`
   background: transparent;
   cursor: pointer;
 
-  &::focus{
+  &::focus {
     outline: none;
   }
 
@@ -455,7 +489,7 @@ export const VolumeInputRange = styled.input`
     height: 10px;
     width: 10px;
   }
-`
+`;
 
 export const VolumeTrack = styled.div`
   background: linear-gradient(45deg, ${green1}, lightblue);
@@ -464,7 +498,7 @@ export const VolumeTrack = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 4px;
-`
+`;
 
 export const VolumeAnimateTrack = styled.div`
   background: ${gray3};
@@ -474,13 +508,15 @@ export const VolumeAnimateTrack = styled.div`
   top: 0;
   left: 0;
   pointer-events: none;
-  ${({volume}) => volume && `
-    transform: translateX(${volume*100}%)
+  ${({ volume }) =>
+    volume &&
+    `
+    transform: translateX(${volume * 100}%)
   `}
-`
+`;
 export const InnerButoons = styled.div`
   width: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;

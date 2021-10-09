@@ -1,17 +1,17 @@
-import styled from 'styled-components'
-import { gray1 } from '../../utils/constants.js'
+import styled from "styled-components";
+import { gray1 } from "../../utils/constants.js";
 const Padding = styled.div`
-  display:block;
+  display: block;
   height: 80px;
   background: ${gray1};
-`
+`;
 
 const PaddingBottom = () => {
-  return(
+  return (
     <>
-      <Padding/>
+      <Padding />
     </>
-  )
-}
+  );
+};
 
-export default PaddingBottom
+export default PaddingBottom;

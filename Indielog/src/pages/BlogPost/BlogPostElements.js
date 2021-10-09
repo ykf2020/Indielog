@@ -1,5 +1,14 @@
-import styled from 'styled-components'
-import { gray1, gray2, gray3, green1, green2, peach1, MEDIA_QUERY_768, MEDIA_QUERY_568 } from '../../utils/constants.js'
+import styled from "styled-components";
+import {
+  gray1,
+  gray2,
+  gray3,
+  green1,
+  green2,
+  peach1,
+  MEDIA_QUERY_768,
+  MEDIA_QUERY_568,
+} from "../../utils/constants.js";
 export const BlogPostPageContainer = styled.div`
   width: 80%;
   margin: 0 auto 20px;
@@ -11,7 +20,7 @@ export const BlogPostPageContainer = styled.div`
   padding-top: 140px;
   background: ${gray1}
   position: relative;
-`
+`;
 
 export const PostContainer = styled.div`
   width: 100%;
@@ -20,17 +29,17 @@ export const PostContainer = styled.div`
   align-items: center;
   background: ${gray1};
   position: relative;
-`
+`;
 
 export const PostPic = styled.img`
   width: 120%;
   margin-bottom: 20px;
-`
+`;
 
 export const PostDesc = styled.p`
   font-size: 0.7rem;
-  color: #bbb
-`
+  color: #bbb;
+`;
 
 export const PostTitle = styled.h1`
   font-weight: bold;
@@ -42,10 +51,10 @@ export const PostTitle = styled.h1`
     font-size: 1.2rem;
     margin: 0 14px 40px;
   }
-`
+`;
 
 export const PostContentWrapper = styled.div`
-  width:100%;
+  width: 100%;
   margin-top: 40px;
   color: #666;
   word-wrap: break-word;
@@ -67,7 +76,7 @@ export const PostContentWrapper = styled.div`
   }
 
   a:hover {
-    color: ${green1}
+    color: ${green1};
   }
 
   blockQuote {
@@ -81,7 +90,7 @@ export const PostContentWrapper = styled.div`
   iframe {
     max-width: 100%;
   }
-`
+`;
 
 export const AuthorContainer = styled.div`
   margin: 60px 0;
@@ -103,23 +112,21 @@ export const AuthorContainer = styled.div`
     width: 100%;
     padding: 0 10px;
   }
-
-`
+`;
 
 export const AuthorContainerTitle = styled.h4`
   font-size: 14px;
   color: ${gray3};
-  width:100px;
-  height:20px;
+  width: 100px;
+  height: 20px;
   position: absolute;
-  left:32px;
-  top:-18px;
-  z-index:3;
-
-`
+  left: 32px;
+  top: -18px;
+  z-index: 3;
+`;
 
 export const AuthorImg = styled.div`
-  width:  130px;
+  width: 130px;
   height: 130px;
   border-radius: 50%;
   overflow: hidden;
@@ -140,7 +147,7 @@ export const AuthorImg = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 
 export const AuthorInfo = styled.div`
   height: 100%;
@@ -153,8 +160,7 @@ export const AuthorInfo = styled.div`
   ${MEDIA_QUERY_768} {
     padding-top: 40px;
   }
-
-`
+`;
 
 export const AuthorName = styled.h3`
   font-size: 1.5rem;
@@ -163,8 +169,7 @@ export const AuthorName = styled.h3`
   ${MEDIA_QUERY_768} {
     font-size: 1.3rem;
   }
-`
-
+`;
 
 export const AuthorDesc = styled.h4`
   font-size: 1rem;
@@ -173,7 +178,7 @@ export const AuthorDesc = styled.h4`
   ${MEDIA_QUERY_768} {
     font-size: 0.8rem;
   }
-`
+`;
 
 export const LikeButtonDiv = styled.div`
   min-width: 80px;
@@ -187,20 +192,22 @@ export const LikeButtonDiv = styled.div`
   cursor: pointer;
   color: ${gray3};
 
-  ${({isLiked}) => isLiked && `
+  ${({ isLiked }) =>
+    isLiked &&
+    `
     background: ${peach1};
     color: white;
   `}
-`
+`;
 
 export const LikeNumber = styled.div`
   font-size: 1rem;
   height: 100%;
   margin: 3px 0 0 6px;
-`
+`;
 
 export const LikePush = styled.div`
   font-size: 0.8rem;
   color: ${gray3};
   margin-bottom: 10px;
-`
+`;

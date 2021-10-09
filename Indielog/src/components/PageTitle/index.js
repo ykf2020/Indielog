@@ -1,13 +1,11 @@
-import { useEffect } from 'react'
-import { useSelector } from "react-redux"
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 const PageTitle = () => {
-  const currentTitle = useSelector((store) => store.pageTitle.currentTitle)
+  const currentTitle = useSelector((store) => store.pageTitle.currentTitle);
   useEffect(() => {
-    document.title = currentTitle
-  },[currentTitle])
-  return (
-    <></>
-  )
-}
+    document.title = currentTitle;
+  }, [currentTitle]);
+  return <></>;
+};
 
-export default PageTitle
+export default PageTitle;

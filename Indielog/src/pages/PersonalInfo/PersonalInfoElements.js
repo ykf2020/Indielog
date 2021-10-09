@@ -1,6 +1,15 @@
-import { Link } from 'react-router-dom'
-import { gray2, gray3, gray4, green1, green2, black1, warning, MEDIA_QUERY_568 } from '../../utils/constants.js'
-import styled from 'styled-components'
+import { Link } from "react-router-dom";
+import {
+  gray2,
+  gray3,
+  gray4,
+  green1,
+  green2,
+  black1,
+  warning,
+  MEDIA_QUERY_568,
+} from "../../utils/constants.js";
+import styled from "styled-components";
 
 export const MemberPageContainer = styled.div`
   width: 80%;
@@ -15,14 +24,14 @@ export const MemberPageContainer = styled.div`
   ${MEDIA_QUERY_568} {
     width: 100%;
   }
-`
+`;
 
 export const TitleButtonsGroup = styled.div`
   display: flex;
   width: 100%;
   padding: 10px 0 20px;
   border-bottom: 1px solid ${gray2};
-`
+`;
 
 export const TitleNormalButton = styled(Link)`
   text-decoration: none;
@@ -41,7 +50,7 @@ export const TitleNormalButton = styled(Link)`
     font-size: 0.6rem;
     margin: 10px 12px;
   }
-`
+`;
 
 export const TitleActiveButton = styled.button`
   border-radius: 30px;
@@ -56,13 +65,13 @@ export const TitleActiveButton = styled.button`
     font-size: 0.6rem;
     padding: 6px 4px;
   }
-`
+`;
 
 export const TitleDiv = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   width: 200px;
-`
+`;
 
 export const PersonalInfoContainer = styled.div`
   width: 94%;
@@ -71,38 +80,38 @@ export const PersonalInfoContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 6px rgba(33, 33, 33, 0.2);
   padding: 16px 18px;
-`
+`;
 
 export const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-`
+`;
 
 export const InfoTitle = styled.h3`
   position: relative;
   &:before {
     position: absolute;
-    content:'';
+    content: "";
     background: ${green1};
     width: 100%;
     height: 4px;
     border: none;
     bottom: -6px;
   }
-`
+`;
 
 export const InfoElementTitle = styled.h4`
   color: ${gray4};
   font-weight: normal;
-`
+`;
 export const InfoElementMainDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: flex-end;
-`
+`;
 export const ImgDiv = styled.div`
-  width:  200px;
+  width: 200px;
   height: 200px;
   border-radius: 20px;
   overflow: hidden;
@@ -112,7 +121,7 @@ export const ImgDiv = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 
 export const EditButton = styled.div`
   display: flex;
@@ -131,9 +140,9 @@ export const EditButton = styled.div`
   cursor: pointer;
 
   &:hover {
-    background: ${green2}
+    background: ${green2};
   }
-`
+`;
 
 export const Input = styled.input`
   width: 300px;
@@ -143,10 +152,10 @@ export const Input = styled.input`
   border-radius: 12px;
   outline: none;
   color: ${gray3};
-`
+`;
 
 export const IntroductionArea = styled.div`
-  width:100%;
+  width: 100%;
   min-height: 200px;
   font-size: 1rem;
   color: ${gray3};
@@ -155,24 +164,24 @@ export const IntroductionArea = styled.div`
   word-wrap: break-word;
   border: 1px solid ${gray2};
   border-radius: 12px;
-`
+`;
 
 export const IntroductionDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const ModalBackground = styled.div`
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   background: rgba(33, 33, 33, 0.8);
   z-index: 1010;
-`
+`;
 
 export const ModalPanel = styled.div`
   position: absolute;
@@ -188,7 +197,7 @@ export const ModalPanel = styled.div`
   border-radius: 10px;
   justify-content: space-between;
   padding: 20px 10px;
-`
+`;
 
 export const ModalInnerTop = styled.div`
   display: flex;
@@ -196,15 +205,15 @@ export const ModalInnerTop = styled.div`
   align-items: center;
   width: 100%;
   height: 80%;
-`
+`;
 
 export const ModalInnerDiv = styled.div`
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width:100%;
-`
+  width: 100%;
+`;
 
 export const ModalInnerBottom = styled.div`
   display: flex;
@@ -213,7 +222,7 @@ export const ModalInnerBottom = styled.div`
   width: 100%;
   height: 20%;
   margin-top: 26px;
-`
+`;
 
 export const ModalButton = styled.div`
   display: flex;
@@ -232,13 +241,13 @@ export const ModalButton = styled.div`
 
   cursor: pointer;
   &:hover {
-    background: ${green2}
+    background: ${green2};
   }
-`
+`;
 
 export const ModalImgDiv = styled(ImgDiv)`
   margin-top: 30px;
-`
+`;
 
 export const ModalUploadButton = styled.label`
   margin-top: 30px;
@@ -249,7 +258,7 @@ export const ModalUploadButton = styled.label`
     transform: translateY(-3px);
     border-bottom: 2px solid ${green2};
   }
-`
+`;
 
 export const ModalTextArea = styled.textarea`
   width: 90%;
@@ -260,11 +269,11 @@ export const ModalTextArea = styled.textarea`
   outline: none;
   border-radius: 10px;
   border: 1px solid ${gray3};
-`
+`;
 export const Warning = styled.div`
   border: none;
   border-radius: 6px;
-  margin-top:10px;
+  margin-top: 10px;
   padding: 0 10px;
   min-height: 34px;
   width: 100%;
@@ -277,4 +286,4 @@ export const Warning = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: -10px;
-`
+`;

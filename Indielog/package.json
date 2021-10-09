@@ -17,6 +17,9 @@
     "ckeditor5-custom-build": "file:ckeditor5",
     "dotenv": "^8.2.0",
     "firebase": "^9.0.2",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.1",
+    "prettier": "^2.4.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-device-detect": "^2.0.1",
@@ -30,6 +33,16 @@
     "styled-components": "^5.3.1",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",

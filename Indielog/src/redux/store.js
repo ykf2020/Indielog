@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit"
-import userReducer from "./reducers/userReducer"
-import songReducer from "./reducers/songReducer"
-import playerControlReducer from "./reducers/playerControlReducer"
-import pageTitleReducer from './reducers/pageTitleReducer'
+import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "./reducers/userReducer";
+import songReducer from "./reducers/songReducer";
+import playerControlReducer from "./reducers/playerControlReducer";
+import pageTitleReducer from "./reducers/pageTitleReducer";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +13,6 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false
+      serializableCheck: false,
     }),
 });

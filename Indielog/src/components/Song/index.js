@@ -1,4 +1,4 @@
-const Song = (song ,index) => {
+const Song = (song, index) => {
   return (
     <Song>
       <SongInfo to={`/songs/${song.id}`}>
@@ -6,7 +6,7 @@ const Song = (song ,index) => {
           <Number>{index + 1}</Number>
         </NumberDiv>
         <ImgDiv onClick={(e) => playSong(e, song)}>
-          <img src={song.cover}/>
+          <img src={song.cover} />
         </ImgDiv>
         <SongDesc>
           <SongName>{song?.name}</SongName>
@@ -14,8 +14,8 @@ const Song = (song ,index) => {
         </SongDesc>
       </SongInfo>
       <SongButtons>
-        <FontAwesomeIcon size='1x' icon={faHeartBorder}/>
+        <FontAwesomeIcon size="1x" icon={faHeartBorder} />
       </SongButtons>
     </Song>
-  )
-}
+  );
+};

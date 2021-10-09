@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { green1, black1, warning } from '../../utils/constants.js'
+import styled from "styled-components";
+import { green1, black1, warning } from "../../utils/constants.js";
 export const SignPanelContainer = styled.div`
   background: ${green1};
   height: 100vh;
@@ -8,9 +8,8 @@ export const SignPanelContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index:1005;
-
-`
+  z-index: 1005;
+`;
 
 export const SignPanelLogo = styled.h1`
   font-weight: bold;
@@ -18,9 +17,9 @@ export const SignPanelLogo = styled.h1`
   font-size: 2.5rem;
   position: absolute;
   top: -80px;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
   margin: 0 auto;
-`
+`;
 
 export const Panel = styled.div`
   background: ${black1};
@@ -31,7 +30,7 @@ export const Panel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const CancelButton = styled.button`
   border: none;
@@ -50,7 +49,7 @@ export const CancelButton = styled.button`
     content: "x";
     top: 50%;
     left: 50%;
-    transform: translate(-42%, -58%)
+    transform: translate(-42%, -58%);
   }
 
   &:hover {
@@ -58,8 +57,7 @@ export const CancelButton = styled.button`
     background: ${green1};
     cursor: pointer;
   }
-
-`
+`;
 
 export const PanelInnerWrap = styled.div`
   height: 100%;
@@ -67,7 +65,7 @@ export const PanelInnerWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const SignPanelTitle = styled.h2`
   margin-top: 20px;
@@ -75,7 +73,7 @@ export const SignPanelTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0;
-`
+`;
 
 export const SignPanelTitleDesc = styled.p`
   margin-top: 20px;
@@ -83,17 +81,17 @@ export const SignPanelTitleDesc = styled.p`
   align-self: flex-start;
   color: white;
   font-size: 1rem;
-`
+`;
 
 export const SignPanelInput = styled.input`
   border: none;
   border-radius: 6px;
-  margin-top:10px;
+  margin-top: 10px;
   padding: 0 10px;
   height: 40px;
   width: 100%;
-  outline: none
-`
+  outline: none;
+`;
 
 export const SignPanelButton = styled.button`
   margin-top: 40px;
@@ -108,7 +106,7 @@ export const SignPanelButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 export const LinkGroups = styled.div`
   margin-top: 20px;
@@ -116,23 +114,23 @@ export const LinkGroups = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
-`
+`;
 
 export const SignPanelChange = styled.a`
   color: white;
-  font-size:0.8rem;
+  font-size: 0.8rem;
   text-decoration: none;
 
   &:hover {
     cursor: pointer;
     color: white;
   }
-`
+`;
 
 export const Warning = styled.div`
   border: none;
   border-radius: 6px;
-  margin-top:10px;
+  margin-top: 10px;
   padding: 0 10px;
   min-height: 34px;
   width: 100%;
@@ -144,4 +142,4 @@ export const Warning = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;

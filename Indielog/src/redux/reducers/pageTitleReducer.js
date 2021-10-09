@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentTitle: 'Indielog'
+  currentTitle: "Indielog",
 };
 
 export const pageTitleReducer = createSlice({
