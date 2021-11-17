@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Waypoint } from 'react-waypoint'
 import {
   CommentsContainer,
   CommentAddSection,
@@ -15,20 +16,36 @@ import Comment from "../Comment";
 import { useSelector } from "react-redux";
 import {
   addNewComment,
-  getCommentsOnSnapshot,
   userInfoOnSnapShot,
+  getNewestComment,
+  getComments,
+  getInfiniteComments
 } from "../../utils/firebase.js";
+import "firebase/compat/storage";
+import firebase from "firebase/compat/app";
+
+
 
 const CommentArea = ({ area, id }) => {
   const user = useSelector((store) => store.user.currentUser);
   const [commentInput, setCommentInput] = useState("");
   const [comments, setComments] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const lastCommentRef = useRef()
 
   function handleCommentInputSubmit() {
     addNewComment(area, id, commentInput, user.uid).then(() => {
+      getNewestComment(area, id).then((res) => {
+        setComments([...res, ...comments])
+      })
       setCommentInput("");
     });
+  }
+
+  function handleInfinteSroll() {
+    if(lastCommentRef.current){
+      getInfiniteComments(area, id, 3, lastCommentRef, comments, setComments)
+    }
   }
 
   useEffect(() => {
@@ -37,7 +54,7 @@ const CommentArea = ({ area, id }) => {
   }, [user]);
 
   useEffect(() => {
-    getCommentsOnSnapshot(area, id, setComments);
+    getComments(area, id, 3, lastCommentRef, setComments);
   }, [area, id]);
 
   return (
@@ -79,6 +96,7 @@ const CommentArea = ({ area, id }) => {
       {comments.map((comment) => {
         return <Comment key={comment.id} currentComment={comment}></Comment>;
       })}
+    <Waypoint onEnter={handleInfinteSroll}/>
     </CommentsContainer>
   );
 };

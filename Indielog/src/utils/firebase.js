@@ -491,12 +491,14 @@ export const getAuthorInfo = (authorId, handleAuthorInfo) => {
 };
 
 // comments
-export const getCommentsOnSnapshot = (area, id, handleComments) => {
+export const getComments = (area, id, limit,lastCommentRef, handleComments) => {
   db.collection(area)
     .doc(id)
     .collection("comments")
-    .orderBy("createdAt", "asc")
-    .onSnapshot((collectionSnapShot) => {
+    .orderBy("createdAt", "desc")
+    .limit(limit)
+    .get()
+    .then((collectionSnapShot) => {
       const data = collectionSnapShot.docs.map((doc) => {
         const id = doc.id;
         return {
@@ -507,6 +509,7 @@ export const getCommentsOnSnapshot = (area, id, handleComments) => {
         };
       });
       handleComments(data);
+      lastCommentRef.current = collectionSnapShot.docs[collectionSnapShot.docs.length - 1]
     });
 };
 
@@ -517,6 +520,50 @@ export const addNewComment = (area, id, commentContent, authorId) => {
     authorUid: authorId,
   });
 };
+
+export const getNewestComment = (area, id) => {
+  return db.collection(area)
+      .doc(id)
+      .collection('comments')
+      .orderBy('createdAt', 'desc')
+      .limit(1)
+      .get()
+      .then(collectionSnapShot => {
+        const data = collectionSnapShot.docs.map((doc) => {
+          const id = doc.id;
+          return {
+            id,
+            authorUid: doc.data().authorUid,
+            content: doc.data().content,
+            createdAt: doc.data().createdAt,
+          };
+        })
+        return data
+      })
+}
+
+export const getInfiniteComments = (area, id, limit, lastCommentRef, currentComments, handleNewComments) => {
+  db.collection(area)
+    .doc(id)
+    .collection("comments")
+    .orderBy("createdAt", "desc")
+    .startAfter(lastCommentRef.current)
+    .limit(limit)
+    .get()
+    .then((collectionSnapShot) => {
+      const data = collectionSnapShot.docs.map((doc) => {
+        const id = doc.id;
+        return {
+          id,
+          authorUid: doc.data().authorUid,
+          content: doc.data().content,
+          createdAt: doc.data().createdAt,
+        };
+      });
+      handleNewComments([...currentComments, ...data]);
+      lastCommentRef.current = collectionSnapShot.docs[collectionSnapShot.docs.length-1]
+    });
+}
 
 // songs
 export const getLikedSongs = (userId, handleSongs) => {
